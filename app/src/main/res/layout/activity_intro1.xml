@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="30dp"
+        android:text="Benvenuto/a su\nNice Places!"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:lineSpacingMultiplier="1.2"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Grazie per aver scaricato Nice Places! Questa app ti permette di scoprire quali sono i luoghi di interesse storico, culturale e artistico vicino a te, offrendoti una descrizione sulle opere per soddisfare la tua curiosità.\nNon solo, avrai anche la possibilità di viaggiare virtualmente e spostarti lungo tutta la penisola, attraversare itinerari, paesaggi, città e posti remoti, scoprendo ciò che rende la nostra nazione, sotto questo punto di vista, una delle più ricche al mondo."
+        android:textColor="#dd000000"
+        android:textSize="18sp"
+        android:lineSpacingMultiplier="1.2"/>
+
+</LinearLayout>

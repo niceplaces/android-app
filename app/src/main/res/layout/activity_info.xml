@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Nice Places"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="versione 1.0 (15/02/2018)"
+            android:textColor="#aa000000"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Nice Places è un'app che ti permette di scoprire quali sono i luoghi di interesse storico, culturale e artistico vicino a te, offrendoti una descrizione sulle opere per soddisfare la tua curiosità. Non solo, avrai anche la possibilità di viaggiare virtualmente e spostarti lungo tutta la penisola, attraversare itinerari, paesaggi, città e posti remoti, scoprendo ciò che rende la nostra nazione, sotto questo punto di vista, una delle più ricche al mondo."
+            android:textColor="#dd000000"
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2" />
+
+        <Button
+            android:id="@+id/button_tutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:text="Visualizza il tutorial"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Cosa c'è in questa versione?"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Questa versione offre una dimostrazione semplice del funzionamento dell'app con la modalità &quot;Luoghi intorno a te&quot;, con la quale puoi scoprire i posti di interesse più vicini alla tua posizione, puoi attivare la navigazione per raggiungere quei luoghi oppure visualizzare una descrizione con la relativa storia."
+            android:textColor="#dd000000"
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Luoghi disponibili"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Sono disponibili dodici luoghi che si trovano tra Siena e Sovicille (SI). Molti altri luoghi verranno aggiunti con i prossimi aggiornamenti!"
+            android:textColor="#dd000000"
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Sostienici!"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Seguici sui social per sostenere il nostro progetto e non perderti gli aggiornamenti di Nice Places!"
+            android:textColor="#dd000000"
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/facebook_dark"
+                android:layout_marginRight="50dp"
+                android:layout_marginEnd="50dp"
+                android:id="@+id/imageview_facebook"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/instagram_dark"
+                android:id="@+id/imageview_instagram"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Contattaci"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Se vuoi segnalarci un problema, un suggerimento o avere qualche informazione in più sul progettto puoi inviarci un messaggio sulla pagina Facebook, sul profilo Instagram oppure inviare una e-mail a niceplacesit@gmail.com"
+            android:textColor="#dd000000"
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2" />
+
+    </LinearLayout>
+
+</ScrollView>
