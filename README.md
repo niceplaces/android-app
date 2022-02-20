@@ -1,4 +1,4 @@
-# Nice Places website
+# Nice Places Android app
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/niceplaces/android-app)
 
