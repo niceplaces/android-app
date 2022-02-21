@@ -1,40 +1,58 @@
 package com.niceplaces.niceplaces.controllers;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.niceplaces.niceplaces.activities.SplashActivity;
 import com.niceplaces.niceplaces.dao.DaoEvents;
 import com.niceplaces.niceplaces.dao.DaoLinks;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.models.Event;
 import com.niceplaces.niceplaces.models.Link;
 import com.niceplaces.niceplaces.models.Place;
+import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.JSONUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.logging.Handler;
+
 public class DatabaseController extends SQLiteOpenHelper {
 
     private boolean isCreating = false;
     private SQLiteDatabase currentDB = null;
     private Context mContext;
+    boolean isUpgrade = false;
 
     public static final String PLACE_IMAGE = "place_image";
     public static final String PLACE_NAME = "place_name";
     public static final String PLACE_URL = "place_url";
 
+    private static final int VERSION = 4;
+
     public DatabaseController(Context context){
-        super(context, "data.db", null, 1);
+        super(context, "data.db", null, VERSION);
         mContext = context;
+        currentDB = getWritableDatabase();
+    }
+
+    public DatabaseController(SplashActivity activity){
+        super(activity, "data.db", null, VERSION);
+        mContext = activity;
         currentDB = getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        ProgressDialog dialog = null;
+        if (!isUpgrade){
+            //dialog = ProgressDialog.show(mContext, "Attendi", "Creazione database...", true);
+        }
         sqLiteDatabase.execSQL("CREATE TABLE places (" +
                 "id INTEGER PRIMARY KEY, " +
                 "name TEXT, " +
@@ -55,6 +73,10 @@ public class DatabaseController extends SQLiteOpenHelper {
                 "label TEXT, " +
                 "url TEXT)");
         insertData(sqLiteDatabase);
+        if (!isUpgrade){
+            //dialog.dismiss();
+        }
+        ((SplashActivity) mContext).close();
     }
 
     private void insertData(SQLiteDatabase db){
@@ -106,7 +128,17 @@ public class DatabaseController extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        isUpgrade = true;
+        //ProgressDialog dialog = ProgressDialog.show(mContext, "Attendi", "Aggiornamento database...", true);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS places");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS events");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS links");
+        onCreate(sqLiteDatabase);
+        //dialog.dismiss();
+    }
 
+    public void deleteDB(){
+        mContext.deleteDatabase("data.db");
     }
 
     @Override

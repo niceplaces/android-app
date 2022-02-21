@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.DebugOptionsActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
             android:name=".activities.IntroActivity"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -56,6 +59,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="" />
     </application>
 
 </manifest>

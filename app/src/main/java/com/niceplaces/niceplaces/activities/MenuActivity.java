@@ -26,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         ImageView IVInfo = findViewById(R.id.imageview_info);
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
         ImageView IVFacebook = findViewById(R.id.imageview_facebook);
+        ImageView IVDebug = findViewById(R.id.imageview_debug);
         IVInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +65,15 @@ public class MenuActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+            IVDebug.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(thisActivity, DebugOptionsActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            IVDebug.setVisibility(View.GONE);
         }
 
     }

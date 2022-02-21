@@ -34,13 +34,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.crash.FirebaseCrash;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.MarkerInfoAdapter;
 import com.niceplaces.niceplaces.adapters.PlacesAdapter;
 import com.niceplaces.niceplaces.controllers.DatabaseController;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.models.Place;
+import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
+import com.niceplaces.niceplaces.utils.StringUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
@@ -94,7 +97,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public boolean evaluate(Place object) {
                         boolean res = object.mName.toLowerCase().contains(pattern);
-                        object.mMarker.setVisible(res);
+                        // TODO causa NullPointerException
+                        try {
+                            object.mMarker.setVisible(res);
+                        } catch (NullPointerException e){
+                            FirebaseCrash.logcat(Log.ERROR, AppUtils.getTag(), "Marker NPE ex");
+                            FirebaseCrash.report(e);
+                        }
                         return res;
                     }
                 });
@@ -177,6 +186,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void setupLocationListener(){
         final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        final AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
+        alertDialog.setTitle("Posizione disabilitata");
+        alertDialog.setMessage("Non è possibile caricare la posizione attuale perché la geolocalizzazione è disattivata.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
         try {
             LocationListener locationListener = new LocationListener() {
                 @Override
@@ -199,16 +217,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.i("OnProviderDisabled", s);
                     boolean oneProviderAvailable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
                     if (!oneProviderAvailable){
-                        AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
-                        alertDialog.setTitle("Posizione disabilitata");
-                        alertDialog.setMessage("Non è possibile caricare la posizione attuale perché la geolocalizzazione è disattivata.");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
+                        if (!alertDialog.isShowing()){
+                            alertDialog.show();
+                        }
                     }
                 }
             };

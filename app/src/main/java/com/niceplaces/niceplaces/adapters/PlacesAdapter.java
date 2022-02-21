@@ -3,6 +3,7 @@ package com.niceplaces.niceplaces.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.models.Place;
+import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
 
 import java.util.List;
@@ -63,6 +65,7 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
         textViewPlaceDistance.setText(Place.formatDistance(place.mDistance));
         /*Direction direction = new Direction(mPosition.latitude, mPosition.longitude, place.mLatitude, place.mLongitude);
         (new DirectionAsyncTask(mContext, textViewPlaceDistance)).execute(direction);*/
+        Log.i("FREE HEAP SIZE", AppUtils.getAvailableHeapSize());
         return convertView;
     }
 }

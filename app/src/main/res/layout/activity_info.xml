@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="versione 1.0 (15/02/2018)"
+            android:text="v1.1 (03/03/2018)"
             android:textColor="#aa000000"
             android:textSize="14sp"
             android:layout_marginBottom="10dp"
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Sono disponibili dodici luoghi che si trovano tra Siena e Sovicille (SI). Molti altri luoghi verranno aggiunti con i prossimi aggiornamenti!"
+            android:text="Sono disponibili 16 luoghi che si trovano tra Siena e Sovicille (SI) e Bologna.\nMolti altri luoghi verranno aggiunti con i prossimi aggiornamenti!"
             android:textColor="#dd000000"
             android:textSize="18sp"
             android:lineSpacingMultiplier="1.2" />

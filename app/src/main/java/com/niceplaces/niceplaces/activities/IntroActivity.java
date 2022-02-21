@@ -71,7 +71,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(thisActivity, MenuActivity.class);
                 startActivity(i);
-                finish();
+                thisActivity.finish();
             }
         });
         mButtonNext.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class IntroActivity extends AppCompatActivity {
                 } else {
                     Intent i = new Intent(thisActivity, MenuActivity.class);
                     startActivity(i);
-                    finish();
+                    thisActivity.finish();
                 }
             }
         });
@@ -105,4 +105,9 @@ public class IntroActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
 }
