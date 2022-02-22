@@ -21,7 +21,6 @@ import com.niceplaces.niceplaces.models.Event;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.ImageUtils;
 import com.niceplaces.niceplaces.utils.NonScrollListView;
-import com.niceplaces.niceplaces.utils.TextUtils;
 
 import java.util.List;
 
@@ -67,8 +66,8 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         textViewPlaceNameActionBar.setText(place.mName);
         textViewPlaceDesc.setText(place.mDescription);
         //TextUtils.justify(textViewPlaceDesc);
-        ImageUtils.setPlacesImageView(this, place.mImage, imageViewPlace);
-        ImageUtils.setPlacesImageView(this, place.mImage, imageViewPlaceActionBar);
+        ImageUtils.setImageViewWithGlide(this, place.mImage, imageViewPlace);
+        ImageUtils.setImageViewWithGlide(this, place.mImage, imageViewPlaceActionBar);
         try {
             final String wikipediaUrl = place.getLinks().get(0).getUrl();
             imageViewWikipedia.setOnClickListener(new View.OnClickListener() {

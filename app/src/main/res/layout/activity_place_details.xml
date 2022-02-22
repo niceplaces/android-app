@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageview_place_image"
@@ -13,10 +13,10 @@
         android:src="@drawable/marker_outline" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:id="@+id/scrollView">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,8 +32,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
-                    android:background="#77ffffff"
-                    android:layout_alignTop="@id/textview_place_name" />
+                    android:layout_alignTop="@id/textview_place_name"
+                    android:background="#77ffffff" />
 
                 <TextView
                     android:id="@+id/textview_place_name"
@@ -46,35 +46,19 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textview_coming_soon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Presto disponibile..."
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
             <LinearLayout
-                android:id="@+id/layout_place_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#fff"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:padding="8dp">
+                android:background="#fff">
 
                 <LinearLayout
+                    android:id="@+id/layout_navigation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp"
                     android:layout_gravity="center"
-                    android:id="@+id/layout_navigation">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageview_directions"
@@ -85,46 +69,74 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="Attiva la navigazione"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"/>
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textview_place_desc"
+                    android:id="@+id/textview_coming_soon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lorem ipsum dolor sit amet."
+                    android:padding="8dp"
+                    android:paddingEnd="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingStart="20dp"
+                    android:text="La descrizione di questo luogo non è al momento disponibile."
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="18sp"
-                    android:lineSpacingMultiplier="1.2"/>
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/layout_place_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:paddingEnd="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingStart="20dp">
+
+                    <TextView
+                        android:id="@+id/textview_place_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
+                        android:text="Lorem ipsum dolor sit amet."
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Storia"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="20sp" />
+
+                    <com.niceplaces.niceplaces.utils.NonScrollListView
+                        android:id="@+id/listview_place_events"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null"
+                        android:dividerHeight="0dp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Storia"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="20sp" />
-
-                <com.niceplaces.niceplaces.utils.NonScrollListView
-                    android:id="@+id/listview_place_events"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:divider="@null"
-                    android:dividerHeight="0dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:padding="10dp"
                     android:text="Approfondimenti"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="20sp" />
-
 
                 <ImageView
                     android:id="@+id/imageview_wikipedia"
@@ -133,15 +145,17 @@
                     android:src="@drawable/wikipedia_icon" />
 
                 <TextView
+                    android:id="@+id/textview_img_credits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
                     android:gravity="end"
-                    android:id="@+id/textview_img_credits"
+                    android:padding="5dp"
                     android:text="Immagine di " />
 
-            </LinearLayout>
 
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -149,25 +163,25 @@
     </ScrollView>
 
     <RelativeLayout
+        android:id="@+id/layout_titlebar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/layout_titlebar">
+        android:layout_height="50dp">
 
         <ImageView
             android:id="@+id/imageview_place_image_titlebar"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginBottom="-200dp"
-            android:scaleType="centerCrop"
             android:cropToPadding="true"
+            android:scaleType="centerCrop"
             android:src="@drawable/marker_outline" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#77ffffff"
+            android:layout_alignBottom="@id/textview_place_name_titlebar"
             android:layout_alignTop="@id/textview_place_name_titlebar"
-            android:layout_alignBottom="@id/textview_place_name_titlebar"/>
+            android:background="#77ffffff" />
 
         <TextView
             android:id="@+id/textview_place_name_titlebar"

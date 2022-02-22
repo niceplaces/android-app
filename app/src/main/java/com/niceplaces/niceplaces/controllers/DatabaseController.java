@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.niceplaces.niceplaces.activities.MapsActivity;
 import com.niceplaces.niceplaces.activities.SplashActivity;
 import com.niceplaces.niceplaces.dao.DaoEvents;
 import com.niceplaces.niceplaces.dao.DaoLinks;
@@ -27,13 +28,14 @@ public class DatabaseController extends SQLiteOpenHelper {
     private boolean isCreating = false;
     private SQLiteDatabase currentDB = null;
     private Context mContext;
-    boolean isUpgrade = false;
+    private boolean isUpgrade = false;
+    private boolean fromSplashActivity = false;
 
     public static final String PLACE_IMAGE = "place_image";
     public static final String PLACE_NAME = "place_name";
     public static final String PLACE_URL = "place_url";
 
-    private static final int VERSION = 4;
+    private static final int VERSION = 5;
 
     public DatabaseController(Context context){
         super(context, "data.db", null, VERSION);
@@ -42,6 +44,13 @@ public class DatabaseController extends SQLiteOpenHelper {
     }
 
     public DatabaseController(SplashActivity activity){
+        super(activity, "data.db", null, VERSION);
+        mContext = activity;
+        currentDB = getWritableDatabase();
+        fromSplashActivity = true;
+    }
+
+    public DatabaseController(MapsActivity activity){
         super(activity, "data.db", null, VERSION);
         mContext = activity;
         currentDB = getWritableDatabase();
@@ -76,7 +85,9 @@ public class DatabaseController extends SQLiteOpenHelper {
         if (!isUpgrade){
             //dialog.dismiss();
         }
-        ((SplashActivity) mContext).close();
+        /*if (fromSplashActivity){
+            ((SplashActivity) mContext).close();
+        }*/
     }
 
     private void insertData(SQLiteDatabase db){

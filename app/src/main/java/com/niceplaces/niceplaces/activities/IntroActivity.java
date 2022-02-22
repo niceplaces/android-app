@@ -105,9 +105,4 @@ public class IntroActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Runtime.getRuntime().gc();
-    }
 }

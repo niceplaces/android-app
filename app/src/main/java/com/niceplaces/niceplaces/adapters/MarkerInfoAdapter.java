@@ -32,7 +32,7 @@ public class MarkerInfoAdapter implements GoogleMap.InfoWindowAdapter {
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
         TextView textViewPlaceName = convertView.findViewById(R.id.textview_place_name);
         TextView textViewPlaceDistance = convertView.findViewById(R.id.textview_place_distance);
-        ImageUtils.setPlacesImageView(mContext, place, imageViewPlaceImage);
+        ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage);
         textViewPlaceName.setText(place.mName);
         textViewPlaceDistance.setText(Place.formatDistance(place.mDistance));
         return convertView;

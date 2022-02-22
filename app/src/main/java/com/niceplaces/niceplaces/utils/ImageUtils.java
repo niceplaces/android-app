@@ -5,11 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.niceplaces.niceplaces.R;
@@ -24,11 +30,7 @@ import java.io.InputStream;
 
 public class ImageUtils {
 
-    public static void setPlacesImageView(Context context, Place place, ImageView imageView){
-        setPlacesImageView(context, place.mImage, imageView);
-    }
-
-    public static void setPlacesImageView(Context context, String imageName, ImageView imageView){
+    public static void setImageView(Context context, String imageName, ImageView imageView){
         try {
             InputStream ims = context.getAssets().open(imageName);
             Bitmap bitmap = BitmapFactory.decodeStream(ims);
@@ -42,7 +44,31 @@ public class ImageUtils {
         }
     }
 
-    public static float dipToPixels(Context context, float dipValue) {
+    public static void setImageViewWithGlide(Context context, String imageName, ImageView imageView){
+        Uri uri = Uri.parse("file:///android_asset/" + imageName);
+        RequestOptions myOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .fitCenter()
+                .placeholder(R.drawable.marker_outline)
+                .override(Target.SIZE_ORIGINAL, imageView.getHeight());
+        Glide.with(context)
+                .load(uri)
+                .apply(myOptions)
+                .into(imageView);
+    }
+
+    public static void setImageViewWithGlide(Context context, int imageId, ImageView imageView){
+        RequestOptions myOptions = new RequestOptions()
+                .fitCenter()
+                .placeholder(R.drawable.marker_outline)
+                .override(Target.SIZE_ORIGINAL, imageView.getHeight());
+        Glide.with(context)
+                .load(imageId)
+                .apply(myOptions)
+                .into(imageView);
+    }
+
+    private static float dipToPixels(Context context, float dipValue) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
     }

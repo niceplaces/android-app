@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final SplashActivity thisActivity = this;
         if (BuildConfig.DEBUG){
             final Fabric fabric = new Fabric.Builder(this)
                     .kits(new Crashlytics())
@@ -34,11 +35,15 @@ public class SplashActivity extends AppCompatActivity {
         PrefsController prefsController = new PrefsController(this);
         if (prefsController.isFistOpenAfterInstall() || prefsController.isFistOpenAfterUpdate()){
             Log.i("FIRSTOPEN_", "DB!");
-            new DatabaseController(this);
-        } else {
-            Log.i("FIRSTOPEN_", "CLOSE!");
-            close();
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new DatabaseController(thisActivity);
+                }
+            });
+            thread.start();
         }
+        close();
     }
 
     public void close(){

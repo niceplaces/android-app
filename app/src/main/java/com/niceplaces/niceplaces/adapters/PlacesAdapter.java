@@ -47,9 +47,12 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
             convertView = layoutInflater.inflate(R.layout.listview_places, parent, false);
         }
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
+        if (place.mDescription.equals("")){
+            imageViewPlaceImage.setAlpha(0.7f);
+        }
         TextView textViewPlaceName = convertView.findViewById(R.id.textview_place_name);
         TextView textViewPlaceDistance = convertView.findViewById(R.id.textview_place_distance);
-        ImageUtils.setPlacesImageView(mContext, place, imageViewPlaceImage);
+        ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage);
         imageViewPlaceImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
