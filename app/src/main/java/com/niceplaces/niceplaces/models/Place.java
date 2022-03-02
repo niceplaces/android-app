@@ -12,18 +12,26 @@ import java.util.List;
 public class Place {
 
     private String mID;
-    public String mName, mDescription, mImage, mCredits, mWikiUrl, mSources;
+    public String mName, mArea, mDescription, mImage, mCredits, mWikiUrl, mSources;
     public boolean mHasDescription;
     public double mLatitude, mLongitude;
     public double mDistance;
     public Marker mMarker;
     private List<Event> mEvents;
     private List<Link> mLinks;
+    public boolean isInfoWindowShown;
 
     public Place(String id, String name, String image){
         mID = id;
         mName = name;
         mImage = image;
+    }
+
+    public Place(String id, String name, String image, boolean hasDesc){
+        mID = id;
+        mName = name;
+        mImage = image;
+        mHasDescription = hasDesc;
     }
 
     public Place(String id, String name, String desc, String sources, double latitude, double longitude, String image, String credits, String wikiUrl){
@@ -37,6 +45,22 @@ public class Place {
         mEvents = new ArrayList<>();
         mCredits = credits;
         mWikiUrl = wikiUrl;
+        isInfoWindowShown = false;
+    }
+
+    public Place(String id, String name, String area, String desc, String sources, double latitude, double longitude, String image, String credits, String wikiUrl){
+        mID = id;
+        mName = name;
+        mArea = area;
+        mDescription = desc;
+        mSources = sources;
+        mLatitude = latitude;
+        mLongitude = longitude;
+        mImage = image;
+        mEvents = new ArrayList<>();
+        mCredits = credits;
+        mWikiUrl = wikiUrl;
+        isInfoWindowShown = false;
     }
 
     public Place(String id, String name, double latitude, double longitude, String image, boolean hasDescription){

@@ -1,77 +1,55 @@
 <resources>
     <string name="app_name">Nice Places</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_settings">Settings</string>
-
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="areas">Areas</string>
+    <string name="close_to_save">Close this activity to save changes.</string>
+    <string name="connection_error">Connection error, impossible to download data.</string>
+    <string name="contact_us">Contact us</string>
+    <string name="description">Description</string>
+    <string name="description_not_available">Description not available.</string>
+    <string name="explore">Explore</string>
+    <string name="find_out_more">Find out more</string>
+    <string name="go">Go!</string>
+    <string name="history">History</string>
+    <string name="impossible_load_location">The current location can not be loaded because location services are deactivated. The last known location will be loaded.</string>
+    <string name="info1">Nice Places is an app that let you discover places of historical, cultural and artistic interest close to you, offering a description of them to satisfy your curiosity.\nNot only, you will also have the opportunity to travel virtually and move along the peninsula, to cross itineraries, landscapes, cities and remote places, discovering what makes Italy, from this point of view, one of the richest country in the world.</string>
+    <string name="info2">In this version you can use two modes:\n&#8226; <b>Places around you</b> let you discover places of interest closest to you, you can turn on navigation to reach those places or read the description.\n&#8226; <b>Explore</b> with which you can view the list of all places divided by area.</string>
+    <string name="info3">Compared to the previous version lots of new places and description have been inserted. Every week more will be added!</string>
+    <string name="info4">Follow us on social network to support our project, to don\'t miss updates and to find out which places will be the next who will be added on Nice Places!</string>
+    <string name="info5">If you want to report a problem, un advice or have further information on the project you can send a message to our Facebook or Instagram accounts or send an e-mail to the following address.</string>
+    <string name="intro1">Thank you for downloading Nice Places! This app let you discover places of historical, cultural and artistic interest close to you, offering a description of them to satisfy your curiosity.\nNot only, you will also have the opportunity to travel virtually and move along the peninsula, to cross itineraries, landscapes, cities and remote places, discovering what makes Italy, from this point of view, one of the richest country in the world.</string>
+    <string name="intro2">To get started, allow your device to read your location and calculate which locations are closest and how far they are.</string>
+    <string name="intro3">From the main menu select \"Places around you\". A map will be displayed with your position and the nearest places.</string>
+    <string name="intro4">Touch the place you are interested in from the list at the bottom: it will be highlighted on the map.</string>
+    <string name="intro5">Touch the marker with the photo displayed on the map to open the card with the details of the place.</string>
+    <string name="intro6">Touching the button \"Start navigation\" you can open the navigator.</string>
+    <string name="intro7">That\'s all,\nhave a good fun!</string>
+    <string name="location_disabled">Location disabled</string>
+    <string name="location_loading">Loading location</string>
+    <string name="location_retrieving">The app is retrieving your location&#8230;</string>
+    <string name="location_update">Location update</string>
+    <string name="minimum_distance">Minimum distance</string>
+    <string name="more_places_available_soon">More places available soon!</string>
+    <string name="more_information">More information</string>
+    <string name="name">Name</string>
+    <string name="new_places_are_waiting">New places are waiting for you!</string>
+    <string name="next">Next</string>
+    <string name="nearest_places">Nearest places</string>
+    <string name="photo">Photo: %1$s</string>
+    <string name="places_around_you">Places around you</string>
+    <string name="places_in_radius_of">Places in radius of %1$s km (%2$d)</string>
+    <string name="places_of_day">Place of the day</string>
+    <string name="settings">Settings</string>
+    <string name="sources">Sources: %1$s</string>
+    <string name="search">Search&#8230;</string>
+    <string name="search_radius">Search radius</string>
+    <string name="settings1">The places shown on map are those whose distance (in kilometers as the crow flies from your position) is less or equal than the one indicated here.</string>
+    <string name="settings2">When you use the function \"Places around you\" the app receives a location update every time the time interval (in seconds) indicated above elapses or the new position is located at a distance (in meters) greater than the one indicated above.\nSet these values to adjust the frequency of update of position and therefore of the list of places.</string>
+    <string name="skip">Skip</string>
+    <string name="start_navigation">Start navigation</string>
+    <string name="support_us">Support us!</string>
+    <string name="time_interval">Time interval</string>
+    <string name="turn_on_location">Turn on\nlocation services</string>
+    <string name="view_tutorial">View the tutorial</string>
+    <string name="welcome_to">Welcome to\nNice Places!</string>
+    <string name="whats_featured">What\'s featured in this version?</string>
 </resources>

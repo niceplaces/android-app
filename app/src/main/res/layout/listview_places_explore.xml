@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="60dp"
+    android:paddingEnd="10dp"
+    android:paddingRight="10dp">
 
     <ImageView
         android:layout_width="50dp"
@@ -15,13 +17,23 @@
         android:layout_margin="5dp"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="0.9"
         android:id="@+id/textview_place_name"
         android:text="Place"
         android:gravity="center_vertical"
         android:textSize="18sp"
         android:padding="10dp"
+        android:ellipsize="end"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="50dp"
+        android:scaleType="center"
+        android:id="@+id/imageview_place_star"
+        android:src="@drawable/star"
+        android:layout_margin="5dp" />
 
 </LinearLayout>

@@ -23,6 +23,7 @@ import com.niceplaces.niceplaces.utils.NonScrollListView;
 import com.niceplaces.niceplaces.utils.MyRunnable;
 
 import java.util.List;
+import java.util.Locale;
 
 public class PlaceDetailsActivity extends AppCompatActivity {
 
@@ -75,22 +76,29 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 ImageUtils.setImageViewWithGlide(mContext, getPlace().mImage, imageViewPlaceActionBar);
                 try {
                     final String wikipediaUrl = getPlace().mWikiUrl;
-                    imageViewWikipedia.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(wikipediaUrl));
-                            startActivity(i);
-                        }
-                    });
+                    if (!wikipediaUrl.equals("")){
+                        imageViewWikipedia.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(wikipediaUrl));
+                                startActivity(i);
+                            }
+                        });
+                    } else {
+                        imageViewWikipedia.setAlpha(0.5f);
+                    }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                     imageViewWikipedia.setAlpha(0.5f);
                 }
                 List<Event> events = getPlace().getEvents();
-                if (events != null) {
+                if (!events.isEmpty() && Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
                     EventsAdapter adapter = new EventsAdapter(mContext, R.layout.listview_events, events);
                     listViewEvents.setAdapter(adapter);
                     listViewEvents.setEnabled(false);
+                } else {
+                    LinearLayout layoutHistory = findViewById(R.id.layout_history);
+                    layoutHistory.setVisibility(View.GONE);
                 }
                 textViewPlaceName.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
                     @Override
@@ -110,12 +118,12 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 TextView textViewDescSources = findViewById(R.id.textview_desc_sources);
                 TextView textViewImageCredits = findViewById(R.id.textview_img_credits);
                 if (!getPlace().mSources.equals("")) {
-                    textViewDescSources.setText("Fonti: " + getPlace().mSources);
+                    textViewDescSources.setText(getString(R.string.sources, getPlace().mSources));
                 } else {
                     textViewDescSources.setText("");
                 }
                 if (!getPlace().mCredits.equals("")) {
-                    textViewImageCredits.setText("Foto: " + getPlace().mCredits);
+                    textViewImageCredits.setText(getString(R.string.photo, getPlace().mCredits));
                 } else {
                     textViewImageCredits.setText("");
                 }

@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.niceplaces.niceplaces.BuildConfig;
+import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.controllers.PrefsController;
 import com.niceplaces.niceplaces.models.Area;
 import com.niceplaces.niceplaces.models.Event;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DaoPlaces {
 
@@ -50,8 +52,12 @@ public class DaoPlaces {
                             List<Area> buffer = new ArrayList<>();
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name_en");
+                                if (name.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                    name = jsonObject.getString("name");
+                                }
                                 Area area = new Area(jsonObject.getString("id"),
-                                        jsonObject.getString("name"));
+                                        name, jsonObject.getString("count"));
                                 buffer.add(area);
                             }
                             callback.setAreas(buffer);
@@ -63,7 +69,7 @@ public class DaoPlaces {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Errore di connessione, impossibile scaricare i dati.", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
@@ -84,9 +90,18 @@ public class DaoPlaces {
                             List<Place> buffer = new ArrayList<>();
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name_en");
+                                if (name.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                    name = jsonObject.getString("name");
+                                }
+                                Boolean hasDescription = jsonObject.getBoolean("has_description_en");
+                                if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                    hasDescription = jsonObject.getBoolean("has_description");
+                                }
                                 Place place = new Place(jsonObject.getString("id"),
-                                        jsonObject.getString("name"),
-                                        jsonObject.getString("image"));
+                                        name,
+                                        jsonObject.getString("image"),
+                                        hasDescription);
                                 buffer.add(place);
                             }
                             callback.setPlaces(buffer);
@@ -98,7 +113,7 @@ public class DaoPlaces {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Errore di connessione, impossibile scaricare i dati.", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
@@ -122,12 +137,20 @@ public class DaoPlaces {
                             List<Place> buffer = new ArrayList<>();
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name_en");
+                                if (name.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                    name = jsonObject.getString("name");
+                                }
+                                Boolean hasDescription = jsonObject.getBoolean("has_description_en");
+                                if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                    hasDescription = jsonObject.getBoolean("has_description");
+                                }
                                 Place place = new Place(jsonObject.getString("id"),
-                                        jsonObject.getString("name"),
+                                        name,
                                         jsonObject.getDouble("latitude"),
                                         jsonObject.getDouble("longitude"),
                                         jsonObject.getString("image"),
-                                        jsonObject.getBoolean("has_description"));
+                                        hasDescription);
                                 buffer.add(place);
                             }
                             callback.setPlaces(buffer);
@@ -139,7 +162,7 @@ public class DaoPlaces {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Errore di connessione, impossibile scaricare i dati.", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
@@ -157,15 +180,27 @@ public class DaoPlaces {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            String name = jsonObject.getString("name_en");
+                            if (name.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                name = jsonObject.getString("name");
+                            }
+                            String description = jsonObject.getString("description_en");
+                            if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                description = jsonObject.getString("description");
+                            }
+                            String wikiUrl = jsonObject.getString("wiki_url_en");
+                            if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                wikiUrl = jsonObject.getString("wiki_url");
+                            }
                             Place place = new Place(jsonObject.getString("id"),
-                                    jsonObject.getString("name"),
-                                    jsonObject.getString("description"),
+                                    name,
+                                    description,
                                     jsonObject.getString("desc_sources"),
                                     jsonObject.getDouble("latitude"),
                                     jsonObject.getDouble("longitude"),
                                     jsonObject.getString("image"),
                                     jsonObject.getString("img_credits"),
-                                    jsonObject.getString("wiki_url"));
+                                    wikiUrl);
                             JSONArray jsonEvents = jsonObject.getJSONArray("events");
                             List<Event> events = new ArrayList<>();
                             for (int i = 0; i < jsonEvents.length(); i++){
@@ -184,9 +219,75 @@ public class DaoPlaces {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Errore di connessione, impossibile scaricare i dati.", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show();
             }
         });
+        queue.add(stringRequest);
+    }
+
+    public void getPlaceOfTheDay(final MyRunnable callback) {
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        String url = "https://niceplaces.altervista.org/data/v2/" + mDbMode + "/placeoftheday";
+        if(!Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+            url = url.concat("-en");
+        }
+        if (BuildConfig.DEBUG){
+            Toast.makeText(mContext, "HTTP request " + url, Toast.LENGTH_SHORT).show();
+        }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String name = jsonObject.getString("name_en");
+                            String areaName = jsonObject.getString("area_en");
+                            if (name.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                name = jsonObject.getString("name");
+                            }
+                            if (areaName.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                areaName = jsonObject.getString("area");
+                            }
+                            String description = jsonObject.getString("description_en");
+                            if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                description = jsonObject.getString("description");
+                            }
+                            String wikiUrl = jsonObject.getString("wiki_url_en");
+                            if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                                wikiUrl = jsonObject.getString("wiki_url");
+                            }
+                            Place place = new Place(jsonObject.getString("id"),
+                                    name,
+                                    areaName,
+                                    description,
+                                    jsonObject.getString("desc_sources"),
+                                    jsonObject.getDouble("latitude"),
+                                    jsonObject.getDouble("longitude"),
+                                    jsonObject.getString("image"),
+                                    jsonObject.getString("img_credits"),
+                                    wikiUrl);
+                            JSONArray jsonEvents = jsonObject.getJSONArray("events");
+                            List<Event> events = new ArrayList<>();
+                            for (int i = 0; i < jsonEvents.length(); i++){
+                                JSONObject eventObject = jsonEvents.getJSONObject(i);
+                                Event event = new Event(eventObject.getString("date"),
+                                        eventObject.getString("description"));
+                                events.add(event);
+                            }
+                            place.setEvents(events);
+                            callback.setPlace(place);
+                            callback.run();
+                        } catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show();
+            }
+        });
+        stringRequest.setShouldCache(false);
         queue.add(stringRequest);
     }
 

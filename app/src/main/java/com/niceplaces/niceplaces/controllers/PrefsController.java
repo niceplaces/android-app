@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.niceplaces.niceplaces.BuildConfig;
+import com.niceplaces.niceplaces.models.GeoPoint;
 import com.niceplaces.niceplaces.utils.AppUtils;
 
 public class PrefsController {
@@ -29,6 +30,20 @@ public class PrefsController {
         } else {
             return "release";
         }
+    }
+
+    public void setStoredLocation(GeoPoint location) {
+        SharedPreferences.Editor editor = mPref.edit();
+        editor.putFloat("stored_location_lat", (float) location.latitude);
+        editor.putFloat("stored_location_lon", (float) location.longitude);
+        editor.apply();
+    }
+
+    public GeoPoint getStoredLocation() {
+        double sienaLat = 43.318498;
+        double sienaLon = 11.331613;
+        return new GeoPoint(mPref.getFloat("stored_location_lat", (float) sienaLat),
+                            mPref.getFloat("stored_location_lon", (float) sienaLon));
     }
 
     public void setDistanceRadius(float radius){

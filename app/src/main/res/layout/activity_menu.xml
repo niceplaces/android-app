@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"/>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:paddingBottom="20dp"
-        android:paddingTop="50dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
         android:src="@drawable/app_icon" />
 
     <LinearLayout
@@ -30,14 +41,19 @@
             android:src="@drawable/info" />
 
         <ImageView
+            android:id="@+id/imageview_web"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/web" />
+
+        <ImageView
             android:id="@+id/imageview_facebook"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_margin="10dp"
             android:src="@drawable/facebook" />
 
         <ImageView
@@ -54,7 +70,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:src="@drawable/debug" />
+            android:src="@drawable/debug"/>
 
     </LinearLayout>
 
@@ -68,7 +84,7 @@
         android:layout_marginTop="20dp"
         android:layout_weight=".5"
         android:background="@drawable/bg_menu_button"
-        android:text="Luoghi intorno a te"
+        android:text="@string/places_around_you"
         android:textColor="#fff"
         android:textSize="20dp" />
 
@@ -86,10 +102,12 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_menu_button"
-            android:text="Esplora"
+            android:text="@string/explore"
             android:textColor="#fff"
             android:textSize="20dp" />
 
     </RelativeLayout>
 
 </LinearLayout>
+
+</FrameLayout>

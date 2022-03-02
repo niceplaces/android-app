@@ -12,6 +12,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.niceplaces.niceplaces.BuildConfig;
 import com.niceplaces.niceplaces.R;
 
+import java.util.Locale;
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -24,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         Button placesNearYou = findViewById(R.id.btn_places_near_you);
         Button virtualTour = findViewById(R.id.btn_virtual_tour);
         ImageView IVInfo = findViewById(R.id.imageview_info);
+        ImageView IVWeb = findViewById(R.id.imageview_web);
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
         ImageView IVFacebook = findViewById(R.id.imageview_facebook);
         ImageView IVDebug = findViewById(R.id.imageview_debug);
@@ -32,6 +35,18 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(thisActivity, InfoActivity.class);
                 startActivity(intent);
+            }
+        });
+        IVWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://niceplaces.altervista.org/en/";
+                if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                    url = "http://niceplaces.altervista.org/";
+                }
+                Intent i = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(url));
+                startActivity(i);
             }
         });
         IVInstagram.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +75,11 @@ public class MenuActivity extends AppCompatActivity {
         virtualTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(thisActivity, AreasListActivity.class);
+                Intent intent = new Intent(thisActivity, ExploreActivity.class);
                 startActivity(intent);
             }
         });
         if (BuildConfig.DEBUG) {
-
             IVDebug.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

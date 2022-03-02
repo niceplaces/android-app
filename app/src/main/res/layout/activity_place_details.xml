@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:padding="10dp"
-                        android:text="Nome"
+                        android:text="@string/name"
                         android:textColor="@color/colorPrimaryDark"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -81,7 +81,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Attiva la navigazione"
+                            android:text="@string/start_navigation"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp" />
@@ -97,7 +97,7 @@
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
                         android:paddingStart="20dp"
-                        android:text="La descrizione di questo luogo non è al momento disponibile."
+                        android:text="@string/description_not_available"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
                         android:visibility="gone" />
@@ -130,23 +130,31 @@
                             android:layout_marginRight="20dp"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
-                            android:text="Fonte: " />
+                            android:text="@string/sources" />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="Storia"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                            android:textSize="20sp" />
+                            android:orientation="vertical"
+                            android:id="@+id/layout_history">
 
-                        <com.niceplaces.niceplaces.utils.NonScrollListView
-                            android:id="@+id/listview_place_events"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:divider="@null"
-                            android:dividerHeight="0dp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:text="@string/history"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="20sp" />
+
+                            <com.niceplaces.niceplaces.utils.NonScrollListView
+                                android:id="@+id/listview_place_events"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:divider="@null"
+                                android:dividerHeight="0dp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -156,7 +164,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
                         android:padding="10dp"
-                        android:text="Approfondimenti"
+                        android:text="@string/more_information"
                         android:textColor="@color/colorPrimaryDark"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textSize="20sp" />
@@ -175,7 +183,7 @@
                         android:layout_marginRight="20dp"
                         android:gravity="end"
                         android:padding="5dp"
-                        android:text="Foto: " />
+                        android:text="@string/photo" />
 
 
                 </LinearLayout>

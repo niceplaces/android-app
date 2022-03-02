@@ -1,8 +1,10 @@
 package com.niceplaces.niceplaces.adapters;
 
 import android.content.Context;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,13 @@ public class ExplorePlacesAdapter extends ArrayAdapter<Place> {
         }
         TextView textViewName = convertView.findViewById(R.id.textview_place_name);
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
+        //Log.i("HAS_DESC", Boolean.toString(place.mHasDescription));
+        ImageView IVStar = convertView.findViewById(R.id.imageview_place_star);
+        if (place.mHasDescription){
+            IVStar.setVisibility(View.VISIBLE);
+        } else {
+            IVStar.setVisibility(View.GONE);
+        }
         textViewName.setText(place.mName);
         ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage);
         return convertView;

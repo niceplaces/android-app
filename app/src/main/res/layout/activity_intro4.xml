@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="Tocca il luogo che ti interessa dalla lista in basso: verrà mostrato sulla mappa."
+        android:text="@string/intro4"
         android:textColor="#dd000000"
         android:textSize="18sp"
         android:lineSpacingMultiplier="1.2"/>

@@ -53,10 +53,10 @@ public class IntroActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 addBottomDots(position, layouts.length);
                 if (position == layouts.length - 1){
-                    mButtonNext.setText("Vai!");
+                    mButtonNext.setText(R.string.go);
                     mButtonSkip.setVisibility(View.GONE);
                 } else {
-                    mButtonNext.setText("Avanti");
+                    mButtonNext.setText(R.string.next);
                     mButtonSkip.setVisibility(View.VISIBLE);
                 }
             }

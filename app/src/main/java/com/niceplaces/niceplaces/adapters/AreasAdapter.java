@@ -29,8 +29,10 @@ public class AreasAdapter extends ArrayAdapter<Area> {
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
             convertView = layoutInflater.inflate(R.layout.listview_areas, parent, false);
         }
-        TextView textViewEventDate = convertView.findViewById(R.id.textview_area_name);
-        textViewEventDate.setText(area.getName());
+        TextView textViewAreaName = convertView.findViewById(R.id.textview_area_name);
+        TextView textViewAreaCount = convertView.findViewById(R.id.textview_area_count);
+        textViewAreaName.setText(area.getName());
+        textViewAreaCount.setText(area.getCount());
         return convertView;
     }
 }

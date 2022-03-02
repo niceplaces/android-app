@@ -28,16 +28,16 @@ public class ViewPagerAdapter extends PagerAdapter {
         ImageView imageView = view.findViewById(R.id.imageview_screenshoot);
         switch (position){
             case 2:
-                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen4, imageView);
+                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen3b, imageView);
                 break;
             case 3:
-                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen5, imageView);
+                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen3, imageView);
                 break;
             case 4:
-                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen6, imageView);
+                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen4, imageView);
                 break;
             case 5:
-                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen6, imageView);
+                ImageUtils.setImageViewWithGlide(mContext, R.drawable.screen4, imageView);
                 break;
                 default:
                     break;

@@ -35,6 +35,9 @@ public class MarkerInfoAdapter implements GoogleMap.InfoWindowAdapter {
         ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage);
         textViewPlaceName.setText(place.mName);
         textViewPlaceDistance.setText(Place.formatDistance(place.mDistance));
+        /*if (place.isInfoWindowShown){
+            marker.showInfoWindow();
+        }*/
         return convertView;
     }
 

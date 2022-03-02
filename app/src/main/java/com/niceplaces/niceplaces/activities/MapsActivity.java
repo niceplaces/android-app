@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ import com.niceplaces.niceplaces.adapters.MarkerInfoAdapter;
 import com.niceplaces.niceplaces.adapters.PlacesAdapter;
 import com.niceplaces.niceplaces.controllers.PrefsController;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
+import com.niceplaces.niceplaces.models.GeoPoint;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
@@ -61,6 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LinearLayout mListView;
     private LatLng mCurrentPosition;
     private MapMode mMapMode;
+    private AlertDialog dialogPosLoading;
 
     public static final String PLACE_ID = "place_id";
 
@@ -160,6 +163,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng newCenter = new LatLng(center.latitude, center.longitude);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(newCenter));
                 marker.showInfoWindow();
+                Place place = (Place) marker.getTag();
+                place.isInfoWindowShown = true;
                 mMap.getUiSettings().setMapToolbarEnabled(true);
                 return false;
             }
@@ -190,10 +195,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void setupLocationListener() {
         final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        final AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
-        alertDialog.setTitle("Posizione disabilitata");
-        alertDialog.setMessage("Non è possibile caricare la posizione attuale perché la geolocalizzazione è disattivata.");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        dialogPosLoading = new AlertDialog.Builder(MapsActivity.this).create();
+        dialogPosLoading.setTitle(R.string.location_loading);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_load_location, null);
+        dialogPosLoading.setView(view);
+        dialogPosLoading.show();
+        final AlertDialog dialogPosDisabled = new AlertDialog.Builder(MapsActivity.this).create();
+        dialogPosDisabled.setTitle(R.string.location_disabled);
+        dialogPosDisabled.setMessage(getString(R.string.impossible_load_location));
+        dialogPosDisabled.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -206,6 +217,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (BuildConfig.DEBUG) {
                         Toast.makeText(mContext, "Location update " + String.valueOf(location.getLatitude()) + " " + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
                     }
+                    PrefsController prefs = new PrefsController(mContext);
+                    prefs.setStoredLocation(new GeoPoint(location.getLatitude(), location.getLongitude()));
                     sendNearestPlacesRequest(location);
                 }
 
@@ -224,8 +237,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.i("OnProviderDisabled", s);
                     boolean oneProviderAvailable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
                     if (!oneProviderAvailable) {
-                        if (!alertDialog.isShowing()) {
-                            alertDialog.show();
+                        PrefsController prefs = new PrefsController(mContext);
+                        GeoPoint storedLocation = prefs.getStoredLocation();
+                        sendNearestPlacesRequest(storedLocation.latitude, storedLocation.longitude);
+                        if (!dialogPosDisabled.isShowing()) {
+                            dialogPosLoading.dismiss();
+                            dialogPosDisabled.show();
                         }
                     }
                 }
@@ -248,16 +265,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void sendNearestPlacesRequest(final Location location) {
+    public void sendNearestPlacesRequest(final double lat, final double lon) {
         DaoPlaces daoPlaces = new DaoPlaces(mContext);
-        daoPlaces.getNearest(location.getLatitude(), location.getLongitude(),
+        daoPlaces.getNearest(lat, lon,
                 new MyRunnable() {
                     @Override
                     public void run() {
                         mPlaces = getPlaces();
-                        updateLocation(location);
+                        updateLocation(lat, lon);
+                        dialogPosLoading.dismiss();
                     }
                 });
+    }
+
+    public void sendNearestPlacesRequest(final Location location) {
+        sendNearestPlacesRequest(location.getLatitude(), location.getLongitude());
     }
 
     public void updateLocation(Location location) {
@@ -308,7 +330,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mListView.addView(morePlaces);
         TextView TVCounter = findViewById(R.id.places_counter);
         PrefsController prefs = new PrefsController(mContext);
-        TVCounter.setText("Luoghi nel raggio di " + String.valueOf(prefs.getDistanceRadius()) + " km (" + places.size() + ")");
+        TVCounter.setText(getString(R.string.places_in_radius_of, String.format("%.2f",prefs.getDistanceRadius()), places.size()));
     }
 
     @Override

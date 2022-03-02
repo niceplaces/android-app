@@ -6,13 +6,25 @@
     android:layout_height="60dp">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="0.7"
         android:id="@+id/textview_area_name"
-        android:text="Area"
-        android:gravity="center"
+        android:text="@string/name"
         android:textSize="18sp"
         android:padding="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/textview_area_count"
+        android:text="0"
+        android:layout_gravity="end"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:textColor="#888"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

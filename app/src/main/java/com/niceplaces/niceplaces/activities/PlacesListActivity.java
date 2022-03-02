@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.niceplaces.niceplaces.R;
-import com.niceplaces.niceplaces.adapters.AreasAdapter;
 import com.niceplaces.niceplaces.adapters.ExplorePlacesAdapter;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.utils.MyRunnable;
@@ -22,11 +22,13 @@ public class PlacesListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_areas_list);
+        setContentView(R.layout.activity_places_list);
         final PlacesListActivity thisActivity = this;
         FirebaseAnalytics.getInstance(this);
         Bundle extras = getIntent().getExtras();
-        getSupportActionBar().setTitle(extras.getString("AREA_NAME"));
+        getSupportActionBar().hide();
+        TextView textViewAreaName = findViewById(R.id.explore_area_name);
+        textViewAreaName.setText(extras.getString("AREA_NAME"));
         final ListView listView = findViewById(R.id.listview_areas);
         final ProgressBar progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);

@@ -1,5 +1,6 @@
 # Nice Places Android app
 
+![Downloads on Google Play](https://img.shields.io/badge/downloads-1.164-success)
 ![GitHub repo size](https://img.shields.io/github/repo-size/niceplaces/android-app)
 
 ## Discover the culture around you

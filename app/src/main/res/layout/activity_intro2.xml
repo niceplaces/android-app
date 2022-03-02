@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="30dp"
-        android:text="Attiva la\ngeolocalizzazione"
+        android:text="@string/turn_on_location"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="Per iniziare, permetti al tuo dispositivo di leggere la tua posizione in modo da poter calcolare quali sono i luoghi più vicini e quanto sono distanti."
+        android:text="@string/intro2"
         android:textColor="#dd000000"
         android:textSize="18sp"
         android:lineSpacingMultiplier="1.2"/>

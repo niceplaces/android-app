@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="Tocca il segnaposto con l'immagine visualizzato sulla mappa per aprire la scheda dei dettagli del luogo."
+        android:text="@string/intro5"
         android:textColor="#dd000000"
         android:textSize="18sp"
         android:lineSpacingMultiplier="1.2"/>

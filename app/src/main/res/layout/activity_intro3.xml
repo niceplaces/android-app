@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="Dal menù principale seleziona &quot;Luoghi intorno a te&quot;. Verrà mostrata una schermata con la tua posizione ed i posti più vicini."
+        android:text="@string/intro3"
         android:textColor="#dd000000"
         android:textSize="18sp"
         android:lineSpacingMultiplier="1.2"/>

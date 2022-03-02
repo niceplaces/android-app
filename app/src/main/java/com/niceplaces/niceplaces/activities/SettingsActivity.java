@@ -17,7 +17,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        getSupportActionBar().setTitle("Opzioni");
+        getSupportActionBar().setTitle(R.string.settings);
         mEditTextRadius = findViewById(R.id.edittext_distance_radius);
         mEditTextRefreshTime = findViewById(R.id.edittext_position_refresh_time);
         mEditTextRefreshDistance = findViewById(R.id.edittext_position_refresh_distance);

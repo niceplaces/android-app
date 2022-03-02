@@ -44,6 +44,15 @@ public class InfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button buttonEmail = findViewById(R.id.button_email);
+        buttonEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SENDTO,
+                        Uri.parse("mailto:niceplacesit@gmail.com"));
+                startActivity(i);
+            }
+        });
     }
 
 }

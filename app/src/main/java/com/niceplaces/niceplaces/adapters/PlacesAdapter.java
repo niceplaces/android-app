@@ -48,7 +48,9 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
         }
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
         ImageView imageViewPlaceStar = convertView.findViewById(R.id.imageview_place_star);
-        if (!place.mHasDescription){
+        if (place.mHasDescription){
+            imageViewPlaceStar.setVisibility(View.VISIBLE);
+        } else {
             imageViewPlaceStar.setVisibility(View.GONE);
         }
         TextView textViewPlaceName = convertView.findViewById(R.id.textview_place_name);
