@@ -3,15 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
+    android:layout_margin="16dp"
     android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Database remoto:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_db_debug"
+            android:text="Debug"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_db_release"
+            android:text="Release"/>
+
+    </RadioGroup>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_margin="20dp"
+        android:layout_gravity="center"
         android:text="Simula prima apertura\ndopo installazione"
         android:id="@+id/button_simulate_open_after_install"/>
 
@@ -20,6 +45,7 @@
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_margin="20dp"
+        android:layout_gravity="center"
         android:text="Simula prima apertura\ndopo aggiornamento"
         android:id="@+id/button_simulate_open_after_update"/>
 

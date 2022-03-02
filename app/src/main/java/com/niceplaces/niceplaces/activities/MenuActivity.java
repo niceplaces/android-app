@@ -57,14 +57,15 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        virtualTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, AreasListActivity.class);
+                startActivity(intent);
+            }
+        });
         if (BuildConfig.DEBUG) {
-            virtualTour.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(thisActivity, VirtualTourActivity.class);
-                    startActivity(intent);
-                }
-            });
+
             IVDebug.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -75,7 +76,5 @@ public class MenuActivity extends AppCompatActivity {
         } else {
             IVDebug.setVisibility(View.GONE);
         }
-
     }
-
 }

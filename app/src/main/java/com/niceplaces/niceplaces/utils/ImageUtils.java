@@ -19,6 +19,7 @@ import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.niceplaces.niceplaces.R;
+import com.niceplaces.niceplaces.controllers.PrefsController;
 import com.niceplaces.niceplaces.models.Place;
 
 import java.io.IOException;
@@ -45,11 +46,12 @@ public class ImageUtils {
     }
 
     public static void setImageViewWithGlide(Context context, String imageName, ImageView imageView){
-        Uri uri = Uri.parse("file:///android_asset/" + imageName);
+        PrefsController prefs = new PrefsController(context);
+        Uri uri = Uri.parse("https://niceplaces.altervista.org/data/photos/" + prefs.getDatabaseMode() + "/" + imageName);
         RequestOptions myOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .fitCenter()
-                .placeholder(R.drawable.marker_outline)
+                .placeholder(R.drawable.placeholder)
                 .override(Target.SIZE_ORIGINAL, imageView.getHeight());
         Glide.with(context)
                 .load(uri)
@@ -60,7 +62,7 @@ public class ImageUtils {
     public static void setImageViewWithGlide(Context context, int imageId, ImageView imageView){
         RequestOptions myOptions = new RequestOptions()
                 .fitCenter()
-                .placeholder(R.drawable.marker_outline)
+                .placeholder(R.drawable.placeholder)
                 .override(Target.SIZE_ORIGINAL, imageView.getHeight());
         Glide.with(context)
                 .load(imageId)

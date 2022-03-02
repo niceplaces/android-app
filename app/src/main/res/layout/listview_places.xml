@@ -13,11 +13,28 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:id="@+id/imageview_place_image" />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/marker_outline"
+                android:id="@+id/imageview_place_image" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/star"
+                android:id="@+id/imageview_place_star" />
+
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
@@ -28,12 +45,14 @@
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_place_distance"
+        android:textColor="@color/colorPrimaryDark"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:text="Distance" />
 

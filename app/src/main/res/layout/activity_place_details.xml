@@ -1,196 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageview_place_image"
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/marker_outline" />
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical" />
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imageview_place_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:isScrollContainer="true"
-            android:orientation="vertical">
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignTop="@id/textview_place_name"
-                    android:background="#77ffffff" />
-
-                <TextView
-                    android:id="@+id/textview_place_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:padding="10dp"
-                    android:text="Nome"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            </RelativeLayout>
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#fff">
+                android:isScrollContainer="true"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/layout_navigation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
 
                     <ImageView
-                        android:id="@+id/imageview_directions"
-                        android:layout_width="50dp"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/directions" />
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignTop="@id/textview_place_name"
+                        android:background="#aaffffff" />
 
                     <TextView
+                        android:id="@+id/textview_place_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:padding="10dp"
+                        android:text="Nome"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/layout_navigation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Attiva la navigazione"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/imageview_directions"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/directions" />
 
-                <TextView
-                    android:id="@+id/textview_coming_soon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:paddingEnd="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="20dp"
-                    android:text="La descrizione di questo luogo non è al momento disponibile."
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Attiva la navigazione"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/layout_place_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:paddingEnd="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="20dp">
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/textview_place_desc"
+                        android:id="@+id/textview_coming_soon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="1.2"
-                        android:text="Lorem ipsum dolor sit amet."
+                        android:padding="8dp"
+                        android:paddingEnd="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingStart="20dp"
+                        android:text="La descrizione di questo luogo non è al momento disponibile."
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_place_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:paddingEnd="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingStart="20dp">
+
+                        <TextView
+                            android:id="@+id/textview_place_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.2"
+                            android:text="Lorem ipsum dolor sit amet."
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textview_desc_sources"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginRight="20dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Fonte: " />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Storia"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textSize="20sp" />
+
+                        <com.niceplaces.niceplaces.utils.NonScrollListView
+                            android:id="@+id/listview_place_events"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@null"
+                            android:dividerHeight="0dp" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:padding="10dp"
-                        android:text="Storia"
+                        android:text="Approfondimenti"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textSize="20sp" />
 
-                    <com.niceplaces.niceplaces.utils.NonScrollListView
-                        android:id="@+id/listview_place_events"
+                    <ImageView
+                        android:id="@+id/imageview_wikipedia"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:src="@drawable/wikipedia_icon" />
+
+                    <TextView
+                        android:id="@+id/textview_img_credits"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:divider="@null"
-                        android:dividerHeight="0dp" />
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="end"
+                        android:padding="5dp"
+                        android:text="Foto: " />
+
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:padding="10dp"
-                    android:text="Approfondimenti"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/imageview_wikipedia"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:src="@drawable/wikipedia_icon" />
-
-                <TextView
-                    android:id="@+id/textview_img_credits"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="end"
-                    android:padding="5dp"
-                    android:text="Immagine di " />
-
-
             </LinearLayout>
 
-        </LinearLayout>
 
+        </ScrollView>
 
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/layout_titlebar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <ImageView
-            android:id="@+id/imageview_place_image_titlebar"
+        <RelativeLayout
+            android:id="@+id/layout_titlebar"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginBottom="-200dp"
-            android:cropToPadding="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/marker_outline" />
+            android:layout_height="50dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignBottom="@id/textview_place_name_titlebar"
-            android:layout_alignTop="@id/textview_place_name_titlebar"
-            android:background="#77ffffff" />
+            <ImageView
+                android:id="@+id/imageview_place_image_titlebar"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginBottom="-200dp"
+                android:cropToPadding="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder" />
 
-        <TextView
-            android:id="@+id/textview_place_name_titlebar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Nome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_alignBottom="@id/textview_place_name_titlebar"
+                android:layout_alignTop="@id/textview_place_name_titlebar"
+                android:background="#aaffffff" />
+
+            <TextView
+                android:id="@+id/textview_place_name_titlebar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Nome"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

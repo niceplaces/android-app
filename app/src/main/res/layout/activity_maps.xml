@@ -29,6 +29,13 @@
             android:src="@drawable/search"
             android:id="@+id/imageview_search_button"/>
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:src="@drawable/settings"
+            android:id="@+id/imageview_map_settings_button"/>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -68,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Luoghi più vicini"
+            android:textColor="@color/colorPrimaryDark"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:id="@+id/places_counter"
             android:paddingLeft="8dp"/>

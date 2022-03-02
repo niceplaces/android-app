@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="v1.2 (02/04/2018)"
+            android:text="v2.0 (06/06/2018)"
             android:textColor="#aa000000"
             android:textSize="14sp"
             android:layout_marginBottom="10dp"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Questa versione offre una dimostrazione semplice del funzionamento dell'app con la modalità &quot;Luoghi intorno a te&quot;, con la quale puoi scoprire i posti di interesse più vicini alla tua posizione, puoi attivare la navigazione per raggiungere quei luoghi oppure visualizzare una descrizione con la relativa storia."
+            android:text="In questa versione puoi utilizzare due modalità:\n&#8226; &quot;Luoghi intorno a te&quot; ti permette di scoprire i posti di interesse più vicini alla tua posizione, puoi attivare la navigazione per raggiungere quei luoghi oppure visualizzare una descrizione con la relativa storia.\n&#8226; &quot;Esplora&quot; con la quale puoi visualizzare la lista di tutti i luoghi presenti divisi per zone."
             android:textColor="#dd000000"
             android:textSize="18sp"
             android:lineSpacingMultiplier="1.2" />
@@ -74,7 +74,7 @@
             android:paddingTop="10dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="Luoghi disponibili"
+            android:text="Nuovi luoghi ti aspettano!"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="22sp" />
 
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Sono disponibili 38 luoghi, di cui 23 con descrizione, che si trovano principalmente tra tra Siena e Bologna.\nMolti altri luoghi verranno aggiunti con i prossimi aggiornamenti!"
+            android:text="Rispetto alla versione precedente sono stati inseriti tantissimi nuovi luoghi e nuove descrizioni. Ogni settimana ne verranno aggiunti altri!"
             android:textColor="#dd000000"
             android:textSize="18sp"
             android:lineSpacingMultiplier="1.2" />
@@ -101,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Seguici sui social per sostenere il nostro progetto e non perderti gli aggiornamenti di Nice Places!"
+            android:text="Seguici sui social per sostenere il nostro progetto, per non perderti gli aggiornamenti e per scoprire quali saranno i prossimi luoghi che verranno aggiunti su Nice Places!"
             android:textColor="#dd000000"
             android:textSize="18sp"
             android:lineSpacingMultiplier="1.2" />

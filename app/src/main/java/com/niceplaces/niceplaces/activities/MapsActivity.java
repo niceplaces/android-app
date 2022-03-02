@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,14 +15,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,15 +33,16 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.crash.FirebaseCrash;
+import com.niceplaces.niceplaces.BuildConfig;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.MarkerInfoAdapter;
 import com.niceplaces.niceplaces.adapters.PlacesAdapter;
-import com.niceplaces.niceplaces.controllers.DatabaseController;
+import com.niceplaces.niceplaces.controllers.PrefsController;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
-import com.niceplaces.niceplaces.utils.StringUtils;
+import com.niceplaces.niceplaces.utils.MyRunnable;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
@@ -80,13 +79,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         mListView = findViewById(R.id.listview);
         ImageView imageViewSearchButton = findViewById(R.id.imageview_search_button);
+        ImageView imageViewSettingsButton = findViewById(R.id.imageview_map_settings_button);
         imageViewSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Check if no view has focus:
                 View focusView = mActivity.getCurrentFocus();
                 if (focusView != null) {
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
                 EditText editTextSearch = findViewById(R.id.edittext_search);
@@ -100,7 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         // TODO causa NullPointerException
                         try {
                             object.mMarker.setVisible(res);
-                        } catch (NullPointerException e){
+                        } catch (NullPointerException e) {
                             FirebaseCrash.logcat(Log.ERROR, AppUtils.getTag(), "Marker NPE ex");
                             FirebaseCrash.report(e);
                         }
@@ -110,9 +110,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 updatePlacesListView(filteredPlaces);
             }
         });
-        SQLiteDatabase db = new DatabaseController(this).getReadableDatabase();
-        DaoPlaces daoPlaces = new DaoPlaces(db, this);
-        mPlaces = daoPlaces.getAll();
+        imageViewSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, SettingsActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -131,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         imageViewMapMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (mMapMode){
+                switch (mMapMode) {
                     case ROAD:
                         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                         imageViewMapMode.setImageResource(R.drawable.road);
@@ -184,7 +188,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void setupLocationListener(){
+    public void setupLocationListener() {
         final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         final AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
         alertDialog.setTitle("Posizione disabilitata");
@@ -198,8 +202,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             LocationListener locationListener = new LocationListener() {
                 @Override
-                public void onLocationChanged(Location location) {
-                    updateLocation(location);
+                public void onLocationChanged(final Location location) {
+                    if (BuildConfig.DEBUG) {
+                        Toast.makeText(mContext, "Location update " + String.valueOf(location.getLatitude()) + " " + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                    }
+                    sendNearestPlacesRequest(location);
                 }
 
                 @Override
@@ -216,15 +223,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onProviderDisabled(String s) {
                     Log.i("OnProviderDisabled", s);
                     boolean oneProviderAvailable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                    if (!oneProviderAvailable){
-                        if (!alertDialog.isShowing()){
+                    if (!oneProviderAvailable) {
+                        if (!alertDialog.isShowing()) {
                             alertDialog.show();
                         }
                     }
                 }
             };
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 1, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, locationListener);
+            PrefsController prefs = new PrefsController(this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, prefs.getLocationRefreshTime(), prefs.getLocationRefreshDistance(), locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, prefs.getLocationRefreshTime(), prefs.getLocationRefreshDistance(), locationListener);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Log.i("getLastKnownLocation", Boolean.toString(location == null));
             if (location == null) {
@@ -232,11 +240,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.i("getLastKnownLocation2", Boolean.toString(location == null));
             }
             if (location != null) {
-                updateLocation(location);
+                // TODO genera crash
+                //updateLocation(location);
             }
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendNearestPlacesRequest(final Location location) {
+        DaoPlaces daoPlaces = new DaoPlaces(mContext);
+        daoPlaces.getNearest(location.getLatitude(), location.getLongitude(),
+                new MyRunnable() {
+                    @Override
+                    public void run() {
+                        mPlaces = getPlaces();
+                        updateLocation(location);
+                    }
+                });
     }
 
     public void updateLocation(Location location) {
@@ -252,7 +273,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(myPosition).title("Tu sei qui!")
                 .icon(ImageUtils.bitmapDescriptorFromDrawable(this, R.drawable.marker_position)));
-        if (mCurrentPosition == null){
+        if (mCurrentPosition == null) {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(myPosition).tilt(80).zoom(16).build()));
         }
         mCurrentPosition = myPosition;
@@ -277,7 +298,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         updatePlacesListView(mPlaces);
     }
 
-    private void updatePlacesListView(List<Place> places){
+    private void updatePlacesListView(List<Place> places) {
         mListView.removeAllViews();
         PlacesAdapter adapter = new PlacesAdapter(this, R.layout.listview_places, places, mMap, mCurrentPosition);
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -286,6 +307,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         View morePlaces = getLayoutInflater().inflate(R.layout.more_places, null);
         mListView.addView(morePlaces);
         TextView TVCounter = findViewById(R.id.places_counter);
-        TVCounter.setText("Luoghi più vicini (" + places.size() + ")");
+        PrefsController prefs = new PrefsController(mContext);
+        TVCounter.setText("Luoghi nel raggio di " + String.valueOf(prefs.getDistanceRadius()) + " km (" + places.size() + ")");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mCurrentPosition != null) {
+            Location location = new Location(LocationManager.GPS_PROVIDER);
+            location.setLatitude(mCurrentPosition.latitude);
+            location.setLongitude(mCurrentPosition.longitude);
+            sendNearestPlacesRequest(location);
+        }
     }
 }

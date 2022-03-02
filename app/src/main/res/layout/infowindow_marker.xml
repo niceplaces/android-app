@@ -26,6 +26,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/textview_place_name"
+        android:textColor="@color/colorPrimaryDark"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:text="Name" />
 
@@ -33,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_place_distance"
+        android:textColor="@color/colorPrimaryDark"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:text="Distance" />
 

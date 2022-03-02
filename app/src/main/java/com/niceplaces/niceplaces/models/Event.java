@@ -15,6 +15,11 @@ public class Event {
         mDescription = description;
     }
 
+    public Event(String date, String description){
+        mDate = date;
+        mDescription = description;
+    }
+
     public String getID(){
         return mID;
     }

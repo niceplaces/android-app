@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/duomo_siena_blur"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="50dp"
-        android:src="@drawable/nice_places" />
+        android:src="@drawable/app_icon" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -86,20 +86,9 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_menu_button"
-            android:text="Tour virtuale"
+            android:text="Esplora"
             android:textColor="#fff"
             android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:elevation="10dp"
-            android:rotation="10"
-            android:text="PRESTO DISPONIBILE"
-            android:textColor="#bbff0000"
-            android:textSize="30dp"
-            android:textStyle="bold" />
 
     </RelativeLayout>
 

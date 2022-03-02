@@ -3,7 +3,6 @@ package com.niceplaces.niceplaces.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -28,7 +27,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.MarkerInfoAdapter;
 import com.niceplaces.niceplaces.adapters.PlacesAdapter;
-import com.niceplaces.niceplaces.controllers.DatabaseController;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.ImageUtils;
@@ -98,9 +96,8 @@ public class VirtualTourActivity extends FragmentActivity implements OnMapReadyC
                 updatePlacesListView(filteredPlaces);
             }
         });
-        SQLiteDatabase db = new DatabaseController(this).getReadableDatabase();
-        DaoPlaces daoPlaces = new DaoPlaces(db, this);
-        mPlaces = daoPlaces.getAll();
+        DaoPlaces daoPlaces = new DaoPlaces(this);
+        //mPlaces = daoPlaces.getAll();
         Button buttonMoveUp = findViewById(R.id.button_up);
         buttonMoveUp.setOnTouchListener(new RepeatListener(10, 10, new View.OnClickListener() {
             @Override

@@ -9,9 +9,7 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.niceplaces.niceplaces.BuildConfig;
 import com.niceplaces.niceplaces.R;
-import com.niceplaces.niceplaces.controllers.DatabaseController;
 import com.niceplaces.niceplaces.controllers.PrefsController;
-import com.niceplaces.niceplaces.utils.AppUtils;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -35,13 +33,13 @@ public class SplashActivity extends AppCompatActivity {
         PrefsController prefsController = new PrefsController(this);
         if (prefsController.isFistOpenAfterInstall() || prefsController.isFistOpenAfterUpdate()){
             Log.i("FIRSTOPEN_", "DB!");
-            Thread thread = new Thread(new Runnable() {
+            /*Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     new DatabaseController(thisActivity);
                 }
             });
-            thread.start();
+            thread.start();*/
         }
         close();
     }

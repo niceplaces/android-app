@@ -47,8 +47,9 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
             convertView = layoutInflater.inflate(R.layout.listview_places, parent, false);
         }
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
-        if (place.mDescription.equals("")){
-            imageViewPlaceImage.setAlpha(0.7f);
+        ImageView imageViewPlaceStar = convertView.findViewById(R.id.imageview_place_star);
+        if (!place.mHasDescription){
+            imageViewPlaceStar.setVisibility(View.GONE);
         }
         TextView textViewPlaceName = convertView.findViewById(R.id.textview_place_name);
         TextView textViewPlaceDistance = convertView.findViewById(R.id.textview_place_distance);
