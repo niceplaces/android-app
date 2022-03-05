@@ -32,6 +32,16 @@ public class PrefsController {
         }
     }
 
+    public void setPrivacyAccepted(boolean accepted){
+        SharedPreferences.Editor editor = mPref.edit();
+        editor.putBoolean("privacy", accepted);
+        editor.apply();
+    }
+
+    public boolean isPrivacyAccepted(){
+        return mPref.getBoolean("privacy", false);
+    }
+
     public void setStoredLocation(GeoPoint location) {
         SharedPreferences.Editor editor = mPref.edit();
         editor.putFloat("stored_location_lat", (float) location.latitude);
@@ -53,7 +63,7 @@ public class PrefsController {
     }
 
     public float getDistanceRadius(){
-        return mPref.getFloat("distance_radius", 10);
+        return mPref.getFloat("distance_radius", 100);
     }
 
     public int getLocationRefreshTime(){

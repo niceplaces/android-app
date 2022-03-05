@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.niceplaces.niceplaces.R;
+
+import java.util.Locale;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -20,6 +23,19 @@ public class InfoActivity extends AppCompatActivity {
         final InfoActivity thisActivity = this;
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
         ImageView IVFacebook = findViewById(R.id.imageview_facebook);
+        TextView textViewWebsite = findViewById(R.id.textview_website);
+        textViewWebsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://www.niceplaces.it/en/";
+                if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                    url = "http://www.niceplaces.it/";
+                }
+                Intent i = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(url));
+                startActivity(i);
+            }
+        });
         IVInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

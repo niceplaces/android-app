@@ -6,16 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.ExplorePlacesAdapter;
-import com.niceplaces.niceplaces.dao.DaoPlaces;
+import com.niceplaces.niceplaces.controllers.AlertController;
+import com.niceplaces.niceplaces.dao.DaoAreas;
 import com.niceplaces.niceplaces.utils.MyRunnable;
-
-import static com.niceplaces.niceplaces.activities.MapsActivity.PLACE_ID;
 
 public class PlacesListActivity extends AppCompatActivity {
 
@@ -30,23 +29,27 @@ public class PlacesListActivity extends AppCompatActivity {
         TextView textViewAreaName = findViewById(R.id.explore_area_name);
         textViewAreaName.setText(extras.getString("AREA_NAME"));
         final ListView listView = findViewById(R.id.listview_areas);
-        final ProgressBar progressBar = findViewById(R.id.progress_bar);
-        progressBar.setVisibility(View.VISIBLE);
-        DaoPlaces daoPlaces = new DaoPlaces(this);
-        daoPlaces.getByArea(extras.getString("AREA_ID"), new MyRunnable() {
+        final AlertController alertController = new AlertController(this, R.id.layout_loading);
+        DaoAreas daoAreas = new DaoAreas(this);
+        daoAreas.getPlaces(extras.getString(Const.AREA_ID), new MyRunnable() {
             @Override
             public void run() {
-                progressBar.setVisibility(View.GONE);
                 ExplorePlacesAdapter adapter = new ExplorePlacesAdapter(thisActivity, R.id.listview_areas, getPlaces());
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent = new Intent(thisActivity, PlaceDetailsActivity.class);
-                        intent.putExtra(PLACE_ID, getPlaces().get(i).getID());
+                        intent.putExtra(Const.PLACE_ID, getPlaces().get(i).getID());
                         thisActivity.startActivity(intent);
                     }
                 });
+                alertController.loadingSuccess();
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                alertController.loadingError();
             }
         });
     }

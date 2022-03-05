@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.ViewPagerAdapter;
+import com.niceplaces.niceplaces.controllers.PrefsController;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -66,11 +67,17 @@ public class IntroActivity extends AppCompatActivity {
 
             }
         });
+        final PrefsController prefs = new PrefsController(this);
         mButtonSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(thisActivity, MenuActivity.class);
-                startActivity(i);
+                if (prefs.isPrivacyAccepted()) {
+                    Intent i = new Intent(thisActivity, MenuActivity.class);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(thisActivity, PrivacyActivity.class);
+                    startActivity(i);
+                }
                 thisActivity.finish();
             }
         });
@@ -80,8 +87,12 @@ public class IntroActivity extends AppCompatActivity {
                 int next = mViewPager.getCurrentItem() + 1;
                 if (next < layouts.length){
                     mViewPager.setCurrentItem(next);
-                } else {
+                } else if (prefs.isPrivacyAccepted()) {
                     Intent i = new Intent(thisActivity, MenuActivity.class);
+                    startActivity(i);
+                    thisActivity.finish();
+                } else {
+                    Intent i = new Intent(thisActivity, PrivacyActivity.class);
                     startActivity(i);
                     thisActivity.finish();
                 }

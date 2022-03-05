@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Nice Places</string>
+    <string name="accept">Accept</string>
     <string name="areas">Areas</string>
     <string name="close_to_save">Close this activity to save changes.</string>
     <string name="connection_error">Connection error, impossible to download data.</string>
     <string name="contact_us">Contact us</string>
+    <string name="decline">Decline</string>
     <string name="description">Description</string>
     <string name="description_not_available">Description not available.</string>
     <string name="explore">Explore</string>
@@ -12,7 +14,7 @@
     <string name="history">History</string>
     <string name="impossible_load_location">The current location can not be loaded because location services are deactivated. The last known location will be loaded.</string>
     <string name="info1">Nice Places is an app that let you discover places of historical, cultural and artistic interest close to you, offering a description of them to satisfy your curiosity.\nNot only, you will also have the opportunity to travel virtually and move along the peninsula, to cross itineraries, landscapes, cities and remote places, discovering what makes Italy, from this point of view, one of the richest country in the world.</string>
-    <string name="info2">In this version you can use two modes:\n&#8226; <b>Places around you</b> let you discover places of interest closest to you, you can turn on navigation to reach those places or read the description.\n&#8226; <b>Explore</b> with which you can view the list of all places divided by area.</string>
+    <string name="info2">In this version you can use three modes:\n&#8226; <b>Places around you</b> let you discover places of interest closest to you, you can turn on navigation to reach those places or read the description.\n&#8226; <b>Explore</b> with which you can view the list of all places divided by region and by area.\n&#8226; <b>New places</b> that contains a list of the latest places inserted and updated.</string>
     <string name="info3">Compared to the previous version lots of new places and description have been inserted. Every week more will be added!</string>
     <string name="info4">Follow us on social network to support our project, to don\'t miss updates and to find out which places will be the next who will be added on Nice Places!</string>
     <string name="info5">If you want to report a problem, un advice or have further information on the project you can send a message to our Facebook or Instagram accounts or send an e-mail to the following address.</string>
@@ -23,6 +25,8 @@
     <string name="intro5">Touch the marker with the photo displayed on the map to open the card with the details of the place.</string>
     <string name="intro6">Touching the button \"Start navigation\" you can open the navigator.</string>
     <string name="intro7">That\'s all,\nhave a good fun!</string>
+    <string name="like_place">Do you like this place? Like and share it!</string>
+    <string name="loading">Loading&#8230;</string>
     <string name="location_disabled">Location disabled</string>
     <string name="location_loading">Loading location</string>
     <string name="location_retrieving">The app is retrieving your location&#8230;</string>
@@ -32,13 +36,18 @@
     <string name="more_information">More information</string>
     <string name="name">Name</string>
     <string name="new_places_are_waiting">New places are waiting for you!</string>
+    <string name="new_places">New places</string>
     <string name="next">Next</string>
     <string name="nearest_places">Nearest places</string>
     <string name="photo">Photo: %1$s</string>
     <string name="places_around_you">Places around you</string>
     <string name="places_in_radius_of">Places in radius of %1$s km (%2$d)</string>
     <string name="places_of_day">Place of the day</string>
+    <string name="privacy_accept">I have read and accepted the privacy policy of Nice Places.</string>
+    <string name="privacy_invite">To use this application you must read and accept our privacy policy.</string>
     <string name="privacy_policy">Privacy policy</string>
+    <string name="read_policy">Read the policy</string>
+    <string name="regions">Regions</string>
     <string name="settings">Settings</string>
     <string name="sources">Sources: %1$s</string>
     <string name="search">Search&#8230;</string>
@@ -53,4 +62,9 @@
     <string name="view_tutorial">View the tutorial</string>
     <string name="welcome_to">Welcome to\nNice Places!</string>
     <string name="whats_featured">What\'s featured in this version?</string>
+
+    <string-array name="latest_places">
+        <item>Latest inserted</item>
+        <item>Latest updated</item>
+    </string-array>
 </resources>

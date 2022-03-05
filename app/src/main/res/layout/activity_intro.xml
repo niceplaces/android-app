@@ -17,7 +17,8 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"
+        android:background="#fff"/>
 
     <Button
         android:id="@+id/button_next"

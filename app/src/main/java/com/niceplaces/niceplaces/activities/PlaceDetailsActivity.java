@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.EventsAdapter;
+import com.niceplaces.niceplaces.controllers.AlertController;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.models.Event;
 import com.niceplaces.niceplaces.utils.ImageUtils;
@@ -38,15 +39,16 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         final RelativeLayout layoutTitleBar = findViewById(R.id.layout_titlebar);
         layoutTitleBar.setVisibility(View.GONE);
         Bundle extras = getIntent().getExtras();
-        final String placeID = extras.getString(MapsActivity.PLACE_ID);
-        final ProgressBar progressBar = findViewById(R.id.progress_bar);
+        final String placeID = extras.getString(Const.PLACE_ID);
         final ScrollView scrollView = findViewById(R.id.scrollView);
-        progressBar.setVisibility(View.VISIBLE);
+        final LinearLayout layoutPlaceShare = findViewById(R.id.layout_place_share);
+        final ImageView IVFacebook = findViewById(R.id.imageview_facebook);
+        final ImageView IVInstagram = findViewById(R.id.imageview_instagram);
+        final AlertController alertController = new AlertController(this, R.id.layout_loading);
         DaoPlaces daoPlaces = new DaoPlaces(this);
         daoPlaces.getOne(placeID, new MyRunnable() {
             @Override
             public void run() {
-                progressBar.setVisibility(View.GONE);
                 final TextView textViewPlaceName = findViewById(R.id.textview_place_name);
                 final TextView textViewPlaceNameActionBar = findViewById(R.id.textview_place_name_titlebar);
                 TextView textViewPlaceDesc = findViewById(R.id.textview_place_desc);
@@ -66,17 +68,19 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 });
                 ImageView imageViewPlace = findViewById(R.id.imageview_place_image);
                 ImageView imageViewPlaceActionBar = findViewById(R.id.imageview_place_image_titlebar);
+                TextView placeArea = findViewById(R.id.place_area);
                 ImageView imageViewWikipedia = findViewById(R.id.imageview_wikipedia);
                 NonScrollListView listViewEvents = findViewById(R.id.listview_place_events);
                 textViewPlaceName.setText(getPlace().mName);
                 textViewPlaceNameActionBar.setText(getPlace().mName);
                 textViewPlaceDesc.setText(getPlace().mDescription);
+                placeArea.setText(getPlace().mArea + ", " + getPlace().mRegion);
                 //TextUtils.justify(textViewPlaceDesc);
                 ImageUtils.setImageViewWithGlide(mContext, getPlace().mImage, imageViewPlace);
                 ImageUtils.setImageViewWithGlide(mContext, getPlace().mImage, imageViewPlaceActionBar);
                 try {
                     final String wikipediaUrl = getPlace().mWikiUrl;
-                    if (!wikipediaUrl.equals("")){
+                    if (!wikipediaUrl.equals("")) {
                         imageViewWikipedia.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -92,7 +96,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                     imageViewWikipedia.setAlpha(0.5f);
                 }
                 List<Event> events = getPlace().getEvents();
-                if (!events.isEmpty() && Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                if (!events.isEmpty() && Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())) {
                     EventsAdapter adapter = new EventsAdapter(mContext, R.layout.listview_events, events);
                     listViewEvents.setAdapter(adapter);
                     listViewEvents.setEnabled(false);
@@ -127,18 +131,44 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 } else {
                     textViewImageCredits.setText("");
                 }
+                if (getPlace().mFacebook.equals("") && getPlace().mInstagram.equals("")) {
+                    layoutPlaceShare.setVisibility(View.GONE);
+                } else {
+                    IVFacebook.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(getPlace().mFacebook));
+                            startActivity(i);
+                        }
+                    });
+                    IVInstagram.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(getPlace().mInstagram));
+                            startActivity(i);
+                        }
+                    });
+                }
                 scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
                         final ViewTreeObserver.OnGlobalLayoutListener listener = this;
                         scrollView.post(new Runnable() {
                             public void run() {
-                                scrollView.scrollTo(0,0);
+                                scrollView.scrollTo(0, 0);
                                 scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
                             }
                         });
                     }
                 });
+                alertController.loadingSuccess();
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                alertController.loadingError();
             }
         });
     }

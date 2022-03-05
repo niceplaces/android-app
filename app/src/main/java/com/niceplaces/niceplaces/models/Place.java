@@ -12,7 +12,7 @@ import java.util.List;
 public class Place {
 
     private String mID;
-    public String mName, mArea, mDescription, mImage, mCredits, mWikiUrl, mSources;
+    public String mName, mArea, mRegion, mDescription, mImage, mCredits, mWikiUrl, mSources, mFacebook, mInstagram;
     public boolean mHasDescription;
     public double mLatitude, mLongitude;
     public double mDistance;
@@ -48,6 +48,24 @@ public class Place {
         isInfoWindowShown = false;
     }
 
+    public Place(String id, String name, String area, String region, String desc, String sources, double latitude, double longitude,
+                 String image, String credits, String wikiUrl, String facebook, String instagram){
+        mID = id;
+        mName = name;
+        mArea = area;
+        mRegion = region;
+        mDescription = desc;
+        mSources = sources;
+        mLatitude = latitude;
+        mLongitude = longitude;
+        mImage = image;
+        mEvents = new ArrayList<>();
+        mCredits = credits;
+        mWikiUrl = wikiUrl;
+        mFacebook = facebook;
+        mInstagram = instagram;
+    }
+
     public Place(String id, String name, String area, String desc, String sources, double latitude, double longitude, String image, String credits, String wikiUrl){
         mID = id;
         mName = name;
@@ -68,6 +86,16 @@ public class Place {
         mName = name;
         mLatitude = latitude;
         mLongitude = longitude;
+        mImage = image;
+        mEvents = new ArrayList<>();
+        mHasDescription = hasDescription;
+    }
+
+    public Place(String id, String name, String area, String region, String image, boolean hasDescription){
+        mID = id;
+        mName = name;
+        mArea = area;
+        mRegion = region;
         mImage = image;
         mEvents = new ArrayList<>();
         mHasDescription = hasDescription;

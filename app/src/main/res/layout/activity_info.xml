@@ -25,11 +25,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="v2.1 (12/08/2018)"
+            android:text="v2.3 (23/10/2018)"
             android:textColor="#aa000000"
             android:textSize="14sp"
             android:layout_marginBottom="10dp"
             android:gravity="center" />
+
+        <TextView
+            android:id="@+id/textview_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:text="www.niceplaces.it"/>
 
         <TextView
             android:layout_width="match_parent"

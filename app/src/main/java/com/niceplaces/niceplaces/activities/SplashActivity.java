@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.crashlytics.android.Crashlytics;
 import com.niceplaces.niceplaces.BuildConfig;
@@ -41,6 +44,9 @@ public class SplashActivity extends AppCompatActivity {
             });
             thread.start();*/
         }
+        ImageView splashIcon = findViewById(R.id.splash_icon);
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        splashIcon.startAnimation(fadeInAnimation);
         close();
     }
 
@@ -54,12 +60,17 @@ public class SplashActivity extends AppCompatActivity {
                     prefsController.firstOpenDone();
                     Intent intent = new Intent(thisActivity, IntroActivity.class);
                     startActivity(intent);
-                    thisActivity.finish();
                 } else {
-                    Intent i = new Intent(thisActivity, MenuActivity.class);
-                    startActivity(i);
-                    thisActivity.finish();
+                    PrefsController prefs = new PrefsController(thisActivity);
+                    if (prefs.isPrivacyAccepted()) {
+                        Intent i = new Intent(thisActivity, MenuActivity.class);
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(thisActivity, PrivacyActivity.class);
+                        startActivity(i);
+                    }
                 }
+                thisActivity.finish();
             }
         }, 2000);
     }

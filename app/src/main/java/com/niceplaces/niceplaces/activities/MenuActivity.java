@@ -25,7 +25,8 @@ public class MenuActivity extends AppCompatActivity {
         final MenuActivity thisActivity = this;
         FirebaseAnalytics.getInstance(this);
         Button placesNearYou = findViewById(R.id.btn_places_near_you);
-        Button virtualTour = findViewById(R.id.btn_virtual_tour);
+        Button explore = findViewById(R.id.btn_virtual_tour);
+        Button newPlaces = findViewById(R.id.btn_new_places);
         ImageView IVInfo = findViewById(R.id.imageview_info);
         ImageView IVWeb = findViewById(R.id.imageview_web);
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
@@ -42,9 +43,9 @@ public class MenuActivity extends AppCompatActivity {
         IVWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://niceplaces.altervista.org/en/";
+                String url = "http://www.niceplaces.it/en/";
                 if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
-                    url = "http://niceplaces.altervista.org/";
+                    url = "http://www.niceplaces.it/";
                 }
                 Intent i = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url));
@@ -74,19 +75,26 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        virtualTour.setOnClickListener(new View.OnClickListener() {
+        explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(thisActivity, ExploreActivity.class);
                 startActivity(intent);
             }
         });
+        newPlaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, LatestPlacesActivity.class);
+                startActivity(intent);
+            }
+        });
         textViewPrivacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://niceplaces.altervista.org/en/privacy_policy.html";
+                String url = "http://www.niceplaces.it/en/privacy";
                 if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
-                    url = "http://niceplaces.altervista.org/privacy_policy.html";
+                    url = "http://www.niceplaces.it/privacy";
                 }
                 Intent i = new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url));

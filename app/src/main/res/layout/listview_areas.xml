@@ -19,12 +19,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/textview_area_count"
-        android:text="0"
+        android:text="(0)"
         android:layout_gravity="end"
-        android:textAlignment="textEnd"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:padding="15dp"
-        android:textColor="#888"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textColor="#555"
+        android:gravity="center_vertical" />
 
 </LinearLayout>

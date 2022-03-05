@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.crash.FirebaseCrash;
 import com.niceplaces.niceplaces.BuildConfig;
+import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.MarkerInfoAdapter;
 import com.niceplaces.niceplaces.adapters.PlacesAdapter;
@@ -64,8 +65,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng mCurrentPosition;
     private MapMode mMapMode;
     private AlertDialog dialogPosLoading;
-
-    public static final String PLACE_ID = "place_id";
 
     private enum MapMode {
         ROAD, SATELLITE
@@ -174,7 +173,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onInfoWindowClick(Marker marker) {
                 final Place place = (Place) marker.getTag();
                 Intent intent = new Intent(mContext, PlaceDetailsActivity.class);
-                intent.putExtra(PLACE_ID, place.getID());
+                intent.putExtra(Const.PLACE_ID, place.getID());
                 mContext.startActivity(intent);
             }
         });

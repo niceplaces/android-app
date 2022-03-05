@@ -32,7 +32,7 @@ public class AreasAdapter extends ArrayAdapter<Area> {
         TextView textViewAreaName = convertView.findViewById(R.id.textview_area_name);
         TextView textViewAreaCount = convertView.findViewById(R.id.textview_area_count);
         textViewAreaName.setText(area.getName());
-        textViewAreaCount.setText(area.getCount());
+        textViewAreaCount.setText("(" + area.getCount() + ")");
         return convertView;
     }
 }

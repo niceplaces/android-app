@@ -38,10 +38,19 @@
             android:name=".activities.PlaceDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.AreasListActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.PlacesListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LatestPlacesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PrivacyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SplashActivity"
@@ -69,7 +78,7 @@
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="" />
+            android:value="f192fc9f4f412645645bcfbcff1306bdf23cc4aa" />
 
     </application>
 

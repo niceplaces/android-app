@@ -7,19 +7,12 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
-    <ProgressBar
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:id="@+id/progress_bar"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/layout_place_of_day"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone">
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -31,12 +24,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:orientation="horizontal">
+
+            <include
+                layout="@layout/layout_loading"
+                android:id="@+id/layout_loading_place_of_day"
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="120dp"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/background"
                 android:scaleType="centerCrop"
                 android:id="@+id/place_of_day_image"
@@ -113,14 +111,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/areas"
+        android:text="@string/regions"
         android:layout_marginBottom="5dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="22sp" />
 
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview_areas"/>
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/layout_loading"
+            android:id="@+id/layout_loading_regions"
+            android:visibility="gone" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview_areas"/>
+
+    </LinearLayout>
 
 </LinearLayout>

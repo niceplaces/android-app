@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Nice Places</string>
+    <string name="accept">Accetta</string>
     <string name="areas">Zone</string>
     <string name="close_to_save">Chiudi la schermata per salvare le modifiche.</string>
     <string name="connection_error">Errore di connessione, impossibile scaricare i dati.</string>
     <string name="contact_us">Contattaci</string>
+    <string name="decline">Rifiuta</string>
     <string name="description">Descrizione</string>
     <string name="description_not_available">Descrizione non disponibile.</string>
     <string name="explore">Esplora</string>
@@ -12,7 +14,7 @@
     <string name="go">Vai!</string>
     <string name="impossible_load_location">Non è possibile caricare la posizione attuale perché la geolocalizzazione è disattivata. Verrà caricata l\'ultima posizione conosciuta.</string>
     <string name="info1">Nice Places è un\'app che ti permette di scoprire quali sono i luoghi di interesse storico, culturale e artistico vicino a te, offrendoti una descrizione sulle opere per soddisfare la tua curiosità.\nNon solo, avrai anche la possibilità di viaggiare virtualmente e spostarti lungo tutta la penisola, attraversare itinerari, paesaggi, città e posti remoti, scoprendo ciò che rende la nostra nazione, sotto questo punto di vista, una delle più ricche al mondo.</string>
-    <string name="info2">In questa versione puoi utilizzare due modalità:\n&#8226; <b>Luoghi intorno a te</b> ti permette di scoprire i posti di interesse più vicini alla tua posizione, puoi attivare la navigazione per raggiungere quei luoghi oppure visualizzare una descrizione con la relativa storia.\n&#8226; <b>Esplora</b> con la quale puoi visualizzare la lista di tutti i luoghi presenti divisi per zone.</string>
+    <string name="info2">In questa versione puoi utilizzare due modalità:\n&#8226; <b>Luoghi intorno a te</b> ti permette di scoprire i posti di interesse più vicini alla tua posizione, puoi attivare la navigazione per raggiungere quei luoghi oppure visualizzare una descrizione con la relativa storia.\n&#8226; <b>Esplora</b> con la quale puoi visualizzare la lista di tutti i luoghi presenti divisi regione e per zona.\n&#8226; <b>Nuovi luoghi</b> che contiene una lista degli ultimi luoghi inseriti e aggiornati.</string>
     <string name="info3">Rispetto alla versione precedente sono stati inseriti tantissimi nuovi luoghi e nuove descrizioni. Ogni settimana ne verranno aggiunti altri!</string>
     <string name="info4">Seguici sui social per sostenere il nostro progetto, per non perderti gli aggiornamenti e per scoprire quali saranno i prossimi luoghi che verranno aggiunti su Nice Places!</string>
     <string name="info5">Se vuoi segnalarci un problema, un suggerimento o avere qualche informazione in più sul progettto puoi inviarci un messaggio sulla pagina Facebook, sul profilo Instagram oppure inviare una e-mail al seguente indirizzo.</string>
@@ -23,6 +25,8 @@
     <string name="intro5">Tocca il segnaposto con la foto visualizzato sulla mappa per aprire la scheda dei dettagli del luogo.</string>
     <string name="intro6">Toccando il pulsante \"Attiva la navigazione\" è possibile far partire il navigatore.</string>
     <string name="intro7">Questo è tutto,\nbuon divertimento!</string>
+    <string name="like_place">Ti piace questo luogo? Metti "mi piace" e condividi!</string>
+    <string name="loading">Caricamento&#8230;</string>
     <string name="location_disabled">Posizione disabilitata</string>
     <string name="location_loading">Caricamento posizione</string>
     <string name="location_retrieving">L\'app sta recuperando la tua posizione&#8230;</string>
@@ -32,13 +36,18 @@
     <string name="more_information">Approfondimenti</string>
     <string name="name">Nome</string>
     <string name="new_places_are_waiting">Nuovi luoghi ti aspettano!</string>
+    <string name="new_places">Nuovi luoghi</string>
     <string name="next">Avanti</string>
     <string name="nearest_places">Luoghi più vicini</string>
     <string name="photo">Foto: %1$s</string>
     <string name="places_around_you">Luoghi intorno a te</string>
     <string name="places_in_radius_of">Luoghi nel raggio di %1$s km (%2$d)</string>
     <string name="places_of_day">Luogo del giorno</string>
-    <string name="privacy_policy">Norme sulla privacy</string>
+    <string name="privacy_accept">Dichiaro di aver letto e accettato l\'informativa sulla privacy di Nice Places.</string>
+    <string name="privacy_invite">Per utilizzare questa applicazione devi leggere e accettare la nostra informativa sulla privacy.</string>
+    <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="read_policy">Leggi l\'informativa</string>
+    <string name="regions">Regioni</string>
     <string name="settings">Impostazioni</string>
     <string name="sources">Fonti: %1$s</string>
     <string name="search">Cerca&#8230;</string>
@@ -53,4 +62,9 @@
     <string name="view_tutorial">Visualizza il tutorial</string>
     <string name="welcome_to">Benvenuto/a su\nNice Places!</string>
     <string name="whats_featured">Cosa c\'è in questa versione?</string>
+
+    <string-array name="latest_places">
+        <item>Ultimi inseriti</item>
+        <item>Ultimi aggiornati</item>
+    </string-array>
 </resources>

@@ -7,4 +7,5 @@
     <color name="colorAccent">#8ea316</color>
     <color name="colorAccentAlpha">#aa8ea316</color>
     <color name="colorAccentLight">#cce24f</color>
+    <color name="colorDisabled">#999</color>
 </resources>

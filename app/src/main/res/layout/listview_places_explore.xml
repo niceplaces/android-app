@@ -9,12 +9,11 @@
     android:paddingRight="10dp">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:scaleType="centerCrop"
         android:id="@+id/imageview_place_image"
-        android:src="@drawable/marker_outline"
-        android:layout_margin="5dp"/>
+        android:src="@drawable/app_icon"/>
 
     <TextView
         android:layout_width="0dp"
@@ -25,7 +24,8 @@
         android:gravity="center_vertical"
         android:textSize="18sp"
         android:padding="10dp"
-        android:ellipsize="end"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <ImageView

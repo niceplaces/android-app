@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical" />
+    <include
+        layout="@layout/layout_loading"
+        android:id="@+id/layout_loading"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/placeholder" />
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -64,6 +64,34 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="end">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/marker_places" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/place_area"
+                            android:layout_marginStart="2dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_marginLeft="2dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/name"
+                            android:ellipsize="end"
+                            android:maxLines="5"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/layout_navigation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -73,18 +101,20 @@
 
                         <ImageView
                             android:id="@+id/imageview_directions"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:src="@drawable/directions" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginStart="7dp"
+                            android:layout_marginLeft="7dp"
                             android:text="@string/start_navigation"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -99,7 +129,7 @@
                         android:paddingStart="20dp"
                         android:text="@string/description_not_available"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:visibility="gone" />
 
                     <LinearLayout
@@ -108,10 +138,10 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="8dp"
-                        android:paddingEnd="20dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:paddingStart="20dp">
+                        android:paddingEnd="15dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingStart="15dp">
 
                         <TextView
                             android:id="@+id/textview_place_desc"
@@ -120,7 +150,7 @@
                             android:lineSpacingMultiplier="1.2"
                             android:text="Lorem ipsum dolor sit amet."
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/textview_desc_sources"
@@ -161,8 +191,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp"
                         android:padding="10dp"
                         android:text="@string/more_information"
                         android:textColor="@color/colorPrimaryDark"
@@ -175,14 +205,55 @@
                         android:layout_height="50dp"
                         android:src="@drawable/wikipedia_icon" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/layout_place_share">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="20dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:text="@string/like_place"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/facebook"
+                                android:layout_marginRight="50dp"
+                                android:layout_marginEnd="50dp"
+                                android:id="@+id/imageview_facebook"/>
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/instagram"
+                                android:id="@+id/imageview_instagram"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/textview_img_credits"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp"
                         android:gravity="end"
                         android:padding="5dp"
+                        android:textSize="12sp"
                         android:text="@string/photo" />
 
 
