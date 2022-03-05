@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.niceplaces.niceplaces.BuildConfig;
@@ -30,6 +31,7 @@ public class MenuActivity extends AppCompatActivity {
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
         ImageView IVFacebook = findViewById(R.id.imageview_facebook);
         ImageView IVDebug = findViewById(R.id.imageview_debug);
+        TextView textViewPrivacy = findViewById(R.id.textview_privacy_policy);
         IVInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +79,18 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(thisActivity, ExploreActivity.class);
                 startActivity(intent);
+            }
+        });
+        textViewPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://niceplaces.altervista.org/en/privacy_policy.html";
+                if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
+                    url = "http://niceplaces.altervista.org/privacy_policy.html";
+                }
+                Intent i = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(url));
+                startActivity(i);
             }
         });
         if (BuildConfig.DEBUG) {

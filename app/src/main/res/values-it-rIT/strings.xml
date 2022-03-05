@@ -38,6 +38,7 @@
     <string name="places_around_you">Luoghi intorno a te</string>
     <string name="places_in_radius_of">Luoghi nel raggio di %1$s km (%2$d)</string>
     <string name="places_of_day">Luogo del giorno</string>
+    <string name="privacy_policy">Norme sulla privacy</string>
     <string name="settings">Impostazioni</string>
     <string name="sources">Fonti: %1$s</string>
     <string name="search">Cerca&#8230;</string>
