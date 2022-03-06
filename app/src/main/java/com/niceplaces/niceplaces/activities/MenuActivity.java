@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.niceplaces.niceplaces.BuildConfig;
+import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
 
 import java.util.Locale;
@@ -43,28 +44,25 @@ public class MenuActivity extends AppCompatActivity {
         IVWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://www.niceplaces.it/en/";
+                String url = Const.WEBSITE_EN_URL;
                 if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
-                    url = "http://www.niceplaces.it/";
+                    url = Const.WEBSITE_URL;
                 }
-                Intent i = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(url));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(i);
             }
         });
         IVInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.instagram.com/niceplacesapp/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.INSTAGRAM));
                 startActivity(i);
             }
         });
         IVFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.facebook.com/niceplacesapp/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.FACEBOOK));
                 startActivity(i);
             }
         });

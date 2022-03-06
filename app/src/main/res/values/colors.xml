@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="icon_color">#185D41</color>
     <color name="colorPrimary">#127a57</color>
     <color name="colorPrimaryAlpha">#cc127a57</color>
     <color name="colorPrimaryDark">#083f2d</color>

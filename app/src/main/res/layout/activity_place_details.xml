@@ -160,6 +160,7 @@
                             android:layout_marginRight="20dp"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
+                            android:visibility="gone"
                             android:text="@string/sources" />
 
                         <LinearLayout
@@ -209,6 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:visibility="gone"
                         android:id="@+id/layout_place_share">
 
                         <TextView

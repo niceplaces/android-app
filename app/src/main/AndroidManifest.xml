@@ -65,6 +65,12 @@
             android:name=".activities.VirtualTourActivity"
             android:screenOrientation="portrait" />
 
+        <service android:name=".controllers.FirebaseMsgHandler">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -78,8 +84,13 @@
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="f192fc9f4f412645645bcfbcff1306bdf23cc4aa" />
+            android:value="" />
 
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/icon_color" />
     </application>
 
 </manifest>
