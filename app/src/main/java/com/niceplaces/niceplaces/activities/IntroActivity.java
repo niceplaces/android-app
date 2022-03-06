@@ -111,7 +111,7 @@ public class IntroActivity extends AppCompatActivity {
             if (i == position){
                 mDots[i].setTextColor(getResources().getColor(R.color.colorPrimary));
             } else {
-                mDots[i].setTextColor(getResources().getColor(R.color.colorPrimaryAlpha));
+                mDots[i].setTextColor(getResources().getColor(R.color.colorPrimaryAlpha2));
             }
             mLayoutDots.addView(mDots[i]);
         }

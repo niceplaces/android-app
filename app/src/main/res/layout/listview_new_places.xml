@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/marker_places"/>
+                app:srcCompat="@drawable/marker_places"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -72,7 +72,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/check" />
+                    app:srcCompat="@drawable/check" />
 
                 <ImageView
                     android:id="@+id/imageview_wished"
@@ -81,7 +81,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/wish" />
+                    app:srcCompat="@drawable/wish" />
 
                 <ImageView
                     android:id="@+id/imageview_fav"
@@ -90,7 +90,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/heart" />
+                    app:srcCompat="@drawable/heart" />
 
             </LinearLayout>
 

@@ -84,7 +84,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/info" />
+                    app:srcCompat="@drawable/info" />
 
                 <ImageView
                     android:id="@+id/imageview_web"
@@ -92,7 +92,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/web" />
+                    app:srcCompat="@drawable/web" />
 
                 <ImageView
                     android:id="@+id/imageview_facebook"
@@ -100,7 +100,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/facebook" />
+                    app:srcCompat="@drawable/facebook" />
 
                 <ImageView
                     android:id="@+id/imageview_instagram"
@@ -108,7 +108,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/instagram" />
+                    app:srcCompat="@drawable/instagram" />
 
                 <ImageView
                     android:id="@+id/imageview_debug"
@@ -116,7 +116,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/debug" />
+                    app:srcCompat="@drawable/debug" />
 
             </LinearLayout>
 

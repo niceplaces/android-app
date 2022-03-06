@@ -1,5 +1,6 @@
 package com.niceplaces.niceplaces.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -61,7 +62,7 @@ public class ImageUtils {
                 .into(imageView);
     }
 
-    public static void setImageViewWithGlide(Context context, final Marker marker, String imageName, final ImageView imageView){
+    public static void setImageViewWithGlide(Activity activity, Context context, final Marker marker, String imageName, final ImageView imageView){
         PrefsController prefs = new PrefsController(context);
         Uri uri = Uri.parse(Const.BASE_URL + "data/photos/" + prefs.getDatabaseMode() + "/" + imageName);
         RequestOptions myOptions = new RequestOptions()
@@ -69,7 +70,7 @@ public class ImageUtils {
                 .fitCenter()
                 .placeholder(R.drawable.placeholder)
                 .override(Target.SIZE_ORIGINAL, imageView.getHeight());
-        Glide.with(context)
+        Glide.with(activity.getApplicationContext())
                 .asBitmap().load(uri).apply(myOptions)
                 .listener(new RequestListener<Bitmap>() {
                               @Override

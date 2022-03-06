@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff">
 
     <include
@@ -75,7 +76,7 @@
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/marker_places" />
+                            app:srcCompat="@drawable/marker_places" />
 
                         <TextView
                             android:id="@+id/place_area"
@@ -112,7 +113,7 @@
                                 android:id="@+id/imageview_directions"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:src="@drawable/directions" />
+                                app:srcCompat="@drawable/directions" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -138,7 +139,7 @@
                                 android:id="@+id/imageview_visited"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:src="@drawable/check_outline" />
+                                app:srcCompat="@drawable/check_outline" />
 
                             <TextView
                                 android:id="@+id/textview_visited"
@@ -165,7 +166,7 @@
                                 android:id="@+id/imageview_wish"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:src="@drawable/wish_outline" />
+                                app:srcCompat="@drawable/wish_outline" />
 
                             <TextView
                                 android:id="@+id/textview_wish"
@@ -192,7 +193,7 @@
                                 android:id="@+id/imageview_fav"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:src="@drawable/heart_outline" />
+                                app:srcCompat="@drawable/heart_outline" />
 
                             <TextView
                                 android:id="@+id/textview_fav"
@@ -303,7 +304,7 @@
                         android:id="@+id/imageview_wikipedia"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/wikipedia_icon" />
+                        app:srcCompat="@drawable/wikipedia_icon" />
 
                     <ImageView
                         android:id="@+id/imageview_proloco"

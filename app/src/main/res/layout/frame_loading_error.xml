@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:src="@drawable/conn_error" />
+            app:srcCompat="@drawable/conn_error" />
 
         <TextView
             android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.niceplaces.niceplaces.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,9 +21,11 @@ import com.niceplaces.niceplaces.utils.ImageUtils;
 
 public class MarkerInfoAdapter implements GoogleMap.InfoWindowAdapter {
 
+    private Activity mActivity;
     private Context mContext;
 
-    public MarkerInfoAdapter(Context context){
+    public MarkerInfoAdapter(Activity activity, Context context){
+        mActivity = activity;
         mContext = context;
     }
 
@@ -36,8 +39,8 @@ public class MarkerInfoAdapter implements GoogleMap.InfoWindowAdapter {
         ImageUtils.setAuthorIcon(place, imageViewPlaceStar);
         TextView textViewPlaceName = convertView.findViewById(R.id.textview_place_name);
         TextView textViewPlaceDistance = convertView.findViewById(R.id.textview_place_distance);
-        Log.i(AppUtils.getTag(), "IMAGE: " + place.mImage);
-        ImageUtils.setImageViewWithGlide(mContext, marker, place.mImage, imageViewPlaceImage);
+        //Log.i(AppUtils.getTag(), "IMAGE: " + place.mImage);
+        ImageUtils.setImageViewWithGlide(mActivity, mContext, marker, place.mImage, imageViewPlaceImage);
         textViewPlaceName.setText(place.mName);
         textViewPlaceDistance.setText(Place.formatDistance(place.mDistance));
         return convertView;

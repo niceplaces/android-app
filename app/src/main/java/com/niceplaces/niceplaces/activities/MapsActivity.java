@@ -11,6 +11,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.core.content.ContextCompat;
@@ -59,7 +61,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener,
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener,
         ClusterManager.OnClusterClickListener<MyClusterItem>, ClusterManager.OnClusterInfoWindowClickListener<MyClusterItem>,
         ClusterManager.OnClusterItemClickListener<MyClusterItem>, ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItem> {
 
@@ -85,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        getSupportActionBar().hide();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mListView = findViewById(R.id.listview);
@@ -199,7 +202,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mClusterManager.setOnClusterItemClickListener(this);
         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
         mMap.setInfoWindowAdapter(mClusterManager.getMarkerManager());
-        mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(new MarkerInfoAdapter(this));
+        mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(new MarkerInfoAdapter(this, this));
         // Cambiare l'ordine di queste istruzioni potrebbe causare il blocco del
         // clustering in fase di cambio di zooom
         mMap.setOnCameraIdleListener(mClusterManager);

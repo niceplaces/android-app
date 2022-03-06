@@ -26,14 +26,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="12dp"
-            android:src="@drawable/search"
+            app:srcCompat="@drawable/search"
             android:id="@+id/imageview_search_button"/>
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="12dp"
-            android:src="@drawable/settings"
+            app:srcCompat="@drawable/settings"
             android:id="@+id/imageview_map_settings_button"/>
 
     </LinearLayout>
@@ -56,7 +56,7 @@
             android:alpha="0.7"
             android:padding="5dp"
             android:layout_margin="10dp"
-            android:src="@drawable/mountains"
+            app:srcCompat="@drawable/mountains"
             android:background="@drawable/bg_round"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -70,7 +70,7 @@
             android:padding="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/crosshairs_gps"
+            app:srcCompat="@drawable/crosshairs_gps"
             android:background="@drawable/bg_round"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
