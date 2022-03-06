@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fillViewport="true">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/edittext_search"
+            android:hint="@string/search"
+            android:padding="8dp"
+            android:layout_weight=".9"
+            android:background="@android:color/transparent"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            app:srcCompat="@drawable/search"
+            android:id="@+id/imageview_search_button"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview_search_explore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,7 +61,7 @@
                 android:padding="10dp"
                 android:text="@string/places_of_day"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="25sp" />
+                android:textSize="@dimen/textTitle" />
 
             <LinearLayout
                 android:id="@+id/sublayout_place_of_day"
@@ -86,6 +123,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="5"
                                 android:text="@string/name"
+                                android:textSize="@dimen/textSmall"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                 android:textColor="@color/colorPrimaryDark" />
 
@@ -99,6 +137,7 @@
                             android:ellipsize="marquee"
                             android:gravity="center_vertical"
                             android:text="@string/description_not_available"
+                            android:textSize="@dimen/textSmall"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                         <TextView
@@ -124,7 +163,7 @@
             android:padding="10dp"
             android:text="@string/highlights"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
+            android:textSize="@dimen/textTitle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,7 +191,7 @@
             android:padding="10dp"
             android:text="@string/all_the_places"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
+            android:textSize="@dimen/textTitle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,4 +214,6 @@
 
     </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+</LinearLayout>

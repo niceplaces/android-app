@@ -9,7 +9,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -19,18 +21,16 @@
         android:paddingBottom="30dp"
         android:text="@string/welcome_to"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="@dimen/textTitleBig"
         android:textStyle="bold"
         android:lineSpacingMultiplier="1.2"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
         android:text="@string/intro1"
         android:textColor="#dd000000"
-        android:textSize="18sp"
+        android:textSize="@dimen/textNormal"
         android:lineSpacingMultiplier="1.2"/>
 
 </LinearLayout>

@@ -30,7 +30,8 @@
             android:ellipsize="marquee"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:textSize="20sp"
+            android:layout_marginBottom="2dp"
+            android:textSize="@dimen/textBig"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
             android:text="@string/name"/>
 
@@ -59,6 +60,7 @@
                 android:singleLine="true"
                 android:ellipsize="marquee"
                 android:maxLines="5"
+                android:textSize="@dimen/textSmall"
                 android:layout_weight="0.9"/>
 
             <LinearLayout

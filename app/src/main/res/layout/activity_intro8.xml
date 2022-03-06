@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="@string/intro8"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="@dimen/textTitleBig"
         android:textStyle="bold"
         android:lineSpacingMultiplier="1.2"/>
 

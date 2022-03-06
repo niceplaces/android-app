@@ -19,7 +19,7 @@
             android:paddingTop="10dp"
             android:text="@string/app_name"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
+            android:textSize="@dimen/textTitleBig"
             android:textStyle="bold" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="v--"
             android:textColor="#aa000000"
-            android:textSize="14sp"
+            android:textSize="@dimen/textSmall"
             android:layout_marginBottom="10dp"
             android:gravity="center" />
 
@@ -39,6 +39,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center"
+            android:textSize="@dimen/textSmall"
             android:text="www.niceplaces.it"/>
 
         <TextView
@@ -47,7 +48,7 @@
             android:padding="10dp"
             android:text="@string/info1"
             android:textColor="#dd000000"
-            android:textSize="18sp"
+            android:textSize="@dimen/textNormal"
             android:lineSpacingMultiplier="1.2" />
 
         <Button
@@ -67,7 +68,7 @@
             android:paddingEnd="10dp"
             android:text="@string/whats_featured"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
+            android:textSize="@dimen/textTitle" />
 
         <TextView
             android:layout_width="match_parent"
@@ -75,26 +76,7 @@
             android:padding="10dp"
             android:text="@string/info2"
             android:textColor="#dd000000"
-            android:textSize="18sp"
-            android:lineSpacingMultiplier="1.2" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="@string/new_places_are_waiting"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/info3"
-            android:textColor="#dd000000"
-            android:textSize="18sp"
+            android:textSize="@dimen/textNormal"
             android:lineSpacingMultiplier="1.2" />
 
         <TextView
@@ -105,7 +87,7 @@
             android:paddingEnd="10dp"
             android:text="@string/support_us"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
+            android:textSize="@dimen/textTitle" />
 
         <TextView
             android:layout_width="match_parent"
@@ -113,7 +95,7 @@
             android:padding="10dp"
             android:text="@string/info4"
             android:textColor="#dd000000"
-            android:textSize="18sp"
+            android:textSize="@dimen/textNormal"
             android:lineSpacingMultiplier="1.2" />
 
         <LinearLayout
@@ -155,7 +137,7 @@
             android:paddingEnd="10dp"
             android:text="@string/contact_us"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
+            android:textSize="@dimen/textTitle" />
 
         <TextView
             android:layout_width="match_parent"
@@ -163,7 +145,7 @@
             android:padding="10dp"
             android:text="@string/info5"
             android:textColor="#dd000000"
-            android:textSize="18sp"
+            android:textSize="@dimen/textNormal"
             android:lineSpacingMultiplier="1.2" />
 
         <Button
@@ -174,6 +156,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center"
+            android:textSize="@dimen/textSmall"
             android:text="niceplacesit@gmail.com"/>
 
     </LinearLayout>

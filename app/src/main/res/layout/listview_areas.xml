@@ -11,8 +11,8 @@
         android:layout_weight="0.7"
         android:id="@+id/textview_area_name"
         android:text="@string/name"
-        android:textSize="18sp"
-        android:padding="12dp"
+        android:textSize="@dimen/textNormal"
+        android:padding="10dp"
         android:gravity="center_vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -22,7 +22,7 @@
         android:id="@+id/textview_area_count"
         android:text="(0)"
         android:layout_gravity="end"
-        android:textSize="14sp"
+        android:textSize="@dimen/textSmall"
         android:padding="12dp"
         android:textColor="#555"
         android:gravity="center_vertical" />

@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#77ffffff" />
+        android:background="#55ffffff" />
 
     <!--<RelativeLayout
         android:id="@+id/top_menu"
@@ -64,61 +64,58 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:src="@drawable/app_icon" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_menu_social">
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageview_info"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/info" />
+                    android:layout_margin="20dp"
+                    app:srcCompat="@drawable/info"
+                    android:padding="5dp"
+                    android:background="@drawable/bg_alpha_button"/>
 
                 <ImageView
-                    android:id="@+id/imageview_web"
+                    android:id="@+id/imageview_notifications"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/web" />
-
-                <ImageView
-                    android:id="@+id/imageview_facebook"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/facebook" />
-
-                <ImageView
-                    android:id="@+id/imageview_instagram"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/instagram" />
+                    android:layout_margin="20dp"
+                    app:srcCompat="@drawable/bell"
+                    android:padding="5dp"
+                    android:background="@drawable/bg_alpha_button"/>
 
                 <ImageView
                     android:id="@+id/imageview_debug"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/debug" />
+                    android:layout_margin="20dp"
+                    app:srcCompat="@drawable/debug"
+                    android:padding="5dp"
+                    android:background="@drawable/bg_alpha_button"/>
 
-            </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:paddingTop="20dp"
+                    android:src="@drawable/app_icon" />
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_places_near_you"
@@ -212,16 +209,58 @@
 
             </TableLayout>
 
-            <TextView
-                android:id="@+id/textview_privacy_policy"
+                <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/privacy_policy"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_menu_social">
+
+                <ImageView
+                    android:id="@+id/imageview_web"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/web" />
+
+                <ImageView
+                    android:id="@+id/imageview_facebook"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/facebook" />
+
+                <ImageView
+                    android:id="@+id/imageview_instagram"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/instagram" />
+
+                <ImageView
+                    android:id="@+id/imageview_twitter"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/twitter" />
+
+            </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textview_privacy_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="@string/privacy_policy"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
         </LinearLayout>
 

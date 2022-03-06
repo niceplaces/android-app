@@ -12,7 +12,7 @@
         android:id="@+id/textview_event_date"
         android:text="Date"
         android:layout_gravity="center"
-        android:textSize="16sp"
+        android:textSize="@dimen/textNormal"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textview_event_desc"
         android:text="Event"
-        android:textSize="16sp"
+        android:textSize="@dimen/textNormal"
         android:lineSpacingMultiplier="1.2"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

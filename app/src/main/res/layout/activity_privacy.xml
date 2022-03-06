@@ -46,7 +46,7 @@
                 android:paddingRight="30dp"
                 android:text="@string/privacy_invite"
                 android:textColor="#dd000000"
-                android:textSize="18sp" />
+                android:textSize="@dimen/textBig" />
 
             <Button
                 android:id="@+id/button_read"
@@ -60,18 +60,33 @@
                 android:textColor="#fff"
                 android:textSize="16sp"/>
 
-            <CheckBox
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/checkbox_privacy"
-                android:layout_marginLeft="30dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
-                android:lineSpacingMultiplier="1.2"
-                android:text="@string/privacy_accept"
-                android:textColor="#dd000000"
-                android:textSize="16sp" />
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkbox_privacy"
+                    android:textColor="#dd000000"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5sp"
+                    android:layout_marginEnd="5sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/privacy_accept"
+                    android:lineSpacingMultiplier="1.2"
+                    android:textColor="#dd000000"
+                    android:textSize="@dimen/textSmall"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

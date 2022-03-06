@@ -27,8 +27,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
-        android:textAlignment="center"/>
+        android:textSize="@dimen/textTitle"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
 
     <include
         layout="@layout/badge_proloco"
@@ -45,7 +46,7 @@
         android:lineSpacingMultiplier="1.2"
         android:text="Lorem ipsum dolor sit amet."
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="16sp"
+        android:textSize="@dimen/textNormal"
         android:paddingTop="5dp"
         android:paddingBottom="20dp"/>
 
@@ -60,7 +61,7 @@
         android:background="@drawable/bg_menu_button"
         android:text="Scopri i luoghi"
         android:textColor="#fff"
-        android:textSize="16dp" />
+        android:textSize="@dimen/textNormal" />
 
 </LinearLayout>
 

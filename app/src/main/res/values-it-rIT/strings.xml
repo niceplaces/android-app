@@ -1,4 +1,5 @@
 <resources>
+    <string name="alert_notifications">Attenzione: le notifiche ricevute sono memorizzate sul tuo dispositivo, se disinstalli questa app perderai questi dati.</string>
     <string name="app_name">Nice Places</string>
     <string name="accept">Accetta</string>
     <string name="all_the_places">Tutti i luoghi</string>
@@ -32,6 +33,7 @@
     <string name="intro6">Toccando il pulsante \"Attiva la navigazione\" è possibile far partire il navigatore.</string>
     <string name="intro7">Utilizza i pulsanti presenti sulla scheda di ogni luogo per memorizzare i luoghi che hai visitato, quelli che vorresti visitare e i tuoi preferiti!</string>
     <string name="intro8">Questo è tutto,\nbuon divertimento!</string>
+    <string name="intro_update">Con questo aggiornamento Nice Places introduce due nuove funzionalità. \n\n&#8226; Tutte le notifiche ricevute adesso saranno memorizzate e consultabili dal <b>centro notifiche</b>, accessibile dalla campanella presente in alto a destra nella schermata del menù principale. Grazie a questa funzione, potrai rivedere le vecchie notifiche e recuperare quelle che eventualmente sono state cancellate per sbaglio. \n\n&#8226; Nella sezione <b>Esplora</b> è stata inserita una <b>barra di ricerca</b> per rendere più facile trovare un luogo, basta digitarne il nome oppure alcune parole che si trovano nella sua descrizione. \n\n&#8226; Sono stati introdotti dei miglioramenti alla stabilità e alle performance dell\'applicazione.</string>
     <string name="like_place">Ti piace questo luogo? Metti "mi piace" e condividi!</string>
     <string name="loading">Caricamento&#8230;</string>
     <string name="location_disabled">Posizione disabilitata</string>
@@ -44,9 +46,12 @@
     <string name="name">Nome</string>
     <string name="new_places_are_waiting">Nuovi luoghi ti aspettano!</string>
     <string name="new_places">Nuovi luoghi</string>
+    <string name="new_on_version">Novità di questa versione</string>
     <string name="news">Notizie</string>
     <string name="next">Avanti</string>
     <string name="nearest_places">Luoghi più vicini</string>
+    <string name="no_thanks">No, grazie</string>
+    <string name="notifications">Notifiche</string>
     <string name="page_written_by">Questa voce è realizzata da</string>
     <string name="photo">Foto: %1$s</string>
     <string name="place_ive_visited">Luogo che ho visitato</string>
@@ -58,11 +63,15 @@
     <string name="privacy_accept">Dichiaro di aver letto e accettato l\'informativa sulla privacy di Nice Places.</string>
     <string name="privacy_invite">Per utilizzare questa applicazione devi leggere e accettare la nostra informativa sulla privacy.</string>
     <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="rate">Valuta</string>
+    <string name="rate_app">Valuta Nice Places</string>
+    <string name="rate_dialog_msg">Se ti piace Nice Places, ti chiediamo di spendere un momento per valutarla. Grazie per il tuo supporto!</string>
     <string name="read_policy">Leggi l\'informativa</string>
     <string name="regions">Regioni</string>
+    <string name="remind_me_later">Ricordamelo in seguito</string>
     <string name="settings">Impostazioni</string>
     <string name="sources">Fonti: %1$s</string>
-    <string name="search">Cerca&#8230;</string>
+    <string name="search">Cerca un luogo&#8230;</string>
     <string name="search_radius">Raggio di ricerca</string>
     <string name="settings1">I luoghi mostrati nella mappa sono quelli la cui distanza (in chilometri e in linea d\'aria dalla tua posizione) è minore o uguale a quella indicata qui.</string>
     <string name="settings2">Quando utilizzi la modalità \"Luoghi intorno a te\" l\'applicazione riceve un nuovo aggiornamento della posizione ogni volta che trascorre l\'intervallo di tempo (in secondi) indicato qua sopra oppure la nuova posizione si trova ad una distanza maggiore (in metri) di quella indicata qua sopra.\nImposta questi valori per regolare la frequenza di aggiornamento della posizione e quindi della lista dei luoghi.</string>
@@ -74,7 +83,7 @@
     <string name="view_tutorial">Visualizza il tutorial</string>
     <string name="visited_places">Luoghi\nvisitati</string>
     <string name="welcome_to">Benvenuto/a su\nNice Places!</string>
-    <string name="whats_featured">Cosa c\'è in questa versione?</string>
+    <string name="whats_featured">Funzioni</string>
 
     <string-array name="latest_places">
         <item>Ultimi inseriti</item>

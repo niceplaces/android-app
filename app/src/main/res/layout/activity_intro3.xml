@@ -15,7 +15,7 @@
         android:paddingRight="30dp"
         android:text="@string/intro3"
         android:textColor="#dd000000"
-        android:textSize="18sp"
+        android:textSize="@dimen/textNormal"
         android:lineSpacingMultiplier="1.2"/>
 
     <ImageView

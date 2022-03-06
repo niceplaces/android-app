@@ -250,7 +250,7 @@
                             android:lineSpacingMultiplier="1.2"
                             android:text="Lorem ipsum dolor sit amet."
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/textNormal" />
 
                         <TextView
                             android:id="@+id/textview_desc_sources"

@@ -49,4 +49,13 @@
         android:text="Simula prima apertura\ndopo aggiornamento"
         android:id="@+id/button_simulate_open_after_update"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:text="Cancella database notifiche"
+        android:id="@+id/button_delete_database"/>
+
 </LinearLayout>
