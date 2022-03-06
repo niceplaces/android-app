@@ -1,8 +1,8 @@
 package com.niceplaces.niceplaces.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.CheckBox;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.widget.EditText;
 
 import com.niceplaces.niceplaces.R;

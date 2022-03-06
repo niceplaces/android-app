@@ -1,10 +1,10 @@
 package com.niceplaces.niceplaces.adapters;
 
 import android.content.Context;
-import android.location.Location;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.controllers.UserListsController;
-import com.niceplaces.niceplaces.models.Area;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.ImageUtils;
 

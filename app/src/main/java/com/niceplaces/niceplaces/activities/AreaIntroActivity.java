@@ -3,22 +3,15 @@ package com.niceplaces.niceplaces.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
-import com.niceplaces.niceplaces.adapters.ExplorePlacesAdapter;
-import com.niceplaces.niceplaces.controllers.AlertController;
-import com.niceplaces.niceplaces.dao.DaoAreas;
-import com.niceplaces.niceplaces.dao.DaoLists;
-import com.niceplaces.niceplaces.utils.MyRunnable;
 
 public class AreaIntroActivity extends AppCompatActivity {
 

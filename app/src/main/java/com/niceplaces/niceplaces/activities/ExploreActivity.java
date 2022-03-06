@@ -3,10 +3,9 @@ package com.niceplaces.niceplaces.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -24,7 +23,6 @@ import com.niceplaces.niceplaces.dao.DaoLists;
 import com.niceplaces.niceplaces.dao.DaoPlaces;
 import com.niceplaces.niceplaces.dao.DaoRegions;
 import com.niceplaces.niceplaces.models.Place;
-import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
 import com.niceplaces.niceplaces.utils.MyRunnable;
 import com.niceplaces.niceplaces.utils.NonScrollListView;
@@ -57,7 +55,11 @@ public class ExploreActivity extends AppCompatActivity {
                 ImageUtils.setImageViewWithGlide(context, place.mImage, imageView);
                 textViewName.setText(place.mName);
                 textViewArea.setText(place.mArea + ", " + place.mRegion);
-                textViewDesc.setText(place.mDescription.substring(0, 150) + "...");
+                String desc = place.mDescription;
+                if (desc.length() > 150){
+                    desc = desc.substring(0, 150) + "...";
+                }
+                textViewDesc.setText(desc);
                 placeOfDayLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -1,9 +1,9 @@
 package com.niceplaces.niceplaces.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.activities.MapsActivity;
 import com.niceplaces.niceplaces.models.Place;
-import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
 import com.niceplaces.niceplaces.utils.MapUtils;
 

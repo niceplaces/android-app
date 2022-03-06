@@ -74,7 +74,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:src="@drawable/marker_places" />
+                                app:srcCompat="@drawable/marker_places" />
 
                             <TextView
                                 android:id="@+id/place_of_day_area"

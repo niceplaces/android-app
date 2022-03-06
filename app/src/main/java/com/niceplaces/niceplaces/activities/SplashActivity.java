@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,12 +12,9 @@ import android.widget.ImageView;
 
 import com.crashlytics.android.Crashlytics;
 import com.niceplaces.niceplaces.BuildConfig;
-import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.controllers.FirebaseMsgHandler;
 import com.niceplaces.niceplaces.controllers.PrefsController;
-
-import java.util.Locale;
 
 import io.fabric.sdk.android.Fabric;
 
