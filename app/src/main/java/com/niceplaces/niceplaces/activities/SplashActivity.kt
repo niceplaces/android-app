@@ -8,14 +8,11 @@ import android.os.Looper
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.crashlytics.android.Crashlytics
-import com.niceplaces.niceplaces.BuildConfig
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.controllers.PrefsController
 import com.niceplaces.niceplaces.localdb.NotificationsDbHelper
 import com.niceplaces.niceplaces.models.Notification
 import com.niceplaces.niceplaces.utils.AppUtils
-import io.fabric.sdk.android.Fabric
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {
@@ -38,15 +35,6 @@ class SplashActivity : AppCompatActivity() {
             finish()
         } catch (e: Exception) {
             e.printStackTrace()
-            if (BuildConfig.DEBUG) {
-                val fabric = Fabric.Builder(this)
-                        .kits(Crashlytics())
-                        .debuggable(true)
-                        .build()
-                Fabric.with(fabric)
-            } else {
-                Fabric.with(this, Crashlytics())
-            }
             setContentView(R.layout.activity_splash)
             supportActionBar!!.hide()
             val splashIcon = findViewById<ImageView>(R.id.splash_icon)

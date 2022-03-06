@@ -26,6 +26,7 @@ class MenuActivity : AppCompatActivity() {
         val placesNearYou = findViewById<Button>(R.id.btn_places_near_you)
         val explore = findViewById<Button>(R.id.btn_virtual_tour)
         val newPlaces = findViewById<Button>(R.id.btn_new_places)
+        val quiz = findViewById<Button>(R.id.btn_quiz)
         //ImageView IVlogin = findViewById(R.id.imageview_login);
         val IVInfo = findViewById<ImageView>(R.id.imageview_info)
         val IVNotifications = findViewById<ImageView>(R.id.imageview_notifications)
@@ -83,6 +84,10 @@ class MenuActivity : AppCompatActivity() {
         }
         newPlaces.setOnClickListener {
             val intent = Intent(thisActivity, LatestPlacesActivity::class.java)
+            startActivity(intent)
+        }
+        newPlaces.setOnClickListener {
+            val intent = Intent(thisActivity, QuizActivity::class.java)
             startActivity(intent)
         }
         buttonVisited.setOnClickListener {

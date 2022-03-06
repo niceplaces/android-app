@@ -59,11 +59,19 @@ class PlacesListActivity : AppCompatActivity() {
         when (mMode) {
             Mode.AREA -> {
                 val daoAreas = DaoAreas(this)
-                mExtras!!.getString(Const.AREA_ID)?.let { daoAreas.getPlaces(it, successCallback, Runnable { alertController.loadingError() }) }
+                mExtras!!.getString(Const.AREA_ID)?.let {
+                    daoAreas.getPlaces(it, successCallback, Runnable {
+                        alertController.loadingError() }
+                    )
+                }
             }
             Mode.LIST -> {
                 val daoLists = DaoLists(this)
-                mExtras!!.getString(Const.LIST_ID)?.let { daoLists.getPlacesByListId(it, successCallback, Runnable { alertController.loadingError() }) }
+                mExtras!!.getString(Const.LIST_ID)?.let {
+                    daoLists.getPlacesByListId(it, successCallback, Runnable {
+                        alertController.loadingError()
+                    })
+                }
             }
         }
     }

@@ -57,6 +57,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
     private var mClusterManager: ClusterManager<MyClusterItem>? = null
     private var myPositionAnchored = true
     private var moveToMyPositionClicked = true
+    private lateinit var locationManager: LocationManager
+    private lateinit var locationListener: LocationListener
+    private lateinit var prefs: PrefsController
 
     private enum class MapMode {
         ROAD, SATELLITE
@@ -64,6 +67,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("MYLOG", "onCreate() called")
         setContentView(R.layout.activity_maps)
         supportActionBar!!.hide()
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -96,17 +100,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
             val intent = Intent(mContext, SettingsActivity::class.java)
             mContext.startActivity(intent)
         }
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        prefs = PrefsController(mContext)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        Log.i("onMapReady", "Called!");
+        Log.i("MYLOG", "onMapReady() called");
         mMap = googleMap
         mMapMode = MapMode.ROAD
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
-        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0)
-        } else {
+        } /*else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0)
+        }*/ else {
             Log.i("Permission", "Granted")
             setupLocationListener()
         }
@@ -125,7 +131,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
                 }
             }
         }
-        val prefs = PrefsController(mContext)
         val imageViewAnchor = findViewById<ImageView>(R.id.imageview_map_position)
         imageViewAnchor.setOnClickListener {
             moveToMyPositionClicked = true
@@ -171,7 +176,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
 
     override fun onCameraMove() {
         val zoom = mMap!!.cameraPosition.zoom
-        val prefs = PrefsController(mContext)
         prefs.zoom = zoom
         var cameraCenter = mMap!!.cameraPosition.target
         if (cameraCenter == null) {
@@ -197,6 +201,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             0 -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -208,8 +213,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         }
     }
 
-    fun setupLocationListener() {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    private fun setupLocationListener() {
         dialogPosLoading = AlertDialog.Builder(this@MapsActivity).create()
         dialogPosLoading.setTitle(R.string.location_loading)
         val inflater = layoutInflater
@@ -222,12 +226,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         dialogPosDisabled.setButton(AlertDialog.BUTTON_NEUTRAL, "OK"
         ) { dialog, which -> dialog.dismiss() }
         try {
-            val locationListener: LocationListener = object : LocationListener {
+            locationListener = object : LocationListener {
                 override fun onLocationChanged(location: Location) {
                     if (BuildConfig.DEBUG) {
                         Toast.makeText(mContext, "Location update " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_SHORT).show()
                     }
-                    val prefs = PrefsController(mContext)
                     prefs.storedLocation = GeoPoint(location.latitude, location.longitude)
                     sendNearestPlacesRequest(location)
                 }
@@ -244,7 +247,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
                     Log.i("OnProviderDisabled", s)
                     val oneProviderAvailable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
                     if (!oneProviderAvailable) {
-                        val prefs = PrefsController(mContext)
                         val storedLocation = prefs.storedLocation
                         sendNearestPlacesRequest(storedLocation.latitude, storedLocation.longitude)
                         if (!dialogPosDisabled.isShowing) {
@@ -254,9 +256,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
                     }
                 }
             }
-            val prefs = PrefsController(this)
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, prefs.locationRefreshTime.toLong(), prefs.locationRefreshDistance.toFloat(), locationListener)
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, prefs.locationRefreshTime.toLong(), prefs.locationRefreshDistance.toFloat(), locationListener)
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                prefs.locationRefreshTime.toLong(), prefs.locationRefreshDistance.toFloat(), locationListener)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                prefs.locationRefreshTime.toLong(), prefs.locationRefreshDistance.toFloat(), locationListener)
             var location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             Log.i("getLastKnownLocation", java.lang.Boolean.toString(location == null))
             if (location == null) {
@@ -276,6 +279,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         val daoPlaces = DaoPlaces(mContext)
         daoPlaces.getNearest(lat, lon, object : MyRunnable() {
             override fun run() {
+                Log.i("MYLOG", "Data retrieved")
                 mPlaces = places
                 updateLocation(lat, lon)
                 dialogPosLoading!!.dismiss()
@@ -304,7 +308,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         mMap!!.addMarker(MarkerOptions().position(myPosition).title("Tu sei qui!")
                 .icon(ImageUtils.bitmapDescriptorFromDrawable(this, R.drawable.marker_position)))
         if (myPositionAnchored) {
-            val prefs = PrefsController(mContext)
             mMap!!.moveCamera(CameraUpdateFactory.newCameraPosition(
                     CameraPosition.Builder().target(myPosition).tilt(DEFAULT_TILT.toFloat()).zoom(prefs.zoom).build()))
         }
@@ -334,17 +337,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         val morePlaces = layoutInflater.inflate(R.layout.more_places, null)
         mListView!!.addView(morePlaces)
         val TVCounter = findViewById<TextView>(R.id.places_counter)
-        val prefs = PrefsController(mContext)
         TVCounter.text = getString(R.string.places_in_radius_of, String.format("%.2f", prefs.distanceRadius), places!!.size)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("MYLOG", "onPause() called")
+        locationManager.removeUpdates(locationListener)
     }
 
     override fun onResume() {
         super.onResume()
-        if (mCurrentPosition != null) {
-            val location = Location(LocationManager.GPS_PROVIDER)
-            location.latitude = mCurrentPosition!!.latitude
-            location.longitude = mCurrentPosition!!.longitude
-            sendNearestPlacesRequest(location)
+        Log.i("MYLOG", "onResume() called")
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                if (mCurrentPosition != null) {
+                    val location = Location(LocationManager.GPS_PROVIDER)
+                    location.latitude = mCurrentPosition!!.latitude
+                    location.longitude = mCurrentPosition!!.longitude
+                    sendNearestPlacesRequest(location)
+                }
         }
     }
 

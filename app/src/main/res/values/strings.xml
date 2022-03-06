@@ -63,6 +63,7 @@
     <string name="privacy_accept">I have read and accepted the privacy policy of Nice Places.</string>
     <string name="privacy_invite">To use this application you must read and accept our privacy policy.</string>
     <string name="privacy_policy">Privacy policy</string>
+    <string name="quiz" translatable="false">Quiz</string>
     <string name="rate">Rate it</string>
     <string name="rate_app">Rate Nice Places</string>
     <string name="rate_dialog_msg">If you enjoy using Nice Places, please take a moment to rate it. Thanks for your support!</string>
