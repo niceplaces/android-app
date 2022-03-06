@@ -2,6 +2,7 @@ package com.niceplaces.niceplaces.utils;
 
 import com.niceplaces.niceplaces.models.Area;
 import com.niceplaces.niceplaces.models.Place;
+import com.niceplaces.niceplaces.models.PlacesList;
 import com.niceplaces.niceplaces.models.Region;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public abstract class MyRunnable implements Runnable {
     private List<Area> mAreas;
     private List<Place> mPlaces;
     private Place mPlace;
+    private List<PlacesList> mLists;
 
     public void setRegions(List<Region> regions){
         mRegions = regions;
@@ -43,5 +45,13 @@ public abstract class MyRunnable implements Runnable {
 
     public Place getPlace() {
         return mPlace;
+    }
+
+    public void setLists(List<PlacesList> lists){
+        mLists = lists;
+    }
+
+    public List<PlacesList> getLists() {
+        return mLists;
     }
 }

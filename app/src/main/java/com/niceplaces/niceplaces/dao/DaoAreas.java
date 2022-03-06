@@ -56,14 +56,15 @@ public class DaoAreas {
                                 if (name.equals("") || Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
                                     name = jsonObject.getString("name");
                                 }
-                                Boolean hasDescription = jsonObject.getBoolean("has_description_en");
+                                boolean hasDescription = jsonObject.getBoolean("has_description_en");
                                 if (Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage())){
                                     hasDescription = jsonObject.getBoolean("has_description");
                                 }
                                 Place place = new Place(jsonObject.getString("id"),
                                         name,
                                         jsonObject.getString("image"),
-                                        hasDescription);
+                                        hasDescription,
+                                        jsonObject.getString("author"));
                                 buffer.add(place);
                             }
                             successCallback.setPlaces(buffer);

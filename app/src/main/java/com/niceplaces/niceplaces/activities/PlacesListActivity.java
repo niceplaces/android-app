@@ -14,43 +14,76 @@ import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.adapters.ExplorePlacesAdapter;
 import com.niceplaces.niceplaces.controllers.AlertController;
 import com.niceplaces.niceplaces.dao.DaoAreas;
+import com.niceplaces.niceplaces.dao.DaoLists;
 import com.niceplaces.niceplaces.utils.MyRunnable;
 
 public class PlacesListActivity extends AppCompatActivity {
+
+    private Bundle mExtras;
+    private final PlacesListActivity mActivity = this;
+    private Mode mMode;
+
+    private enum Mode {
+        AREA, LIST
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places_list);
-        final PlacesListActivity thisActivity = this;
         FirebaseAnalytics.getInstance(this);
-        Bundle extras = getIntent().getExtras();
+        mExtras = getIntent().getExtras();
         getSupportActionBar().hide();
         TextView textViewAreaName = findViewById(R.id.explore_area_name);
-        textViewAreaName.setText(extras.getString("AREA_NAME"));
+        if (mExtras.getString(Const.AREA_ID) != null){
+            mMode = Mode.AREA;
+            textViewAreaName.setText(mExtras.getString("AREA_NAME"));
+        } else {
+            mMode = Mode.LIST;
+            textViewAreaName.setText(mExtras.getString("LIST_NAME"));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         final ListView listView = findViewById(R.id.listview_areas);
         final AlertController alertController = new AlertController(this, R.id.layout_loading);
-        DaoAreas daoAreas = new DaoAreas(this);
-        daoAreas.getPlaces(extras.getString(Const.AREA_ID), new MyRunnable() {
+        final MyRunnable successCallback = new MyRunnable() {
             @Override
             public void run() {
-                ExplorePlacesAdapter adapter = new ExplorePlacesAdapter(thisActivity, R.id.listview_areas, getPlaces());
+                ExplorePlacesAdapter adapter = new ExplorePlacesAdapter(mActivity, R.id.listview_areas, getPlaces());
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(thisActivity, PlaceDetailsActivity.class);
+                        Intent intent = new Intent(mActivity, PlaceDetailsActivity.class);
                         intent.putExtra(Const.PLACE_ID, getPlaces().get(i).getID());
-                        thisActivity.startActivity(intent);
+                        mActivity.startActivity(intent);
                     }
                 });
                 alertController.loadingSuccess();
             }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                alertController.loadingError();
-            }
-        });
+        };
+        switch (mMode){
+            case AREA:
+                DaoAreas daoAreas = new DaoAreas(this);
+                daoAreas.getPlaces(mExtras.getString(Const.AREA_ID), successCallback, new Runnable() {
+                    @Override
+                    public void run() {
+                        alertController.loadingError();
+                    }
+                });
+                break;
+            case LIST:
+                DaoLists daoLists = new DaoLists(this);
+                daoLists.getPlacesByListId(mExtras.getString(Const.LIST_ID), successCallback, new Runnable() {
+                    @Override
+                    public void run() {
+                        alertController.loadingError();
+                    }
+                });
+                break;
+        }
     }
 }

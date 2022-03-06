@@ -2,38 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:orientation="horizontal"
     android:paddingEnd="10dp"
     android:paddingRight="10dp">
 
     <ImageView
+        android:id="@+id/imageview_place_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:scaleType="centerCrop"
-        android:id="@+id/imageview_place_image"
-        android:src="@drawable/app_icon"/>
+        android:src="@drawable/app_icon" />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.9"
-        android:id="@+id/textview_place_name"
-        android:text="Place"
-        android:gravity="center_vertical"
-        android:textSize="18sp"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+
+        <TextView
+            android:id="@+id/textview_place_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="Place"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/imageview_visited"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/check" />
+
+            <ImageView
+                android:id="@+id/imageview_wished"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/wish" />
+
+            <ImageView
+                android:id="@+id/imageview_fav"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/heart" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="50dp"
-        android:scaleType="center"
         android:id="@+id/imageview_place_star"
-        android:src="@drawable/star"
-        android:layout_margin="5dp" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/app_icon" />
 
 </LinearLayout>

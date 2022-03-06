@@ -36,6 +36,7 @@ public class IntroActivity extends AppCompatActivity {
                 R.layout.activity_intro5,
                 R.layout.activity_intro6,
                 R.layout.activity_intro7,
+                R.layout.activity_intro8,
         };
         mLayoutDots = findViewById(R.id.layout_dots);
         mViewPager = findViewById(R.id.view_pager);

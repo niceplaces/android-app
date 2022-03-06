@@ -28,12 +28,23 @@ public class MenuActivity extends AppCompatActivity {
         Button placesNearYou = findViewById(R.id.btn_places_near_you);
         Button explore = findViewById(R.id.btn_virtual_tour);
         Button newPlaces = findViewById(R.id.btn_new_places);
+        //ImageView IVlogin = findViewById(R.id.imageview_login);
         ImageView IVInfo = findViewById(R.id.imageview_info);
         ImageView IVWeb = findViewById(R.id.imageview_web);
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
         ImageView IVFacebook = findViewById(R.id.imageview_facebook);
         ImageView IVDebug = findViewById(R.id.imageview_debug);
+        Button buttonVisited = findViewById(R.id.button_visited);
+        Button buttonWished = findViewById(R.id.button_wished);
+        Button buttonFav = findViewById(R.id.button_fav);
         TextView textViewPrivacy = findViewById(R.id.textview_privacy_policy);
+        /*IVlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, LoginActivity.class);
+                startActivity(intent);
+            }
+        });*/
         IVInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +95,30 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(thisActivity, LatestPlacesActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonVisited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, UserListActivity.class);
+                intent.putExtra(UserListActivity.USERLIST, UserListActivity.VISITED);
+                startActivity(intent);
+            }
+        });
+        buttonWished.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, UserListActivity.class);
+                intent.putExtra(UserListActivity.USERLIST, UserListActivity.WISHED);
+                startActivity(intent);
+            }
+        });
+        buttonFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(thisActivity, UserListActivity.class);
+                intent.putExtra(UserListActivity.USERLIST, UserListActivity.FAVOURITE);
                 startActivity(intent);
             }
         });

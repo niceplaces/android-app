@@ -1,7 +1,5 @@
 package com.niceplaces.niceplaces.models;
 
-import com.google.android.gms.maps.model.Marker;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +10,11 @@ import java.util.List;
 public class Place {
 
     private String mID;
-    public String mName, mArea, mRegion, mDescription, mImage, mCredits, mWikiUrl, mSources, mFacebook, mInstagram;
+    public String mName, mArea, mRegion, mDescription, mAuthor, mImage, mCredits, mWikiUrl, mSources, mFacebook, mInstagram;
     public boolean mHasDescription;
     public double mLatitude, mLongitude;
     public double mDistance;
-    public Marker mMarker;
+    public MyClusterItem mClusterItem;
     private List<Event> mEvents;
     private List<Link> mLinks;
     public boolean isInfoWindowShown;
@@ -27,11 +25,12 @@ public class Place {
         mImage = image;
     }
 
-    public Place(String id, String name, String image, boolean hasDesc){
+    public Place(String id, String name, String image, boolean hasDesc, String author){
         mID = id;
         mName = name;
         mImage = image;
         mHasDescription = hasDesc;
+        mAuthor = author;
     }
 
     public Place(String id, String name, String desc, String sources, double latitude, double longitude, String image, String credits, String wikiUrl){
@@ -48,13 +47,14 @@ public class Place {
         isInfoWindowShown = false;
     }
 
-    public Place(String id, String name, String area, String region, String desc, String sources, double latitude, double longitude,
+    public Place(String id, String name, String area, String region, String desc, String author, String sources, double latitude, double longitude,
                  String image, String credits, String wikiUrl, String facebook, String instagram){
         mID = id;
         mName = name;
         mArea = area;
         mRegion = region;
         mDescription = desc;
+        mAuthor = author;
         mSources = sources;
         mLatitude = latitude;
         mLongitude = longitude;
@@ -81,7 +81,7 @@ public class Place {
         isInfoWindowShown = false;
     }
 
-    public Place(String id, String name, double latitude, double longitude, String image, boolean hasDescription){
+    public Place(String id, String name, double latitude, double longitude, String image, boolean hasDescription, String author){
         mID = id;
         mName = name;
         mLatitude = latitude;
@@ -89,9 +89,10 @@ public class Place {
         mImage = image;
         mEvents = new ArrayList<>();
         mHasDescription = hasDescription;
+        mAuthor = author;
     }
 
-    public Place(String id, String name, String area, String region, String image, boolean hasDescription){
+    public Place(String id, String name, String area, String region, String image, boolean hasDescription, String author){
         mID = id;
         mName = name;
         mArea = area;
@@ -99,6 +100,7 @@ public class Place {
         mImage = image;
         mEvents = new ArrayList<>();
         mHasDescription = hasDescription;
+        mAuthor = author;
     }
 
     public void setEvents(List<Event> events){

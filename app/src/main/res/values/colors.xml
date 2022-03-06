@@ -9,4 +9,7 @@
     <color name="colorAccentAlpha">#aa8ea316</color>
     <color name="colorAccentLight">#cce24f</color>
     <color name="colorDisabled">#999</color>
+    <color name="colorFavourite">#e22b1b</color>
+    <color name="colorWish">#f2801f</color>
+    <color name="colorVisited">#844b19</color>
 </resources>

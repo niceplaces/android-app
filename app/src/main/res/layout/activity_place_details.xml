@@ -5,8 +5,8 @@
     android:background="#fff">
 
     <include
-        layout="@layout/layout_loading"
         android:id="@+id/layout_loading"
+        layout="@layout/layout_loading"
         android:visibility="gone" />
 
     <RelativeLayout
@@ -41,8 +41,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignTop="@id/textview_place_name"
+                        android:layout_alignParentBottom="true"
                         android:background="#aaffffff" />
 
                     <TextView
@@ -52,8 +52,8 @@
                         android:layout_alignParentBottom="true"
                         android:padding="10dp"
                         android:text="@string/name"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="@color/colorPrimaryDark" />
 
                 </RelativeLayout>
 
@@ -66,11 +66,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="7dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="end">
+                        android:gravity="end"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="20dp"
@@ -78,58 +78,157 @@
                             android:src="@drawable/marker_places" />
 
                         <TextView
+                            android:id="@+id/place_area"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/place_area"
-                            android:layout_marginStart="2dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:layout_marginLeft="2dp"
                             android:layout_gravity="center_vertical"
-                            android:text="@string/name"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginLeft="2dp"
                             android:ellipsize="end"
-                            android:maxLines="5"/>
+                            android:maxLines="5"
+                            android:text="@string/name"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/layout_navigation"
+                    <GridLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center|top"
+                        android:orientation="horizontal"
+                        android:columnCount="4"
+                        android:rowCount="1">
 
-                        <ImageView
-                            android:id="@+id/imageview_directions"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/directions" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_columnSpan="1"
+                            android:id="@+id/layout_navigation"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="7dp"
-                            android:layout_marginLeft="7dp"
-                            android:text="@string/start_navigation"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="15sp" />
+                            android:layout_margin="10dp"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/imageview_directions"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/directions" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/start_navigation"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_columnSpan="1"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageview_visited"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/check_outline" />
+
+                            <TextView
+                                android:id="@+id/textview_visited"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/place_ive_visited"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="#888"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_columnSpan="1"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageview_wish"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/wish_outline" />
+
+                            <TextView
+                                android:id="@+id/textview_wish"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/place_i_want_to_visit"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="#888"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_columnSpan="1"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageview_fav"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/heart_outline" />
+
+                            <TextView
+                                android:id="@+id/textview_fav"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/favorite_place"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="#888"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                    </GridLayout>
 
                     <TextView
                         android:id="@+id/textview_coming_soon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:paddingEnd="20dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
                         android:paddingStart="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
                         android:text="@string/description_not_available"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <include
+                        layout="@layout/badge_proloco"
+                        android:visibility="gone" />
+
+                    <include
+                        layout="@layout/badge_viasacra"
                         android:visibility="gone" />
 
                     <LinearLayout
@@ -138,10 +237,10 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="8dp"
-                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
                         android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingStart="15dp">
+                        android:paddingEnd="15dp"
+                        android:paddingRight="15dp">
 
                         <TextView
                             android:id="@+id/textview_place_desc"
@@ -160,22 +259,22 @@
                             android:layout_marginRight="20dp"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
-                            android:visibility="gone"
-                            android:text="@string/sources" />
+                            android:text="@string/sources"
+                            android:visibility="gone" />
 
                         <LinearLayout
+                            android:id="@+id/layout_history"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:id="@+id/layout_history">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
                                 android:text="@string/history"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="20sp" />
 
                             <com.niceplaces.niceplaces.utils.NonScrollListView
@@ -192,12 +291,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginStart="15dp"
+                        android:layout_marginLeft="15dp"
                         android:padding="10dp"
                         android:text="@string/more_information"
-                        android:textColor="@color/colorPrimaryDark"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
 
                     <ImageView
@@ -206,48 +305,62 @@
                         android:layout_height="50dp"
                         android:src="@drawable/wikipedia_icon" />
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/imageview_proloco"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:src="@drawable/pro_loco"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/imageview_viasacra"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:src="@drawable/via_sacra_etrusca"
+                        android:visibility="gone"/>
+
+                    <!--<LinearLayout
+                        android:id="@+id/layout_place_share"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone"
-                        android:id="@+id/layout_place_share">
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingEnd="20dp"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:paddingStart="20dp"
                             android:layout_marginTop="10dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:text="@string/like_place"/>
+                            android:paddingStart="20dp"
+                            android:paddingLeft="20dp"
+                            android:paddingEnd="20dp"
+                            android:paddingRight="20dp"
+                            android:text="@string/like_place"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:layout_margin="10dp"
                             android:gravity="center"
-                            android:layout_margin="10dp">
+                            android:orientation="horizontal">
 
                             <ImageView
+                                android:id="@+id/imageview_facebook"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/facebook"
-                                android:layout_marginRight="50dp"
                                 android:layout_marginEnd="50dp"
-                                android:id="@+id/imageview_facebook"/>
+                                android:layout_marginRight="50dp"
+                                android:src="@drawable/facebook" />
 
                             <ImageView
+                                android:id="@+id/imageview_instagram"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/instagram"
-                                android:id="@+id/imageview_instagram"/>
+                                android:src="@drawable/instagram" />
 
                         </LinearLayout>
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <TextView
                         android:id="@+id/textview_img_credits"
@@ -255,8 +368,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:padding="5dp"
-                        android:textSize="12sp"
-                        android:text="@string/photo" />
+                        android:text="@string/photo"
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>
@@ -283,8 +396,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_alignBottom="@id/textview_place_name_titlebar"
                 android:layout_alignTop="@id/textview_place_name_titlebar"
+                android:layout_alignBottom="@id/textview_place_name_titlebar"
                 android:background="#aaffffff" />
 
             <TextView
@@ -293,8 +406,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Nome"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorPrimaryDark" />
 
         </RelativeLayout>
 

@@ -18,65 +18,22 @@ import com.niceplaces.niceplaces.utils.MyRunnable;
 
 public class LatestPlacesActivity extends AppCompatActivity {
 
+    private final LatestPlacesActivity mActivity = this;
+    private ListView mListView;
+    private Spinner mSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_latest_places);
-        final LatestPlacesActivity thisActivity = this;
         FirebaseAnalytics.getInstance(this);
         getSupportActionBar().hide();
-        final ListView listView = findViewById(R.id.listview_latest_places);
-        final DaoPlaces daoPlaces = new DaoPlaces(this);
-        Spinner spinner = findViewById(R.id.spinner_latest_places);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mListView = findViewById(R.id.listview_latest_places);
+        mSpinner = findViewById(R.id.spinner_latest_places);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                final AlertController alertController = new AlertController(thisActivity, R.id.layout_loading);
-                if (position == 0){
-                    daoPlaces.getLatestInserted(new MyRunnable() {
-                        @Override
-                        public void run() {
-                            LatestPlacesAdapter adapter = new LatestPlacesAdapter(thisActivity, R.id.listview_latest_places, getPlaces());
-                            listView.setAdapter(adapter);
-                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    Intent intent = new Intent(thisActivity, PlaceDetailsActivity.class);
-                                    intent.putExtra(Const.PLACE_ID, getPlaces().get(i).getID());
-                                    thisActivity.startActivity(intent);
-                                }
-                            });
-                            alertController.loadingSuccess();
-                        }
-                    }, new Runnable() {
-                        @Override
-                        public void run() {
-                            alertController.loadingError();
-                        }
-                    });
-                } else {
-                    daoPlaces.getLatestUpdated(new MyRunnable() {
-                        @Override
-                        public void run() {
-                            LatestPlacesAdapter adapter = new LatestPlacesAdapter(thisActivity, R.id.listview_latest_places, getPlaces());
-                            listView.setAdapter(adapter);
-                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    Intent intent = new Intent(thisActivity, PlaceDetailsActivity.class);
-                                    intent.putExtra(Const.PLACE_ID, getPlaces().get(i).getID());
-                                    thisActivity.startActivity(intent);
-                                }
-                            });
-                            alertController.loadingSuccess();
-                        }
-                    }, new Runnable() {
-                        @Override
-                        public void run() {
-                            alertController.loadingError();
-                        }
-                    });
-                }
+                loadList(position);
             }
 
             @Override
@@ -84,5 +41,64 @@ public class LatestPlacesActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadList(mSpinner.getSelectedItemPosition());
+    }
+
+    private void loadList(int position){
+        final DaoPlaces daoPlaces = new DaoPlaces(this);
+        final AlertController alertController = new AlertController(mActivity, R.id.layout_loading);
+        switch (position){
+            case 0:
+                daoPlaces.getLatestInserted(new MyRunnable() {
+                    @Override
+                    public void run() {
+                        LatestPlacesAdapter adapter = new LatestPlacesAdapter(mActivity, R.id.listview_latest_places, getPlaces());
+                        mListView.setAdapter(adapter);
+                        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Intent intent = new Intent(mActivity, PlaceDetailsActivity.class);
+                                intent.putExtra(Const.PLACE_ID, getPlaces().get(i).getID());
+                                mActivity.startActivity(intent);
+                            }
+                        });
+                        alertController.loadingSuccess();
+                    }
+                }, new Runnable() {
+                    @Override
+                    public void run() {
+                        alertController.loadingError();
+                    }
+                });
+                break;
+            case 1:
+                daoPlaces.getLatestUpdated(new MyRunnable() {
+                    @Override
+                    public void run() {
+                        LatestPlacesAdapter adapter = new LatestPlacesAdapter(mActivity, R.id.listview_latest_places, getPlaces());
+                        mListView.setAdapter(adapter);
+                        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Intent intent = new Intent(mActivity, PlaceDetailsActivity.class);
+                                intent.putExtra(Const.PLACE_ID, getPlaces().get(i).getID());
+                                mActivity.startActivity(intent);
+                            }
+                        });
+                        alertController.loadingSuccess();
+                    }
+                }, new Runnable() {
+                    @Override
+                    public void run() {
+                        alertController.loadingError();
+                    }
+                });
+                break;
+        }
     }
 }

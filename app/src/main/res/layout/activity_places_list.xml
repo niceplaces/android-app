@@ -26,12 +26,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
         <include
             layout="@layout/layout_loading"
             android:id="@+id/layout_loading"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <ListView
             android:layout_width="match_parent"

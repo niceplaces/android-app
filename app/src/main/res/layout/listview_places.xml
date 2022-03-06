@@ -27,11 +27,13 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:padding="1dp"
                 android:scaleType="centerCrop"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/star"
+                android:src="@drawable/app_icon"
+                android:background="@drawable/bg_round_square"
                 android:id="@+id/imageview_place_star" />
 
         </RelativeLayout>

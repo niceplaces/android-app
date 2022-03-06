@@ -27,6 +27,8 @@ public class PrefsController {
     public String getDatabaseMode(){
         if (BuildConfig.DEBUG){
             return mPref.getString("database_mode", "debug");
+        } else if (BuildConfig.BUILD_TYPE.equals("demo")){
+            return "debug";
         } else {
             return "release";
         }
@@ -54,6 +56,18 @@ public class PrefsController {
         double sienaLon = 11.331613;
         return new GeoPoint(mPref.getFloat("stored_location_lat", (float) sienaLat),
                             mPref.getFloat("stored_location_lon", (float) sienaLon));
+    }
+
+    public void setZoom(float zoom) {
+        Log.i(AppUtils.getTag(), "ZOOM: " + zoom);
+        SharedPreferences.Editor editor = mPref.edit();
+        editor.putFloat("map_zoom", zoom);
+        editor.apply();
+    }
+
+    public float getZoom() {
+        Log.i(AppUtils.getTag(), "ZOOM: " + mPref.getFloat("map_zoom", 14));
+        return mPref.getFloat("map_zoom", 10);
     }
 
     public void setDistanceRadius(float radius){

@@ -5,16 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:padding="30dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="@string/intro7"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textColor="#dd000000"
+        android:textSize="18sp"
         android:lineSpacingMultiplier="1.2"/>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:id="@+id/imageview_screenshoot"
+        android:layout_gravity="center"
+        android:layout_margin="20dp" />
 
 </LinearLayout>

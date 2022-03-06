@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.niceplaces.niceplaces.R;
+import com.niceplaces.niceplaces.controllers.UserListsController;
 import com.niceplaces.niceplaces.models.Area;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.ImageUtils;
@@ -38,13 +39,27 @@ public class ExplorePlacesAdapter extends ArrayAdapter<Place> {
         }
         TextView textViewName = convertView.findViewById(R.id.textview_place_name);
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
-        //Log.i("HAS_DESC", Boolean.toString(place.mHasDescription));
         ImageView IVStar = convertView.findViewById(R.id.imageview_place_star);
-        if (place.mHasDescription){
-            IVStar.setVisibility(View.VISIBLE);
+        ImageView IVVisited = convertView.findViewById(R.id.imageview_visited);
+        ImageView IVWished = convertView.findViewById(R.id.imageview_wished);
+        ImageView IVFavourite = convertView.findViewById(R.id.imageview_fav);
+        UserListsController prefs = new UserListsController(mContext);
+        if (prefs.isVisited(place.getID())){
+            IVVisited.setVisibility(View.VISIBLE);
         } else {
-            IVStar.setVisibility(View.GONE);
+            IVVisited.setVisibility(View.GONE);
         }
+        if (prefs.isWished(place.getID())){
+            IVWished.setVisibility(View.VISIBLE);
+        } else {
+            IVWished.setVisibility(View.GONE);
+        }
+        if (prefs.isFavourite(place.getID())){
+            IVFavourite.setVisibility(View.VISIBLE);
+        } else {
+            IVFavourite.setVisibility(View.GONE);
+        }
+        ImageUtils.setAuthorIcon(place, IVStar);
         textViewName.setText(place.mName);
         ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage);
         return convertView;

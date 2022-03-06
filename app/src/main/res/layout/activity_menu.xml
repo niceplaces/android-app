@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,6 +15,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#77ffffff" />
+
+    <!--<RelativeLayout
+        android:id="@+id/top_menu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_menu_social">
+
+        <ImageView
+            android:id="@+id/imageview_web"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/app_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Benvenuto, visitatore!"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/imageview_login"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/imageview_info"
+            android:layout_toStartOf="@id/imageview_info"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/login" />
+
+    </RelativeLayout>-->
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -117,11 +153,64 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_menu_button"
                 android:text="@string/new_places"
                 android:textColor="#fff"
                 android:textSize="20dp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:layout_marginBottom="20dp">
+
+                <TableRow
+                    android:layout_width="0dp">
+
+                <Button
+                    android:id="@+id/button_visited"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_menu_button"
+                    android:text="@string/visited_places"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/button_wished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_menu_button"
+                    android:text="@string/places_to_visit"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/button_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_menu_button"
+                    android:text="@string/favorite_places"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+                </TableRow>
+
+            </TableLayout>
 
             <TextView
                 android:id="@+id/textview_privacy_policy"
@@ -131,11 +220,11 @@
                 android:gravity="center"
                 android:text="@string/privacy_policy"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</FrameLayout>
+</RelativeLayout>

@@ -89,7 +89,7 @@ public class VirtualTourActivity extends FragmentActivity implements OnMapReadyC
                     @Override
                     public boolean evaluate(Place object) {
                         boolean res = object.mName.toLowerCase().contains(pattern);
-                        object.mMarker.setVisible(res);
+                        object.mClusterItem.getMarker().setVisible(res);
                         return res;
                     }
                 });
@@ -196,8 +196,7 @@ public class VirtualTourActivity extends FragmentActivity implements OnMapReadyC
             MarkerOptions marker = new MarkerOptions().position(point)
                     .icon(ImageUtils.bitmapDescriptorFromDrawable(this, R.drawable.marker_places))
                     .title(mPlaces.get(i).mName + ", " + Place.formatDistance(mPlaces.get(i).mDistance));
-            mPlaces.get(i).mMarker = mMap.addMarker(marker);
-            mPlaces.get(i).mMarker.setTag(mPlaces.get(i));
+            mPlaces.get(i).mClusterItem.setMarker(mMap.addMarker(marker));
         }
         Collections.sort(mPlaces, new Comparator<Place>() {
             @Override

@@ -17,6 +17,7 @@ import com.niceplaces.niceplaces.controllers.PrefsController;
 import com.niceplaces.niceplaces.models.Area;
 import com.niceplaces.niceplaces.models.Event;
 import com.niceplaces.niceplaces.models.Place;
+import com.niceplaces.niceplaces.utils.JSONUtils;
 import com.niceplaces.niceplaces.utils.MyRunnable;
 
 import org.json.JSONArray;
@@ -40,53 +41,6 @@ public class DaoPlaces {
         isItalian = Locale.getDefault().getDisplayLanguage().equals(Locale.ITALIAN.getDisplayLanguage());
     }
 
-    private Place parseJSON(String json) throws JSONException{
-        JSONObject jsonObject = new JSONObject(json);
-        String name = jsonObject.getString("name_en");
-        if (name.equals("") || isItalian){
-            name = jsonObject.getString("name");
-        }
-        String area = jsonObject.getString("area_en");
-        if (area.equals("") || isItalian){
-            area = jsonObject.getString("area");
-        }
-        String region = jsonObject.getString("region_en");
-        if (region.equals("") || isItalian){
-            region = jsonObject.getString("region");
-        }
-        String description = jsonObject.getString("description_en");
-        if (isItalian){
-            description = jsonObject.getString("description");
-        }
-        String wikiUrl = jsonObject.getString("wiki_url_en");
-        if (isItalian){
-            wikiUrl = jsonObject.getString("wiki_url");
-        }
-        Place place = new Place(jsonObject.getString("id"),
-                name,
-                area,
-                region,
-                description,
-                jsonObject.getString("desc_sources"),
-                jsonObject.getDouble("latitude"),
-                jsonObject.getDouble("longitude"),
-                jsonObject.getString("image"),
-                jsonObject.getString("img_credits"),
-                wikiUrl,
-                jsonObject.getString("facebook"),
-                jsonObject.getString("instagram"));
-        JSONArray jsonEvents = jsonObject.getJSONArray("events");
-        List<Event> events = new ArrayList<>();
-        for (int i = 0; i < jsonEvents.length(); i++){
-            JSONObject eventObject = jsonEvents.getJSONObject(i);
-            Event event = new Event(eventObject.getString("date"),
-                    eventObject.getString("description"));
-            events.add(event);
-        }
-        place.setEvents(events);
-        return place;
-    }
-
     public void getOne(String id, final MyRunnable successCallback, final Runnable errorCallback) {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         String url = Const.DATA_PATH + mDbMode + "/places/" + id;
@@ -98,7 +52,7 @@ public class DaoPlaces {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            successCallback.setPlace(parseJSON(response));
+                            successCallback.setPlace(JSONUtils.placeFromJSON(response, isItalian));
                             successCallback.run();
                         } catch (JSONException e){
                             e.printStackTrace();
@@ -114,7 +68,8 @@ public class DaoPlaces {
         queue.add(stringRequest);
     }
 
-    public void getNearest(double latitude, double longitude, final MyRunnable successCallback) {
+    public void getNearest(double latitude, double longitude, final MyRunnable successCallback,
+                           final MyRunnable errorCallback) {
         PrefsController prefs = new PrefsController(mContext);
         RequestQueue queue = Volley.newRequestQueue(mContext);
         String url = Const.BASE_URL + "data/query.php?version=" + Const.DB_VERSION + "&mode=" + mDbMode +
@@ -136,7 +91,7 @@ public class DaoPlaces {
                                 if (name.equals("") || isItalian){
                                     name = jsonObject.getString("name");
                                 }
-                                Boolean hasDescription = jsonObject.getBoolean("has_description_en");
+                                boolean hasDescription = jsonObject.getBoolean("has_description_en");
                                 if (isItalian){
                                     hasDescription = jsonObject.getBoolean("has_description");
                                 }
@@ -145,19 +100,22 @@ public class DaoPlaces {
                                         jsonObject.getDouble("latitude"),
                                         jsonObject.getDouble("longitude"),
                                         jsonObject.getString("image"),
-                                        hasDescription);
+                                        hasDescription,
+                                        jsonObject.getString("author"));
                                 buffer.add(place);
                             }
                             successCallback.setPlaces(buffer);
                             successCallback.run();
                         } catch (JSONException e){
                             e.printStackTrace();
+                            errorCallback.run();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show();
+                errorCallback.run();
             }
         });
         queue.add(stringRequest);
@@ -177,7 +135,7 @@ public class DaoPlaces {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            successCallback.setPlace(parseJSON(response));
+                            successCallback.setPlace(JSONUtils.placeFromJSON(response, isItalian));
                             successCallback.run();
                         } catch (JSONException e){
                             e.printStackTrace();
@@ -221,7 +179,7 @@ public class DaoPlaces {
                                 if (region.equals("") || isItalian){
                                     region = jsonObject.getString("region");
                                 }
-                                Boolean hasDescription = jsonObject.getBoolean("has_description_en");
+                                boolean hasDescription = jsonObject.getBoolean("has_description_en");
                                 if (isItalian){
                                     hasDescription = jsonObject.getBoolean("has_description");
                                 }
@@ -230,7 +188,8 @@ public class DaoPlaces {
                                         area,
                                         region,
                                         jsonObject.getString("image"),
-                                        hasDescription);
+                                        hasDescription,
+                                        jsonObject.getString("author"));
                                 buffer.add(place);
                             }
                             successCallback.setPlaces(buffer);
@@ -286,7 +245,8 @@ public class DaoPlaces {
                                         area,
                                         region,
                                         jsonObject.getString("image"),
-                                        hasDescription);
+                                        hasDescription,
+                                        jsonObject.getString("author"));
                                 buffer.add(place);
                             }
                             successCallback.setPlaces(buffer);

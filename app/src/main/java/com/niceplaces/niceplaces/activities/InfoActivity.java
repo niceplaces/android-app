@@ -1,6 +1,7 @@
 package com.niceplaces.niceplaces.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +22,15 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
         getSupportActionBar().hide();
         final InfoActivity thisActivity = this;
+        TextView textViewVersion = findViewById(R.id.textview_version_number);
+        try {
+            textViewVersion.setText("v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        } catch (PackageManager.NameNotFoundException e){
+            e.printStackTrace();
+        }
         ImageView IVInstagram = findViewById(R.id.imageview_instagram);
         ImageView IVFacebook = findViewById(R.id.imageview_facebook);
+        ImageView IVTwitter = findViewById(R.id.imageview_twitter);
         TextView textViewWebsite = findViewById(R.id.textview_website);
         textViewWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +57,14 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_VIEW,
                         Uri.parse("https://www.facebook.com/niceplacesapp/"));
+                startActivity(i);
+            }
+        });
+        IVTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://twitter.com/niceplacesapp"));
                 startActivity(i);
             }
         });

@@ -6,18 +6,25 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Marker;
 import com.niceplaces.niceplaces.Const;
 import com.niceplaces.niceplaces.R;
 import com.niceplaces.niceplaces.controllers.PrefsController;
@@ -32,7 +39,7 @@ import java.io.InputStream;
 
 public class ImageUtils {
 
-    public static void setImageView(Context context, String imageName, ImageView imageView){
+    /*public static void setImageView(Context context, String imageName, ImageView imageView){
         try {
             InputStream ims = context.getAssets().open(imageName);
             Bitmap bitmap = BitmapFactory.decodeStream(ims);
@@ -44,7 +51,7 @@ public class ImageUtils {
         } catch (IOException e){
             imageView.setImageResource(R.drawable.marker_outline);
         }
-    }
+    }*/
 
     public static void setImageViewWithGlide(Context context, String imageName, ImageView imageView){
         PrefsController prefs = new PrefsController(context);
@@ -58,6 +65,35 @@ public class ImageUtils {
                 .load(uri)
                 .apply(myOptions)
                 .into(imageView);
+    }
+
+    public static void setImageViewWithGlide(Context context, final Marker marker, String imageName, final ImageView imageView){
+        PrefsController prefs = new PrefsController(context);
+        Uri uri = Uri.parse(Const.BASE_URL + "data/photos/" + prefs.getDatabaseMode() + "/" + imageName);
+        RequestOptions myOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .fitCenter()
+                .placeholder(R.drawable.placeholder)
+                .override(Target.SIZE_ORIGINAL, imageView.getHeight());
+        Glide.with(context)
+                .asBitmap().load(uri).apply(myOptions)
+                .listener(new RequestListener<Bitmap>() {
+                              @Override
+                              public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                                  return false;
+                              }
+
+                              @Override
+                              public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                                  imageView.setImageBitmap(resource);
+                                  if (marker.isInfoWindowShown()) {
+                                      marker.hideInfoWindow();
+                                      marker.showInfoWindow();
+                                  }
+                                  return false;
+                              }
+                          }
+                ).submit();
     }
 
     public static void setImageViewWithGlide(Context context, int imageId, ImageView imageView){
@@ -76,7 +112,7 @@ public class ImageUtils {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
     }
 
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    /*private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -96,7 +132,7 @@ public class ImageUtils {
         }
 
         return inSampleSize;
-    }
+    }*/
 
     public static BitmapDescriptor bitmapDescriptorFromDrawable(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
@@ -107,4 +143,23 @@ public class ImageUtils {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+
+    public static void setAuthorIcon(Place place, ImageView imageView){
+        if (place.mHasDescription){
+            imageView.setVisibility(View.VISIBLE);
+            switch (place.mAuthor){
+                case "1":
+                    imageView.setImageResource(R.drawable.app_icon);
+                    break;
+                case "2":
+                    imageView.setImageResource(R.drawable.pro_loco);
+                    break;
+                case "3":
+                    imageView.setImageResource(R.drawable.via_sacra_etrusca);
+                    break;
+            }
+        } else {
+            imageView.setVisibility(View.GONE);
+        }
+    }
 }

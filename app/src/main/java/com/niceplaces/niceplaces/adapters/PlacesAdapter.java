@@ -13,29 +13,26 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.niceplaces.niceplaces.R;
+import com.niceplaces.niceplaces.activities.MapsActivity;
 import com.niceplaces.niceplaces.models.Place;
 import com.niceplaces.niceplaces.utils.AppUtils;
 import com.niceplaces.niceplaces.utils.ImageUtils;
+import com.niceplaces.niceplaces.utils.MapUtils;
 
 import java.util.List;
-
-/**
- * Created by Lorenzo on 29/12/2017.
- */
 
 public class PlacesAdapter extends ArrayAdapter<Place> {
 
     private Context mContext;
     private GoogleMap mMap;
-    private LatLng mPosition;
 
     public PlacesAdapter(Context context, int resource, List<Place> objects, GoogleMap map, LatLng position){
         super(context, resource, objects);
         mContext = context;
         mMap = map;
-        mPosition = position;
     }
 
     @NonNull
@@ -48,30 +45,46 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
         }
         ImageView imageViewPlaceImage = convertView.findViewById(R.id.imageview_place_image);
         ImageView imageViewPlaceStar = convertView.findViewById(R.id.imageview_place_star);
-        if (place.mHasDescription){
-            imageViewPlaceStar.setVisibility(View.VISIBLE);
-        } else {
-            imageViewPlaceStar.setVisibility(View.GONE);
-        }
+        ImageUtils.setAuthorIcon(place, imageViewPlaceStar);
         TextView textViewPlaceName = convertView.findViewById(R.id.textview_place_name);
         TextView textViewPlaceDistance = convertView.findViewById(R.id.textview_place_distance);
         ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage);
         imageViewPlaceImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LatLng center = place.mMarker.getPosition();
+                final LatLng center = new LatLng(place.mLatitude, place.mLongitude);
+                GoogleMap.CancelableCallback callback = new GoogleMap.CancelableCallback() {
+                    @Override
+                    public void onFinish() {
+                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+                                new CameraPosition.Builder()
+                                        .target(MapUtils.offset(mMap, center, 0, -150))
+                                        .tilt(MapsActivity.DEFAULT_TILT)
+                                        .zoom(mMap.getCameraPosition().zoom).build()));
+                        place.mClusterItem.getMarker().showInfoWindow();
+                        mMap.getUiSettings().setMapToolbarEnabled(true);
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                };
                 float zoom = mMap.getCameraPosition().zoom;
-                LatLng newCenter = new LatLng(center.latitude + 0.003, center.longitude);
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(newCenter));
-                place.mMarker.showInfoWindow();
-                mMap.getUiSettings().setMapToolbarEnabled(true);
+                if (place.mClusterItem.isMarkerClustered()){
+                    zoom = 18;
+                }
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+                        new CameraPosition.Builder()
+                                .target(center)
+                                .tilt(MapsActivity.DEFAULT_TILT)
+                                .zoom(zoom).build()), callback);
             }
         });
         textViewPlaceName.setText(place.mName);
         textViewPlaceDistance.setText(Place.formatDistance(place.mDistance));
         /*Direction direction = new Direction(mPosition.latitude, mPosition.longitude, place.mLatitude, place.mLongitude);
         (new DirectionAsyncTask(mContext, textViewPlaceDistance)).execute(direction);*/
-        Log.i("FREE HEAP SIZE", AppUtils.getAvailableHeapSize());
         return convertView;
     }
 }

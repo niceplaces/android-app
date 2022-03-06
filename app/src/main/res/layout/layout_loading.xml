@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <include
-        layout="@layout/frame_loading"
-        android:visibility="gone" />
+        layout="@layout/frame_loading" />
 
     <include
         layout="@layout/frame_loading_error"
+        android:visibility="gone" />
+
+    <include
+        layout="@layout/frame_nodata"
         android:visibility="gone" />
 
 </FrameLayout>
