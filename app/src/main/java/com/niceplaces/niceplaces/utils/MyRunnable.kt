@@ -1,9 +1,6 @@
 package com.niceplaces.niceplaces.utils
 
-import com.niceplaces.niceplaces.models.Area
-import com.niceplaces.niceplaces.models.Place
-import com.niceplaces.niceplaces.models.PlacesList
-import com.niceplaces.niceplaces.models.Region
+import com.niceplaces.niceplaces.models.*
 
 abstract class MyRunnable : Runnable {
     var regions: List<Region>? = null
@@ -11,6 +8,7 @@ abstract class MyRunnable : Runnable {
     var places: List<Place>? = null
     var place: Place? = null
     var lists: List<PlacesList>? = null
+    var quiz: MutableList<Quiz>? = ArrayList()
 
     fun setAreas(pAreas: List<Area>) {
         areas = pAreas

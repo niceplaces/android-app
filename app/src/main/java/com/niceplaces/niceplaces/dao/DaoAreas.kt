@@ -19,7 +19,9 @@ import org.json.JSONObject
 import java.util.*
 
 class DaoAreas(private val mContext: Context) {
+
     private val mDbMode: String?
+
     fun getPlaces(idArea: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/areas/" + idArea

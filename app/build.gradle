@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.google.gms:google-services:4.3.8'
+        classpath 'com.google.gms:google-services:4.3.10'
     }
 
 }
@@ -20,11 +20,14 @@ repositories {
 android {
     compileSdkVersion 30
     defaultConfig {
+        configurations.all {
+            resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+        }
         applicationId "com.niceplaces.niceplaces"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 15
-        versionName "3.3.1"
+        versionCode 16
+        versionName "3.4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -32,10 +35,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("keystore.jks")
-            storePassword ""
-            keyAlias ""
-            keyPassword ""
+
         }
     }
 
@@ -64,10 +64,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
-    lintOptions {
+    lint {
         abortOnError false
     }
+
 }
 
 dependencies {
@@ -97,6 +97,5 @@ dependencies {
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 }
-
-apply plugin: 'com.google.gms.google-services'

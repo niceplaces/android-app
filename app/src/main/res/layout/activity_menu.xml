@@ -16,43 +16,6 @@
         android:layout_height="match_parent"
         android:background="#55ffffff" />
 
-    <!--<RelativeLayout
-        android:id="@+id/top_menu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:background="@drawable/bg_menu_social">
-
-        <ImageView
-            android:id="@+id/imageview_web"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_margin="10dp"
-            android:src="@drawable/app_icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Benvenuto, visitatore!"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16dp"
-            android:gravity="center"
-            />
-
-        <ImageView
-            android:id="@+id/imageview_login"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_toLeftOf="@id/imageview_info"
-            android:layout_toStartOf="@id/imageview_info"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/login" />
-
-    </RelativeLayout>-->
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -117,6 +80,30 @@
 
             </RelativeLayout>
 
+            <!--<com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Ciao"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/sign_out_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Logout"
+                android:visibility="gone"/>-->
+
             <Button
                 android:id="@+id/btn_places_near_you"
                 android:layout_width="match_parent"
@@ -154,7 +141,8 @@
                 android:background="@drawable/bg_menu_button"
                 android:text="@string/quiz"
                 android:textColor="#fff"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_new_places"

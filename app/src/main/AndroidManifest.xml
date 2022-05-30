@@ -68,6 +68,9 @@
             android:name=".activities.AreaIntroActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.QuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -104,7 +107,7 @@
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="" />
+            android:value="@string/fabric_api_key" />
 
         <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />

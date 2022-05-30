@@ -8,3 +8,4 @@
 .externalNativeBuild
 *google_maps_api.xml
 *google-services.json
+app/build.release.gradle

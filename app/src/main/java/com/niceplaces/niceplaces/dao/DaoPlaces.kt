@@ -18,8 +18,10 @@ import org.json.JSONException
 import java.util.*
 
 class DaoPlaces(private val mContext: Context) {
+
     private val mDbMode: String?
     private val isItalian: Boolean
+
     fun getOne(id: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/places/" + id
