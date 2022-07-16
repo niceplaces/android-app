@@ -3,7 +3,6 @@ package com.niceplaces.niceplaces.dao
 import android.content.Context
 import android.widget.Toast
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.niceplaces.niceplaces.BuildConfig
@@ -29,17 +28,17 @@ class DaoPlaces(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        successCallback.place = JSONUtils.placeFromJSON(response, isItalian)
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
+            { response ->
+                try {
+                    successCallback.place = JSONUtils.placeFromJSON(response, isItalian)
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
         queue.add(stringRequest)
     }
 
@@ -54,39 +53,39 @@ class DaoPlaces(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        val jsonArray = JSONArray(response)
-                        val buffer: MutableList<Place> = ArrayList()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            var name = jsonObject.getString("name_en")
-                            if (name == "" || isItalian) {
-                                name = jsonObject.getString("name")
-                            }
-                            var hasDescription = jsonObject.getBoolean("has_description_en")
-                            if (isItalian) {
-                                hasDescription = jsonObject.getBoolean("has_description")
-                            }
-                            val place = Place(jsonObject.getString("id"),
-                                    name,
-                                    jsonObject.getDouble("latitude"),
-                                    jsonObject.getDouble("longitude"),
-                                    jsonObject.getString("image"),
-                                    hasDescription,
-                                    jsonObject.getString("author"))
-                            buffer.add(place)
+            { response ->
+                try {
+                    val jsonArray = JSONArray(response)
+                    val buffer: MutableList<Place> = ArrayList()
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        var name = jsonObject.getString("name_en")
+                        if (name == "" || isItalian) {
+                            name = jsonObject.getString("name")
                         }
-                        successCallback.places = buffer
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                        errorCallback.run()
+                        var hasDescription = jsonObject.getBoolean("has_description_en")
+                        if (isItalian) {
+                            hasDescription = jsonObject.getBoolean("has_description")
+                        }
+                        val place = Place(jsonObject.getString("id"),
+                                name,
+                                jsonObject.getDouble("latitude"),
+                                jsonObject.getDouble("longitude"),
+                                jsonObject.getString("image"),
+                                hasDescription,
+                                jsonObject.getString("author"))
+                        buffer.add(place)
                     }
-                }, Response.ErrorListener {
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-            errorCallback.run()
-        })
+                    successCallback.places = buffer
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    errorCallback.run()
+                }
+            }, {
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+        errorCallback.run()
+    })
         queue.add(stringRequest)
     }
 
@@ -100,17 +99,17 @@ class DaoPlaces(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        successCallback.place = JSONUtils.placeFromJSON(response, isItalian)
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
+            { response ->
+                try {
+                    successCallback.place = JSONUtils.placeFromJSON(response, isItalian)
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
         stringRequest.setShouldCache(false)
         queue.add(stringRequest)
     }
@@ -122,46 +121,48 @@ class DaoPlaces(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        val jsonArray = JSONArray(response)
-                        val buffer: MutableList<Place> = ArrayList()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            var name = jsonObject.getString("name_en")
-                            if (name == "" || isItalian) {
-                                name = jsonObject.getString("name")
-                            }
-                            var area = jsonObject.getString("area_en")
-                            if (area == "" || isItalian) {
-                                area = jsonObject.getString("area")
-                            }
-                            var region = jsonObject.getString("region_en")
-                            if (region == "" || isItalian) {
-                                region = jsonObject.getString("region")
-                            }
-                            var hasDescription = jsonObject.getBoolean("has_description_en")
-                            if (isItalian) {
-                                hasDescription = jsonObject.getBoolean("has_description")
-                            }
-                            val place = Place(jsonObject.getString("id"),
-                                    name,
-                                    area,
-                                    region,
-                                    jsonObject.getString("image"),
-                                    hasDescription,
-                                    jsonObject.getString("author"))
-                            buffer.add(place)
+            { response ->
+                try {
+                    val jsonArray = JSONArray(response)
+                    val buffer: MutableList<Place> = ArrayList()
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        var name = jsonObject.getString("name_en")
+                        if (name == "" || isItalian) {
+                            name = jsonObject.getString("name")
                         }
-                        successCallback.places = buffer
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
+                        var area = jsonObject.getString("area_en")
+                        if (area == "" || isItalian) {
+                            area = jsonObject.getString("area")
+                        }
+                        var region = jsonObject.getString("region_en")
+                        if (region == "" || isItalian) {
+                            region = jsonObject.getString("region")
+                        }
+                        var hasDescription = jsonObject.getBoolean("has_description_en")
+                        if (isItalian) {
+                            hasDescription = jsonObject.getBoolean("has_description")
+                        }
+                        val wikiUrl = jsonObject.getString(if (isItalian) "wiki_url" else "wiki_url_en")
+                        val place = Place(jsonObject.getString("id"),
+                                name,
+                                area,
+                                region,
+                                jsonObject.getString("image"),
+                                hasDescription,
+                                jsonObject.getString("author"),
+                                wikiUrl)
+                        buffer.add(place)
                     }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
+                    successCallback.places = buffer
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
         stringRequest.setShouldCache(false)
         queue.add(stringRequest)
     }
@@ -173,46 +174,48 @@ class DaoPlaces(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        val jsonArray = JSONArray(response)
-                        val buffer: MutableList<Place> = ArrayList()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            var name = jsonObject.getString("name_en")
-                            if (name == "" || isItalian) {
-                                name = jsonObject.getString("name")
-                            }
-                            var area = jsonObject.getString("area_en")
-                            if (area == "" || isItalian) {
-                                area = jsonObject.getString("area")
-                            }
-                            var region = jsonObject.getString("region_en")
-                            if (region == "" || isItalian) {
-                                region = jsonObject.getString("region")
-                            }
-                            var hasDescription = jsonObject.getBoolean("has_description_en")
-                            if (isItalian) {
-                                hasDescription = jsonObject.getBoolean("has_description")
-                            }
-                            val place = Place(jsonObject.getString("id"),
-                                    name,
-                                    area,
-                                    region,
-                                    jsonObject.getString("image"),
-                                    hasDescription,
-                                    jsonObject.getString("author"))
-                            buffer.add(place)
+            { response ->
+                try {
+                    val jsonArray = JSONArray(response)
+                    val buffer: MutableList<Place> = ArrayList()
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        var name = jsonObject.getString("name_en")
+                        if (name == "" || isItalian) {
+                            name = jsonObject.getString("name")
                         }
-                        successCallback.places = buffer
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
+                        var area = jsonObject.getString("area_en")
+                        if (area == "" || isItalian) {
+                            area = jsonObject.getString("area")
+                        }
+                        var region = jsonObject.getString("region_en")
+                        if (region == "" || isItalian) {
+                            region = jsonObject.getString("region")
+                        }
+                        var hasDescription = jsonObject.getBoolean("has_description_en")
+                        if (isItalian) {
+                            hasDescription = jsonObject.getBoolean("has_description")
+                        }
+                        val wikiUrl = jsonObject.getString(if (isItalian) "wiki_url" else "wiki_url_en")
+                        val place = Place(jsonObject.getString("id"),
+                                name,
+                                area,
+                                region,
+                                jsonObject.getString("image"),
+                                hasDescription,
+                                jsonObject.getString("author"),
+                                wikiUrl)
+                        buffer.add(place)
                     }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
+                    successCallback.places = buffer
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
         stringRequest.setShouldCache(false)
         queue.add(stringRequest)
     }
@@ -224,48 +227,80 @@ class DaoPlaces(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        val jsonArray = JSONArray(response)
-                        val buffer: MutableList<Place> = ArrayList()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            var name = jsonObject.getString("name_en")
-                            if (name == "" || isItalian) {
-                                name = jsonObject.getString("name")
-                            }
-                            var area = jsonObject.getString("area_en")
-                            if (area == "" || isItalian) {
-                                area = jsonObject.getString("area")
-                            }
-                            var region = jsonObject.getString("region_en")
-                            if (region == "" || isItalian) {
-                                region = jsonObject.getString("region")
-                            }
-                            var hasDescription = jsonObject.getBoolean("has_description_en")
-                            if (isItalian) {
-                                hasDescription = jsonObject.getBoolean("has_description")
-                            }
-                            val place = Place(jsonObject.getString("id"),
-                                    name,
-                                    area,
-                                    region,
-                                    jsonObject.getString("image"),
-                                    hasDescription,
-                                    jsonObject.getString("author"))
-                            buffer.add(place)
+            { response ->
+                try {
+                    val jsonArray = JSONArray(response)
+                    val buffer: MutableList<Place> = ArrayList()
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        var name = jsonObject.getString("name_en")
+                        if (name == "" || isItalian) {
+                            name = jsonObject.getString("name")
                         }
-                        successCallback.places = buffer
+                        var area = jsonObject.getString("area_en")
+                        if (area == "" || isItalian) {
+                            area = jsonObject.getString("area")
+                        }
+                        var region = jsonObject.getString("region_en")
+                        if (region == "" || isItalian) {
+                            region = jsonObject.getString("region")
+                        }
+                        var hasDescription = jsonObject.getBoolean("has_description_en")
+                        if (isItalian) {
+                            hasDescription = jsonObject.getBoolean("has_description")
+                        }
+                        val place = Place(jsonObject.getString("id"),
+                                name,
+                                area,
+                                region,
+                                jsonObject.getString("image"),
+                                hasDescription,
+                                jsonObject.getString("author"),
+                                jsonObject.getString("wiki_url"))
+                        buffer.add(place)
+                    }
+                    successCallback.places = buffer
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
+        stringRequest.setShouldCache(false)
+        queue.add(stringRequest)
+    }
+
+    companion object {
+        fun getWikipediaData(
+            context: Context,
+            pageName: String,
+            successCallback: MyRunnable,
+            errorCallback: Runnable
+        ) {
+            val queue = Volley.newRequestQueue(context)
+            val isItalian = Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage
+            val lang = if (isItalian) "it" else "en"
+            val url = "https://$lang.wikipedia.org/api/rest_v1/page/summary/$pageName"
+            if (BuildConfig.DEBUG) {
+                Toast.makeText(context, "HTTP request $url", Toast.LENGTH_SHORT).show()
+            }
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    try {
+                        successCallback.wikipediaData = response
                         successCallback.run()
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
-        stringRequest.setShouldCache(false)
-        queue.add(stringRequest)
+                }, {
+                    errorCallback.run()
+                    Toast.makeText(context, R.string.connection_error, Toast.LENGTH_LONG).show()
+                })
+            queue.add(stringRequest)
+        }
     }
 
     init {

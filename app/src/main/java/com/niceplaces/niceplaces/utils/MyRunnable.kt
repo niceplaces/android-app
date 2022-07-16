@@ -9,6 +9,7 @@ abstract class MyRunnable : Runnable {
     var place: Place? = null
     var lists: List<PlacesList>? = null
     var quiz: MutableList<Quiz>? = ArrayList()
+    var wikipediaData: String = ""
 
     fun setAreas(pAreas: List<Area>) {
         areas = pAreas

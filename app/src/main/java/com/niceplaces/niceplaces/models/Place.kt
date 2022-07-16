@@ -1,7 +1,5 @@
 package com.niceplaces.niceplaces.models
 
-import java.util.*
-
 /**
  * Created by Lorenzo on 29/12/2017.
  */
@@ -37,12 +35,13 @@ class Place {
         mImage = image
     }
 
-    constructor(id: String, name: String, image: String, hasDesc: Boolean, author: String?) {
+    constructor(id: String, name: String, image: String, hasDesc: Boolean, author: String?, wikiUrl: String?) {
         iD = id
         mName = name
         mImage = image
         mHasDescription = hasDesc
         mAuthor = author
+        mWikiUrl = wikiUrl
     }
 
     constructor(id: String, name: String, desc: String?, sources: String?, latitude: Double, longitude: Double, image: String, credits: String?, wikiUrl: String?) {
@@ -104,7 +103,8 @@ class Place {
         mAuthor = author
     }
 
-    constructor(id: String, name: String, area: String?, region: String?, image: String, hasDescription: Boolean, author: String?) {
+    constructor(id: String, name: String, area: String?, region: String?, image: String,
+                hasDescription: Boolean, author: String?, wikiUrl: String?) {
         iD = id
         mName = name
         mArea = area
@@ -113,6 +113,7 @@ class Place {
         events = ArrayList()
         mHasDescription = hasDescription
         mAuthor = author
+        mWikiUrl = wikiUrl
     }
 
     companion object {

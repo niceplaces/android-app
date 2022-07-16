@@ -19,6 +19,7 @@ import com.niceplaces.niceplaces.dao.DaoPlaces
 import com.niceplaces.niceplaces.utils.ImageUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import com.niceplaces.niceplaces.utils.NonScrollListView
+import org.json.JSONObject
 import java.util.*
 
 class PlaceDetailsActivity : AppCompatActivity() {
@@ -136,10 +137,38 @@ class PlaceDetailsActivity : AppCompatActivity() {
                 place?.mImage?.let { ImageUtils.setImageViewWithGlide(mContext, it, imageViewPlace) }
                 place?.mImage?.let { ImageUtils.setImageViewWithGlide(mContext, it, imageViewPlaceActionBar) }
                 if (place?.mDescription?.compareTo("") == 0) {
-                    val textViewComingSoon = findViewById<TextView>(R.id.textview_coming_soon)
-                    textViewComingSoon.visibility = View.VISIBLE
-                    val layoutPlaceInfo = findViewById<LinearLayout>(R.id.layout_place_info)
-                    layoutPlaceInfo.visibility = View.GONE
+                    if (place!!.mWikiUrl == "") {
+                        val textViewComingSoon = findViewById<TextView>(R.id.textview_coming_soon)
+                        textViewComingSoon.visibility = View.VISIBLE
+                        val layoutPlaceInfo = findViewById<LinearLayout>(R.id.layout_place_info)
+                        layoutPlaceInfo.visibility = View.GONE
+                    } else {
+                        val pageName = place!!.mWikiUrl?.let {
+                            place!!.mWikiUrl?.substring(it.lastIndexOf('/')+1)
+                        }
+                        val placeImage = place!!.mImage
+                        if (pageName != null) {
+                            DaoPlaces.getWikipediaData(mContext as PlaceDetailsActivity,
+                                pageName, object : MyRunnable(){
+                                override fun run() {
+                                    val data = JSONObject(this.wikipediaData)
+                                    textViewPlaceDesc.text = data.getString("extract")
+                                    if (placeImage == "") {
+                                        data.getJSONObject("originalimage").getString("source")
+                                            .let {
+                                                ImageUtils.setImageViewFromURL(
+                                                    mContext,
+                                                    it,
+                                                    imageViewPlace
+                                                )
+                                            }
+                                    }
+                                }
+                            }, Runnable(){
+
+                            })
+                        }
+                    }
                 } else {
                     val badgeProLoco = findViewById<LinearLayout>(R.id.badge_proloco)
                     val badgeViaSacra = findViewById<LinearLayout>(R.id.badge_viasacra)

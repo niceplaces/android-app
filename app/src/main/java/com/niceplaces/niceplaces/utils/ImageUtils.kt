@@ -60,14 +60,28 @@ object ImageUtils {
         val prefs = PrefsController(context!!)
         val uri = Uri.parse(Const.BASE_URL + "data/photos/" + prefs.databaseMode + "/" + imageName)
         val myOptions = RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .fitCenter()
-                .placeholder(R.drawable.placeholder)
-                .override(Target.SIZE_ORIGINAL, imageView.height)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .fitCenter()
+            .placeholder(R.drawable.placeholder)
+            .override(Target.SIZE_ORIGINAL, imageView.height)
         Glide.with(context)
-                .load(uri)
-                .apply(myOptions)
-                .into(imageView)
+            .load(uri)
+            .apply(myOptions)
+            .into(imageView)
+    }
+
+    fun setImageViewFromURL(context: Context?, url: String, imageView: ImageView) {
+        val prefs = PrefsController(context!!)
+        val uri = Uri.parse(url)
+        val myOptions = RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .fitCenter()
+            .placeholder(R.drawable.placeholder)
+            .override(Target.SIZE_ORIGINAL, imageView.height)
+        Glide.with(context)
+            .load(uri)
+            .apply(myOptions)
+            .into(imageView)
     }
 
     fun setImageViewWithGlide(activity: Activity, context: Context?, marker: Marker, imageName: String, imageView: ImageView) {

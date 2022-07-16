@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.niceplaces.niceplaces.BuildConfig
@@ -28,30 +27,30 @@ class DaoRegions(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        Log.i("REGIONS", response)
-                        val jsonArray = JSONArray(response)
-                        val buffer: MutableList<Region> = ArrayList()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            var name = jsonObject.getString("name_en")
-                            if (name == "" || Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
-                                name = jsonObject.getString("name")
-                            }
-                            val region = Region(jsonObject.getString("id"),
-                                    name, jsonObject.getString("count"))
-                            buffer.add(region)
+            { response ->
+                try {
+                    Log.i("REGIONS", response)
+                    val jsonArray = JSONArray(response)
+                    val buffer: MutableList<Region> = ArrayList()
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        var name = jsonObject.getString("name_en")
+                        if (name == "" || Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
+                            name = jsonObject.getString("name")
                         }
-                        successCallback.regions = buffer
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
+                        val region = Region(jsonObject.getString("id"),
+                                name, jsonObject.getString("count"))
+                        buffer.add(region)
                     }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
+                    successCallback.regions = buffer
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
         queue.add(stringRequest)
     }
 
@@ -62,29 +61,29 @@ class DaoRegions(private val mContext: Context) {
             Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
         }
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    try {
-                        val jsonArray = JSONArray(response)
-                        val buffer: MutableList<Area> = ArrayList()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            var name = jsonObject.getString("name_en")
-                            if (name == "" || Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
-                                name = jsonObject.getString("name")
-                            }
-                            val area = Area(jsonObject.getString("id"),
-                                    name, jsonObject.getString("count"))
-                            buffer.add(area)
+            { response ->
+                try {
+                    val jsonArray = JSONArray(response)
+                    val buffer: MutableList<Area> = ArrayList()
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        var name = jsonObject.getString("name_en")
+                        if (name == "" || Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
+                            name = jsonObject.getString("name")
                         }
-                        successCallback.setAreas(buffer)
-                        successCallback.run()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
+                        val area = Area(jsonObject.getString("id"),
+                                name, jsonObject.getString("count"))
+                        buffer.add(area)
                     }
-                }, Response.ErrorListener {
-            errorCallback.run()
-            Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
-        })
+                    successCallback.setAreas(buffer)
+                    successCallback.run()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, {
+        errorCallback.run()
+        Toast.makeText(mContext, R.string.connection_error, Toast.LENGTH_LONG).show()
+    })
         queue.add(stringRequest)
     }
 
