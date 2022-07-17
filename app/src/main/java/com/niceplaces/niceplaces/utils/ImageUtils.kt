@@ -71,14 +71,13 @@ object ImageUtils {
     }
 
     fun setImageViewFromURL(context: Context?, url: String, imageView: ImageView) {
-        val prefs = PrefsController(context!!)
         val uri = Uri.parse(url)
         val myOptions = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .fitCenter()
             .placeholder(R.drawable.placeholder)
             .override(Target.SIZE_ORIGINAL, imageView.height)
-        Glide.with(context)
+        Glide.with(context!!)
             .load(uri)
             .apply(myOptions)
             .into(imageView)

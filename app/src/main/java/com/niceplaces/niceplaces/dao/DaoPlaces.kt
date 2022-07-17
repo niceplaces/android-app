@@ -2,6 +2,7 @@ package com.niceplaces.niceplaces.dao
 
 import android.content.Context
 import android.widget.Toast
+import androidx.core.text.htmlEncode
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -14,6 +15,7 @@ import com.niceplaces.niceplaces.utils.JSONUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 
 class DaoPlaces(private val mContext: Context) {
@@ -67,13 +69,15 @@ class DaoPlaces(private val mContext: Context) {
                         if (isItalian) {
                             hasDescription = jsonObject.getBoolean("has_description")
                         }
+                        val wikiUrl = jsonObject.getString(if (isItalian) "wiki_url" else "wiki_url_en")
                         val place = Place(jsonObject.getString("id"),
                                 name,
                                 jsonObject.getDouble("latitude"),
                                 jsonObject.getDouble("longitude"),
                                 jsonObject.getString("image"),
                                 hasDescription,
-                                jsonObject.getString("author"))
+                                jsonObject.getString("author"),
+                                wikiUrl)
                         buffer.add(place)
                     }
                     successCallback.places = buffer
@@ -273,12 +277,8 @@ class DaoPlaces(private val mContext: Context) {
     }
 
     companion object {
-        fun getWikipediaData(
-            context: Context,
-            pageName: String,
-            successCallback: MyRunnable,
-            errorCallback: Runnable
-        ) {
+        fun getWikipediaData(context: Context, pageName: String, includeImageData: Boolean,
+                             successCallback: MyRunnable, errorCallback: Runnable) {
             val queue = Volley.newRequestQueue(context)
             val isItalian = Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage
             val lang = if (isItalian) "it" else "en"
@@ -291,7 +291,38 @@ class DaoPlaces(private val mContext: Context) {
                 { response ->
                     try {
                         successCallback.wikipediaData = response
-                        successCallback.run()
+                        if (includeImageData) {
+                            var imageName = JSONObject(response).getJSONObject("originalimage")
+                                .getString("source")
+                            imageName =
+                                imageName.substring(imageName.lastIndexOf('/') + 1).htmlEncode()
+                            val url2 =
+                                "https://$lang.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File%3a$imageName&format=json"
+                            if (BuildConfig.DEBUG) {
+                                Toast.makeText(context, "HTTP request $url2", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                            val stringRequest = StringRequest(
+                                Request.Method.GET, url2,
+                                { response2 ->
+                                    try {
+                                        successCallback.wikipediaImageData = response2
+                                        successCallback.run()
+                                    } catch (e: JSONException) {
+                                        e.printStackTrace()
+                                    }
+                                }, {
+                                    errorCallback.run()
+                                    Toast.makeText(
+                                        context,
+                                        R.string.connection_error,
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                })
+                            queue.add(stringRequest)
+                        } else {
+                            successCallback.run()
+                        }
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }

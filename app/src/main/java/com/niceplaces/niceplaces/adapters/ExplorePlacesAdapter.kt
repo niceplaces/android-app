@@ -57,14 +57,12 @@ class ExplorePlacesAdapter(private val mContext: Context, resource: Int, objects
                     place.mWikiUrl?.substring(it.lastIndexOf('/')+1)
                 }
                 if (pageName != null) {
-                    DaoPlaces.getWikipediaData(
-                        mContext,
-                        pageName,
+                    DaoPlaces.getWikipediaData(mContext, pageName, false,
                         object : MyRunnable() {
                             override fun run() {
                                 val data = JSONObject(this.wikipediaData)
                                 if (place.mImage == "") {
-                                    data.getJSONObject("originalimage").getString("source").let {
+                                    data.getJSONObject("thumbnail").getString("source").let {
                                         ImageUtils.setImageViewFromURL(
                                             mContext,
                                             it,

@@ -92,7 +92,8 @@ class Place {
         isInfoWindowShown = false
     }
 
-    constructor(id: String, name: String, latitude: Double, longitude: Double, image: String, hasDescription: Boolean, author: String?) {
+    constructor(id: String, name: String, latitude: Double, longitude: Double, image: String,
+                hasDescription: Boolean, author: String?, wikiUrl: String?) {
         iD = id
         mName = name
         mLatitude = latitude
@@ -101,6 +102,7 @@ class Place {
         events = ArrayList()
         mHasDescription = hasDescription
         mAuthor = author
+        mWikiUrl = wikiUrl
     }
 
     constructor(id: String, name: String, area: String?, region: String?, image: String,

@@ -130,7 +130,7 @@
                 android:textColor="#fff"
                 android:textSize="20dp" />
 
-            <!--<Button
+            <Button
                 android:id="@+id/btn_quiz"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -142,7 +142,7 @@
                 android:text="@string/quiz"
                 android:textColor="#fff"
                 android:textSize="20dp"
-                android:visibility="gone"/>-->
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_new_places"

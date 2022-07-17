@@ -1,6 +1,7 @@
 package com.niceplaces.niceplaces.utils
 
 import android.util.Log
+import androidx.core.text.HtmlCompat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,5 +32,9 @@ object StringUtils {
         } else {
             l.toString()
         }
+    }
+
+    fun html2text(html: String?): String? {
+        return html?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() }
     }
 }

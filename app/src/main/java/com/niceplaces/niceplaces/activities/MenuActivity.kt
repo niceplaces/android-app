@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
@@ -125,13 +124,13 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(thisActivity, LatestPlacesActivity::class.java)
             startActivity(intent)
         }
-        if (Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
+        /*if (Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
             quiz.visibility = View.VISIBLE
             quiz.setOnClickListener {
                 val intent = Intent(thisActivity, QuizActivity::class.java)
                 startActivity(intent)
             }
-        }
+        }*/
         buttonVisited.setOnClickListener {
             val intent = Intent(thisActivity, UserListActivity::class.java)
             intent.putExtra(UserListActivity.Companion.USERLIST, UserListActivity.Companion.VISITED)

@@ -1,17 +1,20 @@
 package com.niceplaces.niceplaces.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.controllers.UserListsController
+import com.niceplaces.niceplaces.dao.DaoPlaces
 import com.niceplaces.niceplaces.models.Place
 import com.niceplaces.niceplaces.utils.ImageUtils
+import com.niceplaces.niceplaces.utils.MyRunnable
+import org.json.JSONObject
 
 class LatestPlacesAdapter(private val mContext: Context, resource: Int, objects: List<Place?>?) : ArrayAdapter<Place?>(mContext, resource, objects as MutableList<Place?>) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -47,7 +50,36 @@ class LatestPlacesAdapter(private val mContext: Context, resource: Int, objects:
         ImageUtils.setAuthorIcon(place, IVStar)
         textViewName.text = place.mName
         textViewArea.text = place.mArea + ", " + place.mRegion
-        ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage)
+        Glide.with(this.mContext).clear(imageViewPlaceImage)
+        if (place.mImage != "") {
+            ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage)
+        } else {
+            if (place.mWikiUrl != "") {
+                val pageName = place.mWikiUrl?.let {
+                    place.mWikiUrl?.substring(it.lastIndexOf('/')+1)
+                }
+                if (pageName != null) {
+                    DaoPlaces.getWikipediaData(mContext, pageName, false,
+                        object : MyRunnable() {
+                            override fun run() {
+                                val data = JSONObject(this.wikipediaData)
+                                if (place.mImage == "") {
+                                    data.getJSONObject("thumbnail").getString("source").let {
+                                        ImageUtils.setImageViewFromURL(
+                                            mContext,
+                                            it,
+                                            imageViewPlaceImage
+                                        )
+                                    }
+                                }
+                            }
+                        },
+                        Runnable() {
+
+                        })
+                }
+            }
+        }
         return convertView
     }
 

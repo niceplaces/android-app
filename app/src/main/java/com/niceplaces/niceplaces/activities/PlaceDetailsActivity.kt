@@ -19,6 +19,7 @@ import com.niceplaces.niceplaces.dao.DaoPlaces
 import com.niceplaces.niceplaces.utils.ImageUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import com.niceplaces.niceplaces.utils.NonScrollListView
+import com.niceplaces.niceplaces.utils.StringUtils
 import org.json.JSONObject
 import java.util.*
 
@@ -129,6 +130,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
                 val placeArea = findViewById<TextView>(R.id.place_area)
                 val imageViewWikipedia = findViewById<ImageView>(R.id.imageview_wikipedia)
                 val listViewEvents = findViewById<NonScrollListView>(R.id.listview_place_events)
+                val textViewImageCredits = findViewById<TextView>(R.id.textview_img_credits)
                 textViewPlaceName.text = place?.mName
                 textViewPlaceNameActionBar.text = place?.mName
                 textViewPlaceDesc.text = place?.mDescription
@@ -143,13 +145,18 @@ class PlaceDetailsActivity : AppCompatActivity() {
                         val layoutPlaceInfo = findViewById<LinearLayout>(R.id.layout_place_info)
                         layoutPlaceInfo.visibility = View.GONE
                     } else {
+                        val wikipediaUrl = place!!.mWikiUrl
+                        imageViewWikipedia.setOnClickListener {
+                            val i = Intent(Intent.ACTION_VIEW, Uri.parse(wikipediaUrl))
+                            startActivity(i)
+                        }
                         val pageName = place!!.mWikiUrl?.let {
                             place!!.mWikiUrl?.substring(it.lastIndexOf('/')+1)
                         }
                         val placeImage = place!!.mImage
                         if (pageName != null) {
                             DaoPlaces.getWikipediaData(mContext as PlaceDetailsActivity,
-                                pageName, object : MyRunnable(){
+                                pageName, true, object : MyRunnable(){
                                 override fun run() {
                                     val data = JSONObject(this.wikipediaData)
                                     textViewPlaceDesc.text = data.getString("extract")
@@ -163,6 +170,18 @@ class PlaceDetailsActivity : AppCompatActivity() {
                                                 )
                                             }
                                     }
+                                    val imageData = JSONObject(this.wikipediaImageData)
+                                    val imageInfo = imageData.getJSONObject("query").getJSONObject("pages")
+                                        .getJSONObject("-1").getJSONArray("imageinfo").getJSONObject(0)
+                                        .getJSONObject("extmetadata")
+                                    var credits = imageInfo.getJSONObject("Artist").getString("value")
+                                    credits += ", "
+                                    credits += imageInfo.getJSONObject("LicenseShortName").getString("value")
+                                    credits += ", "
+                                    credits += StringUtils.html2text(
+                                        imageInfo.getJSONObject("Credit").getString("value")
+                                    )
+                                    textViewImageCredits.text = getString(R.string.photo, credits)
                                 }
                             }, Runnable(){
 
@@ -248,7 +267,6 @@ class PlaceDetailsActivity : AppCompatActivity() {
                     }
                 }
                 val textViewDescSources = findViewById<TextView>(R.id.textview_desc_sources)
-                val textViewImageCredits = findViewById<TextView>(R.id.textview_img_credits)
                 if (place?.mSources != "") {
                     textViewDescSources.text = getString(R.string.sources, place?.mSources)
                 } else {

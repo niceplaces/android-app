@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.CancelableCallback
@@ -14,9 +15,12 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.activities.MapsActivity
+import com.niceplaces.niceplaces.dao.DaoPlaces
 import com.niceplaces.niceplaces.models.Place
 import com.niceplaces.niceplaces.utils.ImageUtils
 import com.niceplaces.niceplaces.utils.MapUtils
+import com.niceplaces.niceplaces.utils.MyRunnable
+import org.json.JSONObject
 
 class PlacesAdapter(private val mContext: Context, resource: Int, objects: List<Place?>?,
                     private val mMap: GoogleMap, position: LatLng?) :
@@ -35,34 +39,71 @@ class PlacesAdapter(private val mContext: Context, resource: Int, objects: List<
         }
         val textViewPlaceName = convertView.findViewById<TextView>(R.id.textview_place_name)
         val textViewPlaceDistance = convertView.findViewById<TextView>(R.id.textview_place_distance)
-        ImageUtils.setImageViewWithGlide(mContext, place!!.mImage, imageViewPlaceImage)
-        imageViewPlaceImage.setOnClickListener {
-            val center = LatLng(place.mLatitude, place.mLongitude)
-            val callback: CancelableCallback = object : CancelableCallback {
-                override fun onFinish() {
-                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(
-                            CameraPosition.Builder()
+        Glide.with(this.mContext).clear(imageViewPlaceImage)
+        if (place != null) {
+            if (place.mImage != "") {
+                ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage)
+            } else {
+                if (place.mWikiUrl != "") {
+                    val pageName = place.mWikiUrl?.let {
+                        place.mWikiUrl?.substring(it.lastIndexOf('/') + 1)
+                    }
+                    if (pageName != null) {
+                        DaoPlaces.getWikipediaData(mContext, pageName, false,
+                            object : MyRunnable() {
+                                override fun run() {
+                                    val data = JSONObject(this.wikipediaData)
+                                    if (place.mImage == "") {
+                                        data.getJSONObject("thumbnail").getString("source").let {
+                                            ImageUtils.setImageViewFromURL(
+                                                mContext,
+                                                it,
+                                                imageViewPlaceImage
+                                            )
+                                        }
+                                    }
+                                }
+                            },
+                            Runnable() {
+
+                            })
+                    }
+                }
+            }
+            imageViewPlaceImage.setOnClickListener {
+                val center = LatLng(place.mLatitude, place.mLongitude)
+                val callback: CancelableCallback = object : CancelableCallback {
+                    override fun onFinish() {
+                        mMap.animateCamera(
+                            CameraUpdateFactory.newCameraPosition(
+                                CameraPosition.Builder()
                                     .target(MapUtils.offset(mMap, center, 0, -150))
                                     .tilt(MapsActivity.DEFAULT_TILT.toFloat())
-                                    .zoom(mMap.cameraPosition.zoom).build()))
-                    place.mClusterItem?.marker?.showInfoWindow()
-                    mMap.uiSettings.isMapToolbarEnabled = true
-                }
+                                    .zoom(mMap.cameraPosition.zoom).build()
+                            )
+                        )
+                        place.mClusterItem?.marker?.showInfoWindow()
+                        mMap.uiSettings.isMapToolbarEnabled = true
+                    }
 
-                override fun onCancel() {}
-            }
-            var zoom = mMap.cameraPosition.zoom
-            if (place.mClusterItem?.isMarkerClustered!!) {
-                zoom = 18f
-            }
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(
-                    CameraPosition.Builder()
+                    override fun onCancel() {}
+                }
+                var zoom = mMap.cameraPosition.zoom
+                if (place.mClusterItem?.isMarkerClustered!!) {
+                    zoom = 18f
+                }
+                mMap.animateCamera(
+                    CameraUpdateFactory.newCameraPosition(
+                        CameraPosition.Builder()
                             .target(center)
                             .tilt(MapsActivity.DEFAULT_TILT.toFloat())
-                            .zoom(zoom).build()), callback)
+                            .zoom(zoom).build()
+                    ), callback
+                )
+            }
+            textViewPlaceName.text = place.mName
+            textViewPlaceDistance.text = Place.formatDistance(place.mDistance)
         }
-        textViewPlaceName.text = place.mName
-        textViewPlaceDistance.text = Place.formatDistance(place.mDistance)
         /*Direction direction = new Direction(mPosition.latitude, mPosition.longitude, place.mLatitude, place.mLongitude);
         (new DirectionAsyncTask(mContext, textViewPlaceDistance)).execute(direction);*/
         return convertView

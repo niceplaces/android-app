@@ -19,11 +19,10 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/infowindow_place_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/placeholder"
-                android:id="@+id/infowindow_place_image" />
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:layout_width="20dp"
