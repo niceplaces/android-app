@@ -21,6 +21,7 @@ import com.niceplaces.niceplaces.utils.MyRunnable
 import com.niceplaces.niceplaces.utils.NonScrollListView
 import com.niceplaces.niceplaces.utils.StringUtils
 import org.json.JSONObject
+import org.jsoup.Jsoup
 import java.util.*
 
 class PlaceDetailsActivity : AppCompatActivity() {
@@ -175,6 +176,9 @@ class PlaceDetailsActivity : AppCompatActivity() {
                                         .getJSONObject("-1").getJSONArray("imageinfo").getJSONObject(0)
                                         .getJSONObject("extmetadata")
                                     var credits = imageInfo.getJSONObject("Artist").getString("value")
+                                    if (credits.startsWith("<a") && credits.endsWith("</a>")){
+                                        credits = Jsoup.parse(credits).getElementsByTag("a")[0].text()
+                                    }
                                     credits += ", "
                                     credits += imageInfo.getJSONObject("LicenseShortName").getString("value")
                                     credits += ", "
