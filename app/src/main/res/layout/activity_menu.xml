@@ -131,20 +131,6 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/btn_quiz"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_button"
-                android:text="@string/quiz"
-                android:textColor="#fff"
-                android:textSize="20dp"
-                android:visibility="gone"/>
-
-            <Button
                 android:id="@+id/btn_new_places"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"

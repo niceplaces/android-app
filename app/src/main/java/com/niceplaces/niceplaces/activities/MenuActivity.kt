@@ -44,8 +44,6 @@ class MenuActivity : AppCompatActivity() {
         val placesNearYou = findViewById<Button>(R.id.btn_places_near_you)
         val explore = findViewById<Button>(R.id.btn_virtual_tour)
         val newPlaces = findViewById<Button>(R.id.btn_new_places)
-        val quiz = findViewById<Button>(R.id.btn_quiz)
-        //ImageView IVlogin = findViewById(R.id.imageview_login);
         val IVInfo = findViewById<ImageView>(R.id.imageview_info)
         val IVNotifications = findViewById<ImageView>(R.id.imageview_notifications)
         val IVWeb = findViewById<ImageView>(R.id.imageview_web)
@@ -57,33 +55,6 @@ class MenuActivity : AppCompatActivity() {
         val buttonWished = findViewById<Button>(R.id.button_wished)
         val buttonFav = findViewById<Button>(R.id.button_fav)
         val textViewPrivacy = findViewById<TextView>(R.id.textview_privacy_policy)
-        /*signInButton = findViewById(R.id.sign_in_button)
-        signOutButton = findViewById(R.id.sign_out_button)
-        TVUsername = findViewById(R.id.tv_username)
-        IVlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(thisActivity, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-        updateUI(account)
-        signInButton.setOnClickListener {
-            signIn()
-        }
-        signOutButton.setOnClickListener {
-            signOut()
-        }*/
         IVInfo.setOnClickListener {
             val intent = Intent(thisActivity, InfoActivity::class.java)
             startActivity(intent)
@@ -124,13 +95,6 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(thisActivity, LatestPlacesActivity::class.java)
             startActivity(intent)
         }
-        /*if (Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
-            quiz.visibility = View.VISIBLE
-            quiz.setOnClickListener {
-                val intent = Intent(thisActivity, QuizActivity::class.java)
-                startActivity(intent)
-            }
-        }*/
         buttonVisited.setOnClickListener {
             val intent = Intent(thisActivity, UserListActivity::class.java)
             intent.putExtra(UserListActivity.Companion.USERLIST, UserListActivity.Companion.VISITED)

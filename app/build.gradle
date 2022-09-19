@@ -67,6 +67,7 @@ android {
     lint {
         abortOnError false
     }
+    namespace 'com.niceplaces.niceplaces'
 
 }
 
