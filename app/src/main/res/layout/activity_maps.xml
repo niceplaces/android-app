@@ -95,21 +95,12 @@
             android:paddingLeft="8dp"
             android:paddingStart="8dp"/>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:id="@+id/listview">
-
-                <include layout="@layout/more_places" />
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
+                android:scrollbars="horizontal"
+                android:id="@+id/listview"/>
 
     </LinearLayout>
 

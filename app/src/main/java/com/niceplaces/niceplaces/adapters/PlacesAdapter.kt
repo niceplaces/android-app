@@ -4,10 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.CancelableCallback
@@ -22,41 +23,40 @@ import com.niceplaces.niceplaces.utils.MapUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import org.json.JSONObject
 
-class PlacesAdapter(private val mContext: Context, resource: Int, objects: List<Place?>?,
-                    private val mMap: GoogleMap, position: LatLng?) :
-        ArrayAdapter<Place?>(mContext, resource, objects as MutableList<Place?>) {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
-        val place = getItem(position)
-        if (convertView == null) {
-            val layoutInflater = LayoutInflater.from(context)
-            convertView = layoutInflater.inflate(R.layout.listview_places, parent, false)
-        }
-        val imageViewPlaceImage = convertView!!.findViewById<ImageView>(R.id.imageview_place_image)
-        val imageViewPlaceStar = convertView.findViewById<ImageView>(R.id.imageview_place_star)
-        if (place != null) {
+class PlacesAdapter(val context: Context, private val map: GoogleMap) :
+    ListAdapter<Place, PlacesAdapter.PlacesViewHolder>(PlacesDiffCallback) {
+
+    class PlacesViewHolder(itemView: View, val context: Context, val map: GoogleMap) :
+        RecyclerView.ViewHolder(itemView) {
+        private val textViewPlaceName = itemView.findViewById<TextView>(R.id.textview_place_name)
+        private val textViewPlaceDistance =
+            itemView.findViewById<TextView>(R.id.textview_place_distance)
+        private val imageViewPlaceImage =
+            itemView.findViewById<ImageView>(R.id.imageview_place_image)
+        private val imageViewPlaceStar = itemView.findViewById<ImageView>(R.id.imageview_place_star)
+        private var currentPlace: Place? = null
+
+        fun bind(place: Place) {
+            currentPlace = place
+            textViewPlaceName.text = place.mName
+            textViewPlaceDistance.text = Place.formatDistance(place.mDistance)
             ImageUtils.setAuthorIcon(place, imageViewPlaceStar)
-        }
-        val textViewPlaceName = convertView.findViewById<TextView>(R.id.textview_place_name)
-        val textViewPlaceDistance = convertView.findViewById<TextView>(R.id.textview_place_distance)
-        Glide.with(this.mContext).clear(imageViewPlaceImage)
-        if (place != null) {
             if (place.mImage != "") {
-                ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage)
+                ImageUtils.setImageViewWithGlide(context, place.mImage, imageViewPlaceImage)
             } else {
                 if (place.mWikiUrl != "") {
                     val pageName = place.mWikiUrl?.let {
                         place.mWikiUrl?.substring(it.lastIndexOf('/') + 1)
                     }
                     if (pageName != null) {
-                        DaoPlaces.getWikipediaData(mContext, pageName, false,
+                        DaoPlaces.getWikipediaData(context, pageName, false,
                             object : MyRunnable() {
                                 override fun run() {
                                     val data = JSONObject(this.wikipediaData)
                                     if (place.mImage == "") {
                                         data.getJSONObject("thumbnail").getString("source").let {
                                             ImageUtils.setImageViewFromURL(
-                                                mContext,
+                                                context,
                                                 it,
                                                 imageViewPlaceImage
                                             )
@@ -70,29 +70,29 @@ class PlacesAdapter(private val mContext: Context, resource: Int, objects: List<
                     }
                 }
             }
-            imageViewPlaceImage.setOnClickListener {
+            itemView.setOnClickListener {
                 val center = LatLng(place.mLatitude, place.mLongitude)
                 val callback: CancelableCallback = object : CancelableCallback {
                     override fun onFinish() {
-                        mMap.animateCamera(
+                        map.animateCamera(
                             CameraUpdateFactory.newCameraPosition(
                                 CameraPosition.Builder()
-                                    .target(MapUtils.offset(mMap, center, 0, -150))
+                                    .target(MapUtils.offset(map, center, 0, -150))
                                     .tilt(MapsActivity.DEFAULT_TILT.toFloat())
-                                    .zoom(mMap.cameraPosition.zoom).build()
+                                    .zoom(map.cameraPosition.zoom).build()
                             )
                         )
                         place.mClusterItem?.marker?.showInfoWindow()
-                        mMap.uiSettings.isMapToolbarEnabled = true
+                        map.uiSettings.isMapToolbarEnabled = true
                     }
 
                     override fun onCancel() {}
                 }
-                var zoom = mMap.cameraPosition.zoom
+                var zoom = map.cameraPosition.zoom
                 if (place.mClusterItem?.isMarkerClustered!!) {
                     zoom = 18f
                 }
-                mMap.animateCamera(
+                map.animateCamera(
                     CameraUpdateFactory.newCameraPosition(
                         CameraPosition.Builder()
                             .target(center)
@@ -101,12 +101,30 @@ class PlacesAdapter(private val mContext: Context, resource: Int, objects: List<
                     ), callback
                 )
             }
-            textViewPlaceName.text = place.mName
-            textViewPlaceDistance.text = Place.formatDistance(place.mDistance)
         }
-        /*Direction direction = new Direction(mPosition.latitude, mPosition.longitude, place.mLatitude, place.mLongitude);
-        (new DirectionAsyncTask(mContext, textViewPlaceDistance)).execute(direction);*/
-        return convertView
     }
 
+    /* Creates and inflates view and return PlaceViewHolder. */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlacesViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.listview_places, parent, false)
+        return PlacesViewHolder(view, context, map)
+    }
+
+    /* Gets current place and uses it to bind view. */
+    override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
+        val place = getItem(position)
+        holder.bind(place)
+    }
+
+}
+
+object PlacesDiffCallback : DiffUtil.ItemCallback<Place>() {
+    override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
+        return oldItem.mName == newItem.mName
+    }
 }

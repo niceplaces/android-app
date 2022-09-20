@@ -42,7 +42,7 @@ class MenuActivity : AppCompatActivity() {
         val thisActivity = this
         FirebaseAnalytics.getInstance(this)
         val placesNearYou = findViewById<Button>(R.id.btn_places_near_you)
-        val explore = findViewById<Button>(R.id.btn_virtual_tour)
+        val explore = findViewById<Button>(R.id.btn_explore)
         val newPlaces = findViewById<Button>(R.id.btn_new_places)
         val IVInfo = findViewById<ImageView>(R.id.imageview_info)
         val IVNotifications = findViewById<ImageView>(R.id.imageview_notifications)

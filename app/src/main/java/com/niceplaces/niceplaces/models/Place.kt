@@ -28,6 +28,7 @@ class Place {
     var events: List<Event>? = null
     var links: List<Link>? = null
     var isInfoWindowShown = false
+    var isImageLoaded = false
 
     constructor(id: String, name: String, image: String) {
         iD = id

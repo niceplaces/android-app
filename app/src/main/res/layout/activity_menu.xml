@@ -80,30 +80,6 @@
 
             </RelativeLayout>
 
-            <!--<com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_in_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Ciao"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
-                android:visibility="gone"/>
-
-            <Button
-                android:id="@+id/sign_out_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Logout"
-                android:visibility="gone"/>-->
-
             <Button
                 android:id="@+id/btn_places_near_you"
                 android:layout_width="match_parent"
@@ -118,7 +94,7 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/btn_virtual_tour"
+                android:id="@+id/btn_explore"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="20dp"

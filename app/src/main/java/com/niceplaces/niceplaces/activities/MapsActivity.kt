@@ -12,10 +12,15 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.CancelableCallback
@@ -50,7 +55,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
     private val mActivity: Activity = this
     private var mMap: GoogleMap? = null
     private var mPlaces: List<Place>? = null
-    private var mListView: LinearLayout? = null
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mPlacesAdapter: PlacesAdapter
     private var mCurrentPosition: LatLng? = null
     private var mMapMode: MapMode? = null
     private lateinit var dialogPosLoading: AlertDialog
@@ -72,7 +78,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         supportActionBar!!.hide()
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
-        mListView = findViewById(R.id.listview)
+        mRecyclerView = findViewById(R.id.listview)
         val imageViewSearchButton = findViewById<ImageView>(R.id.imageview_search_button)
         val imageViewSettingsButton = findViewById<ImageView>(R.id.imageview_map_settings_button)
         imageViewSearchButton.setOnClickListener { view -> // Check if no view has focus:
@@ -172,6 +178,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         val myPosition = LatLng(prefs.storedLocation.latitude, prefs.storedLocation.longitude)
         mMap!!.moveCamera(CameraUpdateFactory.newCameraPosition(
                 CameraPosition.Builder().target(myPosition).tilt(DEFAULT_TILT.toFloat()).zoom(prefs.zoom).build()))
+        mPlacesAdapter = mMap?.let { PlacesAdapter(this, it) }!!
+        mRecyclerView.adapter = mPlacesAdapter
+        mRecyclerView.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun onCameraMove() {
@@ -327,15 +336,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
     }
 
     private fun updatePlacesListView(places: List<Place>?) {
-        mListView!!.removeAllViews()
-        val adapter = mMap?.let { PlacesAdapter(this, R.layout.listview_places, places, it, mCurrentPosition) }
-        if (adapter != null) {
-            for (i in 0 until adapter.count) {
-                mListView!!.addView(adapter.getView(i, null, mListView!!))
-            }
-        }
-        val morePlaces = layoutInflater.inflate(R.layout.more_places, null)
-        mListView!!.addView(morePlaces)
+        mPlacesAdapter.submitList(places)
         val TVCounter = findViewById<TextView>(R.id.places_counter)
         TVCounter.text = getString(R.string.places_in_radius_of, String.format("%.2f", prefs.distanceRadius), places!!.size)
     }
