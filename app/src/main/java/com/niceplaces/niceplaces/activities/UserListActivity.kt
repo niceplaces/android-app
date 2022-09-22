@@ -15,7 +15,6 @@ import com.niceplaces.niceplaces.controllers.UserListsController
 import com.niceplaces.niceplaces.dao.DaoPlaces
 import com.niceplaces.niceplaces.models.Place
 import com.niceplaces.niceplaces.utils.MyRunnable
-import java.util.*
 
 class UserListActivity : AppCompatActivity() {
     private val mActivity = this
@@ -55,7 +54,7 @@ class UserListActivity : AppCompatActivity() {
                         override fun run() {
                             place?.let { places.add(it) }
                             if (places.size == numPlaces) {
-                                Collections.sort(places) { o1, o2 -> o1.mName.compareTo(o2.mName) }
+                                places.sortWith { o1, o2 -> o1.mName.compareTo(o2.mName) }
                                 val adapter = LatestPlacesAdapter(mActivity, R.id.listview_latest_places, places)
                                 listView.adapter = adapter
                                 listView.onItemClickListener = OnItemClickListener { adapterView, view, i, l ->

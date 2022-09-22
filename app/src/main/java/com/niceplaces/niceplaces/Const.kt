@@ -15,6 +15,7 @@ object Const {
     const val FACEBOOK = "https://www.facebook.com/niceplacesapp/"
     const val INSTAGRAM = "https://www.instagram.com/niceplacesapp/"
     const val TWITTER = "https://twitter.com/niceplacesapp"
-    const val PROLOCO_URL = "http://www.prolocosovicille.it/"
-    const val VIASACRA_URL = "http://viasacraetrusca.altervista.org/"
+    const val PROLOCO_URL = "https://www.prolocosovicille.it/"
+    const val CAMMINO_DETRURIA_URL = "https://www.facebook.com/camminodetruria/"
+    const val PROLOCO_MURLO_URL = "https://prolocomurlo.it/"
 }

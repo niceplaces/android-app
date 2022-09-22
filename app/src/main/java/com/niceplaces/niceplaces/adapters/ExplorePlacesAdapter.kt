@@ -50,7 +50,9 @@ class ExplorePlacesAdapter(private val mContext: Context, resource: Int, objects
         textViewName.text = place.mName
         Glide.with(this.mContext).clear(imageViewPlaceImage)
         if (place.mImage != "") {
-            ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage)
+            ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage,
+                ImageUtils.dipToPixels(mContext, 60),
+                ImageUtils.dipToPixels(mContext, 60))
         } else {
             if (place.mWikiUrl != "") {
                 val pageName = place.mWikiUrl?.let {

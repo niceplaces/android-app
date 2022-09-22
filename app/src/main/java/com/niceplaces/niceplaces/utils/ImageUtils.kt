@@ -42,6 +42,7 @@ object ImageUtils {
             imageView.setImageResource(R.drawable.marker_outline);
         }
     }*/
+
     fun setImageViewWithGlideFullURL(context: Context?, imageURL: String, imageView: ImageView) {
         val prefs = PrefsController(context!!)
         val uri = Uri.parse(imageURL)
@@ -70,10 +71,19 @@ object ImageUtils {
             .into(imageView)
     }
 
+    fun setImageViewWithGlide(context: Context?, imageName: String, imageView: ImageView,
+                              width: Int, height: Int) {
+        val prefs = PrefsController(context!!)
+        // https://www.niceplaces.it/data/image.php?mode=debug&file=torri.jpg&w=200&h=200
+        val uri = Uri.parse(Const.BASE_URL + "data/image.php?mode=" + prefs.databaseMode +
+                "&file=" + imageName + "&w=" + width + "&h=" + height).toString()
+        setImageViewFromURL(context, uri, imageView)
+    }
+
     fun setImageViewFromURL(context: Context?, url: String, imageView: ImageView) {
         val uri = Uri.parse(url)
         val myOptions = RequestOptions()
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .fitCenter()
             .placeholder(R.drawable.placeholder)
             .override(Target.SIZE_ORIGINAL, imageView.height)
@@ -121,9 +131,11 @@ object ImageUtils {
                 .into(imageView)
     }
 
-    private fun dipToPixels(context: Context, dipValue: Float): Float {
+    fun dipToPixels(context: Context, dipValue: Int): Int {
         val metrics = context.resources.displayMetrics
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics)
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dipValue.toFloat(), metrics
+        ).toInt()
     }
 
     /*private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -168,6 +180,7 @@ object ImageUtils {
                 "1" -> imageView.setImageResource(R.drawable.app_icon)
                 "2" -> imageView.setImageResource(R.drawable.pro_loco)
                 "3" -> imageView.setImageResource(R.drawable.via_sacra_etrusca)
+                "4" -> imageView.setImageResource(R.drawable.proloco_murlo)
             }
         } else {
             imageView.visibility = View.GONE

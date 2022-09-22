@@ -34,7 +34,11 @@ class MarkerInfoAdapter(private val mActivity: Activity, private val mContext: C
         Glide.with(this.mContext).clear(imageViewPlaceImage)
         if (place != null) {
             if (place.mImage != "") {
-                ImageUtils.setImageViewWithGlide(mContext, place.mImage, imageViewPlaceImage)
+                ImageUtils.setImageViewWithGlide(
+                    mContext, place.mImage, imageViewPlaceImage,
+                    ImageUtils.dipToPixels(mContext, 100),
+                    ImageUtils.dipToPixels(mContext, 100)
+                )
             } else {
                 if (place.mWikiUrl != "") {
                     val pageName = place.mWikiUrl?.let {

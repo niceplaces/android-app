@@ -23,6 +23,7 @@ import com.niceplaces.niceplaces.utils.MapUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import org.json.JSONObject
 
+
 class PlacesAdapter(val context: Context, private val map: GoogleMap) :
     ListAdapter<Place, PlacesAdapter.PlacesViewHolder>(PlacesDiffCallback) {
 
@@ -42,7 +43,11 @@ class PlacesAdapter(val context: Context, private val map: GoogleMap) :
             textViewPlaceDistance.text = Place.formatDistance(place.mDistance)
             ImageUtils.setAuthorIcon(place, imageViewPlaceStar)
             if (place.mImage != "") {
-                ImageUtils.setImageViewWithGlide(context, place.mImage, imageViewPlaceImage)
+                ImageUtils.setImageViewWithGlide(
+                    context, place.mImage, imageViewPlaceImage,
+                    ImageUtils.dipToPixels(context, 100),
+                    ImageUtils.dipToPixels(context, 100)
+                )
             } else {
                 if (place.mWikiUrl != "") {
                     val pageName = place.mWikiUrl?.let {

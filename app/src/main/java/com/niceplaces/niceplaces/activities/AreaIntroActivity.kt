@@ -60,14 +60,24 @@ class AreaIntroActivity : AppCompatActivity() {
                         badge.visibility = View.VISIBLE
                     }
                     "3" -> {
-                        badge = findViewById(R.id.badge_viasacra)
+                        badge = findViewById(R.id.badge_cammino_detruria)
                         val listener1 = View.OnClickListener {
                             val i = Intent(Intent.ACTION_VIEW,
-                                    Uri.parse(Const.VIASACRA_URL))
+                                Uri.parse(Const.CAMMINO_DETRURIA_URL))
                             startActivity(i)
                         }
                         badge.setOnClickListener(listener1)
-                        badge.setVisibility(View.VISIBLE)
+                        badge.visibility = View.VISIBLE
+                    }
+                    "4" -> {
+                        badge = findViewById(R.id.badge_proloco_murlo)
+                        val listener1 = View.OnClickListener {
+                            val i = Intent(Intent.ACTION_VIEW,
+                                Uri.parse(Const.PROLOCO_MURLO_URL))
+                            startActivity(i)
+                        }
+                        badge.setOnClickListener(listener1)
+                        badge.visibility = View.VISIBLE
                     }
                 }
             }

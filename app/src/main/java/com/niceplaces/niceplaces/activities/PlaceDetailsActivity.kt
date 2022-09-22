@@ -194,11 +194,13 @@ class PlaceDetailsActivity : AppCompatActivity() {
                     }
                 } else {
                     val badgeProLoco = findViewById<LinearLayout>(R.id.badge_proloco)
-                    val badgeViaSacra = findViewById<LinearLayout>(R.id.badge_viasacra)
+                    val badgeCammino = findViewById<LinearLayout>(R.id.badge_cammino_detruria)
+                    val badgeProLocoMurlo = findViewById<LinearLayout>(R.id.badge_proloco_murlo)
                     when (place?.mAuthor) {
                         "1" -> {
                             badgeProLoco.visibility = View.GONE
-                            badgeViaSacra.visibility = View.GONE
+                            badgeCammino.visibility = View.GONE
+                            badgeProLocoMurlo.visibility = View.GONE
                             try {
                                 val wikipediaUrl = place!!.mWikiUrl
                                 if (wikipediaUrl != "") {
@@ -215,7 +217,8 @@ class PlaceDetailsActivity : AppCompatActivity() {
                             }
                             imageViewWikipedia.visibility = View.VISIBLE
                             findViewById<View>(R.id.imageview_proloco).visibility = View.GONE
-                            findViewById<View>(R.id.imageview_viasacra).visibility = View.GONE
+                            findViewById<View>(R.id.imageview_cammino_detruria).visibility = View.GONE
+                            findViewById<View>(R.id.imageview_proloco_murlo).visibility = View.GONE
                         }
                         "2" -> {
                             val listener = View.OnClickListener {
@@ -225,31 +228,51 @@ class PlaceDetailsActivity : AppCompatActivity() {
                             }
                             badgeProLoco.setOnClickListener(listener)
                             badgeProLoco.visibility = View.VISIBLE
-                            badgeViaSacra.visibility = View.GONE
+                            badgeCammino.visibility = View.GONE
+                            badgeProLocoMurlo.visibility = View.GONE
                             imageViewWikipedia.visibility = View.GONE
                             findViewById<View>(R.id.imageview_proloco).visibility = View.VISIBLE
                             findViewById<View>(R.id.imageview_proloco).setOnClickListener(listener)
-                            findViewById<View>(R.id.imageview_viasacra).visibility = View.GONE
+                            findViewById<View>(R.id.imageview_cammino_detruria).visibility = View.GONE
+                            findViewById<View>(R.id.imageview_proloco_murlo).visibility = View.GONE
                         }
                         "3" -> {
                             val listener1 = View.OnClickListener {
                                 val i = Intent(Intent.ACTION_VIEW,
-                                        Uri.parse(Const.VIASACRA_URL))
+                                    Uri.parse(Const.CAMMINO_DETRURIA_URL))
                                 startActivity(i)
                             }
-                            badgeViaSacra.setOnClickListener(listener1)
-                            badgeViaSacra.visibility = View.VISIBLE
+                            badgeCammino.setOnClickListener(listener1)
+                            badgeCammino.visibility = View.VISIBLE
                             badgeProLoco.visibility = View.GONE
+                            badgeProLocoMurlo.visibility = View.GONE
                             imageViewWikipedia.visibility = View.GONE
                             findViewById<View>(R.id.imageview_proloco).visibility = View.GONE
-                            findViewById<View>(R.id.imageview_viasacra).visibility = View.VISIBLE
-                            findViewById<View>(R.id.imageview_viasacra).setOnClickListener(listener1)
+                            findViewById<View>(R.id.imageview_cammino_detruria).visibility = View.VISIBLE
+                            findViewById<View>(R.id.imageview_cammino_detruria).setOnClickListener(listener1)
+                            findViewById<View>(R.id.imageview_proloco_murlo).setOnClickListener(listener1)
+                        }
+                        "4" -> {
+                            val listener1 = View.OnClickListener {
+                                val i = Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(Const.PROLOCO_MURLO_URL))
+                                startActivity(i)
+                            }
+                            badgeCammino.setOnClickListener(listener1)
+                            badgeCammino.visibility = View.GONE
+                            badgeProLoco.visibility = View.GONE
+                            badgeProLocoMurlo.visibility = View.VISIBLE
+                            imageViewWikipedia.visibility = View.GONE
+                            findViewById<View>(R.id.imageview_proloco).visibility = View.GONE
+                            findViewById<View>(R.id.imageview_cammino_detruria).visibility = View.GONE
+                            findViewById<View>(R.id.imageview_proloco_murlo).setOnClickListener(listener1)
+                            findViewById<View>(R.id.imageview_proloco_murlo).visibility = View.VISIBLE
                         }
                     }
                 }
                 val events = place?.events
                 if (events != null) {
-                    if (!events.isEmpty() && Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage && place?.mAuthor == "1") {
+                    if (events.isNotEmpty() && Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage && place?.mAuthor == "1") {
                         val adapter = EventsAdapter(mContext as PlaceDetailsActivity, R.layout.listview_events, events)
                         listViewEvents.adapter = adapter
                         listViewEvents.isEnabled = false

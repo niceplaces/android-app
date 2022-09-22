@@ -36,7 +36,11 @@
         android:visibility="gone" />
 
     <include
-        layout="@layout/badge_viasacra"
+        layout="@layout/badge_cammino_detruria"
+        android:visibility="gone" />
+
+    <include
+        layout="@layout/badge_proloco_murlo"
         android:visibility="gone" />
 
     <TextView

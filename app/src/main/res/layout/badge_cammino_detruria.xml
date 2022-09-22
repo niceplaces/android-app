@@ -4,17 +4,17 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="5dp"
-    android:background="@drawable/bg_cert_viasacra"
+    android:background="@drawable/bg_cert_cammino_detruria"
     android:gravity="center|top"
     android:padding="2dp"
-    android:id="@+id/badge_viasacra">
+    android:id="@+id/badge_cammino_detruria">
 
     <ImageView
         android:id="@+id/logo_author"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/via_sacra_etrusca" />
+        android:src="@drawable/cammino_detruria" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="3dp"
-            android:text="Via Sacra Etrusca"
+            android:text="Cammino d'Etruria"
             android:textColor="#fff" />
 
     </LinearLayout>
