@@ -37,8 +37,18 @@
         android:padding="20dp"
         android:layout_margin="20dp"
         android:layout_gravity="center"
+        android:text="Simula Runtime Exception"
+        android:id="@+id/button_runtime_exception"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
         android:text="Simula prima apertura\ndopo installazione"
         android:id="@+id/button_simulate_open_after_install"/>
+
 
     <Button
         android:layout_width="wrap_content"

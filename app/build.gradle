@@ -1,21 +1,16 @@
-buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.google.gms:google-services:4.3.10'
-    }
-
+plugins {
+    id 'com.google.firebase.crashlytics'
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 repositories {
-    maven { url 'https://maven.fabric.io/public' }
+    maven {
+        url "https://maven.google.com"
+    }
     mavenCentral()
 }
-
 
 android {
     compileSdkVersion 32
@@ -24,7 +19,7 @@ android {
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
         applicationId "com.niceplaces.niceplaces"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 32
         versionCode 16
         versionName "3.4.0"
@@ -81,9 +76,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.android.volley:volley:1.2.0'
     implementation 'org.apache.commons:commons-collections4:4.4'
-    implementation 'com.google.firebase:firebase-core:19.0.0'
-    implementation 'com.google.firebase:firebase-analytics:19.0.0'
-    implementation 'com.google.firebase:firebase-messaging:22.0.0' // 20.2.2 has a bug
+    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-messaging'
     implementation('com.github.bumptech.glide:glide:4.11.0') {
         exclude group: "com.android.support"
     }
@@ -105,3 +102,5 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

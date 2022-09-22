@@ -135,6 +135,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
                     imageViewMapMode.setImageResource(R.drawable.mountains)
                     mMapMode = MapMode.ROAD
                 }
+                else -> {}
             }
         }
         val imageViewAnchor = findViewById<ImageView>(R.id.imageview_map_position)
