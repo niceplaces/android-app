@@ -345,7 +345,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
     override fun onPause() {
         super.onPause()
         Log.i("MYLOG", "onPause() called")
-        locationManager.removeUpdates(locationListener)
+        try {
+            locationManager.removeUpdates(locationListener)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 
     override fun onResume() {
