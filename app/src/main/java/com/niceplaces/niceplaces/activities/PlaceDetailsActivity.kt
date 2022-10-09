@@ -157,6 +157,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
                         }
                         val placeImage = place!!.mImage
                         if (pageName != null) {
+                            textViewPlaceDesc.text = getString(R.string.loading)
                             DaoPlaces.getWikipediaData(mContext as PlaceDetailsActivity,
                                 pageName, true, object : MyRunnable(){
                                 override fun run() {
