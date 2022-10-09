@@ -12,8 +12,6 @@ import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.controllers.PrefsController
 import com.niceplaces.niceplaces.localdb.NotificationsDbHelper
 import com.niceplaces.niceplaces.models.Notification
-import com.niceplaces.niceplaces.utils.AppUtils
-import java.util.*
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +47,7 @@ class SplashActivity : AppCompatActivity() {
         val prefsController = PrefsController(this)
         Handler(Looper.getMainLooper()).postDelayed({
             if (prefsController.isFistOpenAfterInstall || prefsController.isFistOpenAfterUpdate) {
-                if (Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
+                /*if (Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage) {
                     AppUtils.notify(this,
                             "Ecco la versione 3.3 di Nice Places!",
                             "Apri per leggere tutte le novità.",
@@ -61,7 +59,7 @@ class SplashActivity : AppCompatActivity() {
                             "Open to read what's new.",
                             "https://i1.wp.com/www.niceplaces.it/blog/wp-content/uploads/2020/07/v3.3_cover.jpg",
                             "https://www.niceplaces.it/blog/en/2020/07/what's-new-in-version-3-3-for-android/")
-                }
+                }*/
                 val intent = Intent(thisActivity, IntroActivity::class.java)
                 startActivity(intent)
             } else {

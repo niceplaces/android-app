@@ -2,7 +2,6 @@ package com.niceplaces.niceplaces.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -36,7 +35,7 @@ class IntroActivity : AppCompatActivity() {
                 R.layout.activity_intro5,
                 R.layout.activity_intro6,
                 R.layout.activity_intro7,
-                R.layout.activity_intro_update,
+//                R.layout.activity_intro_update,
                 R.layout.activity_intro8)
         if (!prefs.isFistOpenAfterInstall && prefs.isFistOpenAfterUpdate){
             layouts = intArrayOf(R.layout.activity_intro_update)
