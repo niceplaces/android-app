@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/page_written_by"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="10sp" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="3dp"
             android:text="Cammino d'Etruria"
-            android:textColor="#fff" />
+            android:textColor="#000" />
 
     </LinearLayout>
 

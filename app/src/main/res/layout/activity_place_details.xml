@@ -248,6 +248,17 @@
                         android:paddingRight="15dp">
 
                         <TextView
+                            android:id="@+id/textview_from_wikipedia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.2"
+                            android:text="@string/from_wikipedia"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textColor="#888"
+                            android:textSize="@dimen/textSmall"
+                            android:visibility="gone"/>
+
+                        <TextView
                             android:id="@+id/textview_place_desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

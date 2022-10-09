@@ -121,6 +121,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
                 val textViewPlaceName = findViewById<TextView>(R.id.textview_place_name)
                 val textViewPlaceNameActionBar = findViewById<TextView>(R.id.textview_place_name_titlebar)
                 val textViewPlaceDesc = findViewById<TextView>(R.id.textview_place_desc)
+                val textViewFromWikipedia = findViewById<TextView>(R.id.textview_from_wikipedia)
                 val layoutNavigation = findViewById<LinearLayout>(R.id.layout_navigation)
                 layoutNavigation.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW,
@@ -161,6 +162,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
                                 override fun run() {
                                     val data = JSONObject(this.wikipediaData)
                                     textViewPlaceDesc.text = data.getString("extract")
+                                    textViewFromWikipedia.visibility = View.VISIBLE
                                     if (placeImage == "") {
                                         data.getJSONObject("originalimage").getString("source")
                                             .let {
