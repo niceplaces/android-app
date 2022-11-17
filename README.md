@@ -1,6 +1,6 @@
 # Nice Places Android app
 
-![Downloads on Google Play](https://img.shields.io/badge/downloads-1.188-success)
+![Downloads on Google Play](https://img.shields.io/badge/downloads-1.2K-success)
 ![GitHub repo size](https://img.shields.io/github/repo-size/niceplaces/android-app)
 ![GitHub issues](https://img.shields.io/github/issues/niceplaces/android-app)
 
