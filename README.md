@@ -27,3 +27,23 @@ The source code available in this repository is licensed under the [MIT license]
 *The profile photos of people appearing on the site are used under their permission and belong to them.*
 
 *The contents mentioned above MUST NOT be used outside the Nice Places project.*
+
+## 🛠️ Installation steps
+
+1. Clone the repository.
+
+    ```bash
+    git clone https://github.com/niceplaces/android-app.git niceplaces-android-app
+    ```
+
+1. Get an API key for Google Maps for Android following this guide: [Using API Keys  |  Maps SDK for Android  |  Google Developers](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+
+1. Create the file `google_maps_api.xml` in folder `app/src/main/res/values/` with the following content:
+
+    ```xml
+    <resources>
+        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">[YOUR_API_KEY]</string>
+    </resources>
+    ```
+
+1. Run the app!
