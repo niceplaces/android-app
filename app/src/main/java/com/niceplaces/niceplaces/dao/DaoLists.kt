@@ -1,16 +1,17 @@
 package com.niceplaces.niceplaces.dao
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.niceplaces.niceplaces.BuildConfig
 import com.niceplaces.niceplaces.Const
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.controllers.PrefsController
 import com.niceplaces.niceplaces.models.Place
 import com.niceplaces.niceplaces.models.PlacesList
+import com.niceplaces.niceplaces.utils.AppUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import org.json.JSONArray
 import org.json.JSONException
@@ -22,13 +23,12 @@ class DaoLists(private val mContext: Context) {
     fun getAll(successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/lists"
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
                     val jsonArray = JSONArray(response)
+                    Log.i(AppUtils.tag, "HTTP response array length: " + jsonArray.length())
                     val buffer: MutableList<PlacesList> = ArrayList()
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
@@ -62,9 +62,7 @@ class DaoLists(private val mContext: Context) {
     fun getPlacesByListId(id: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/lists/" + id
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {

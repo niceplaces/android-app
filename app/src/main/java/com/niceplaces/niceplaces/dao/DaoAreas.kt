@@ -1,16 +1,17 @@
 package com.niceplaces.niceplaces.dao
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.niceplaces.niceplaces.BuildConfig
 import com.niceplaces.niceplaces.Const
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.controllers.PrefsController
 import com.niceplaces.niceplaces.models.Event
 import com.niceplaces.niceplaces.models.Place
+import com.niceplaces.niceplaces.utils.AppUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import org.json.JSONArray
 import org.json.JSONException
@@ -25,9 +26,7 @@ class DaoAreas(private val mContext: Context) {
     fun getPlaces(idArea: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/areas/" + idArea
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
@@ -66,9 +65,7 @@ class DaoAreas(private val mContext: Context) {
     fun getOne(id: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/places/" + id
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {

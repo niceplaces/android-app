@@ -1,16 +1,17 @@
 package com.niceplaces.niceplaces.dao
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.core.text.htmlEncode
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.niceplaces.niceplaces.BuildConfig
 import com.niceplaces.niceplaces.Const
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.controllers.PrefsController
 import com.niceplaces.niceplaces.models.Place
+import com.niceplaces.niceplaces.utils.AppUtils
 import com.niceplaces.niceplaces.utils.JSONUtils
 import com.niceplaces.niceplaces.utils.MyRunnable
 import org.json.JSONArray
@@ -26,9 +27,7 @@ class DaoPlaces(private val mContext: Context) {
     fun getOne(id: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/places/" + id
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
@@ -51,9 +50,7 @@ class DaoPlaces(private val mContext: Context) {
         val url = Const.BASE_URL + "data/query.php?version=" + Const.DB_VERSION + "&mode=" + mDbMode +
                 "&p1=getnearestplaces&p2=" + latitude.toString() +
                 "&p3=" + longitude.toString() + "&p4=" + prefs.distanceRadius.toString()
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
@@ -99,9 +96,7 @@ class DaoPlaces(private val mContext: Context) {
         if (Locale.getDefault().displayLanguage != Locale.ITALIAN.displayLanguage) {
             url = "$url-en"
         }
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
@@ -121,9 +116,7 @@ class DaoPlaces(private val mContext: Context) {
     fun getLatestInserted(successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/latestinserted"
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
@@ -174,9 +167,7 @@ class DaoPlaces(private val mContext: Context) {
     fun getLatestUpdated(successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/latestupdated"
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
@@ -227,13 +218,12 @@ class DaoPlaces(private val mContext: Context) {
     fun getSearchResults(keywords: String, successCallback: MyRunnable, errorCallback: Runnable) {
         val queue = Volley.newRequestQueue(mContext)
         val url = Const.DATA_PATH + mDbMode + "/search/" + keywords
-        if (BuildConfig.DEBUG) {
-            Toast.makeText(mContext, "HTTP request $url", Toast.LENGTH_SHORT).show()
-        }
+        Log.i(AppUtils.tag, "HTTP request $url")
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 try {
                     val jsonArray = JSONArray(response)
+                    Log.i(AppUtils.tag, "HTTP response array length: " + jsonArray.length())
                     val buffer: MutableList<Place> = ArrayList()
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
@@ -283,9 +273,7 @@ class DaoPlaces(private val mContext: Context) {
             val isItalian = Locale.getDefault().displayLanguage == Locale.ITALIAN.displayLanguage
             val lang = if (isItalian) "it" else "en"
             val url = "https://$lang.wikipedia.org/api/rest_v1/page/summary/$pageName"
-            if (BuildConfig.DEBUG) {
-                Toast.makeText(context, "HTTP request $url", Toast.LENGTH_SHORT).show()
-            }
+            Log.i(AppUtils.tag, "HTTP request $url")
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
                 { response ->
@@ -298,10 +286,7 @@ class DaoPlaces(private val mContext: Context) {
                                 imageName.substring(imageName.lastIndexOf('/') + 1).htmlEncode()
                             val url2 =
                                 "https://$lang.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File%3a$imageName&format=json"
-                            if (BuildConfig.DEBUG) {
-                                Toast.makeText(context, "HTTP request $url2", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
+                            Log.i(AppUtils.tag, "HTTP request $url2")
                             val stringRequest = StringRequest(
                                 Request.Method.GET, url2,
                                 { response2 ->

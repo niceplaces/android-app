@@ -15,7 +15,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,7 +33,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.ClusterManager.*
-import com.niceplaces.niceplaces.BuildConfig
 import com.niceplaces.niceplaces.Const
 import com.niceplaces.niceplaces.R
 import com.niceplaces.niceplaces.adapters.MarkerInfoAdapter
@@ -51,6 +49,7 @@ import java.util.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListener,
         OnClusterClickListener<MyClusterItem?>, OnClusterInfoWindowClickListener<MyClusterItem?>,
         OnClusterItemClickListener<MyClusterItem?>, OnClusterItemInfoWindowClickListener<MyClusterItem> {
+
     private val mContext: Context = this
     private val mActivity: Activity = this
     private var mMap: GoogleMap? = null
@@ -73,7 +72,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("MYLOG", "onCreate() called")
+        Log.i(AppUtils.tag, "onCreate() called")
         setContentView(R.layout.activity_maps)
         supportActionBar!!.hide()
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -111,7 +110,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        Log.i("MYLOG", "onMapReady() called");
+        Log.i(AppUtils.tag, "onMapReady() called");
         mMap = googleMap
         mMapMode = MapMode.ROAD
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -238,9 +237,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         try {
             locationListener = object : LocationListener {
                 override fun onLocationChanged(location: Location) {
-                    if (BuildConfig.DEBUG) {
-                        Toast.makeText(mContext, "Location update " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_SHORT).show()
-                    }
+                    Log.i(AppUtils.tag, "Location update " + location.latitude.toString() + " " + location.longitude.toString())
                     prefs.storedLocation = GeoPoint(location.latitude, location.longitude)
                     sendNearestPlacesRequest(location)
                 }
@@ -289,7 +286,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
         val daoPlaces = DaoPlaces(mContext)
         daoPlaces.getNearest(lat, lon, object : MyRunnable() {
             override fun run() {
-                Log.i("MYLOG", "Data retrieved")
+                Log.i(AppUtils.tag, "Data retrieved")
                 mPlaces = places
                 updateLocation(lat, lon)
                 dialogPosLoading!!.dismiss()
@@ -311,7 +308,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
 
     fun updateLocation(latitude: Double, longitude: Double) {
         val results = FloatArray(1)
-        Log.i("LOCATION", "$latitude $longitude")
+        Log.i(AppUtils.tag, "New location: $latitude, $longitude")
         val myPosition = LatLng(latitude, longitude)
         mMap!!.clear()
         mClusterManager!!.clearItems()
@@ -344,7 +341,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
 
     override fun onPause() {
         super.onPause()
-        Log.i("MYLOG", "onPause() called")
+        Log.i(AppUtils.tag, "onPause() called")
         try {
             locationManager.removeUpdates(locationListener)
         } catch (e: Exception){
@@ -354,7 +351,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnCameraMoveListen
 
     override fun onResume() {
         super.onResume()
-        Log.i("MYLOG", "onResume() called")
+        Log.i(AppUtils.tag, "onResume() called")
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                 if (mCurrentPosition != null) {
                     val location = Location(LocationManager.GPS_PROVIDER)
