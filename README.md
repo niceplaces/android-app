@@ -1,12 +1,15 @@
-# Nice Places Android app
-
-![Downloads on Google Play](https://img.shields.io/badge/downloads-1.2K-success)
-![GitHub repo size](https://img.shields.io/github/repo-size/niceplaces/android-app)
-![GitHub issues](https://img.shields.io/github/issues/niceplaces/android-app)
+# Nice Places Android App
 
 ## Discover the culture around you
 
 **Nice Places helps you to discover the places of interest in your area briefly describing their history and characteristics.**
+
+![Places](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.niceplaces.it%2Fdata%2Fshields_endpoint.php%3Fparam%3Dplaces_count)
+![Descriptions](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.niceplaces.it%2Fdata%2Fshields_endpoint.php%3Fparam%3Ddescriptions_count)
+[![Downloads on Google Play](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.niceplaces.it%2Fdata%2Fshields_endpoint.php%3Fparam%3Ddownloads&logo=googleplay)](https://play.google.com/store/apps/details?id=com.niceplaces.niceplaces)
+[![Contributors](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.niceplaces.it%2Fdata%2Fshields_endpoint.php%3Fparam%3Dcontributors&logo=awsj)](https://github.com/niceplaces/website/blob/main/AUTHORS.md)
+![GitHub repo size](https://img.shields.io/github/repo-size/niceplaces/android-app)
+![GitHub issues](https://img.shields.io/github/issues/niceplaces/android-app)
 
 ![Nice Places screenshots](https://github.com/niceplaces/.github/blob/main/profile/devices-en.png)
 
@@ -18,7 +21,7 @@ In 2022, the project became open source to allow anyone to contribute.
 
 [Join the Discord channel](https://discord.gg/p9fC72mzDX)
 
-## Copyright notice
+## 📝 Copyright notice
 
 The source code available in this repository is licensed under the [MIT license](https://github.com/niceplaces/android-app/blob/main/LICENSE), however this repository contains digital assets to which the following terms apply.
 
